@@ -112,7 +112,7 @@
         the number.</p>
       </div>
       <div>
-        <p>Email: <a class="mail" href="mailto:zubair@crlab.ca">zubair@crlab.ca</a><br>
+        <p>Email: <a class="mail" id="contact-mail" href="#">email&nbsp;me</a><br>
         Ontario, Canada</p>
       </div>
     </div>
@@ -122,6 +122,14 @@
 <footer>
   <div class="wrap">Cyber Resiliency Labs and Consulting Inc. · Ontario, Canada</div>
 </footer>
+
+<script>
+  // Assemble the address at runtime so it isn't in the raw HTML for scrapers.
+  (function () {
+    var user = "zubair", domain = "crlab.ca", a = document.getElementById("contact-mail");
+    if (a) { var addr = user + "@" + domain; a.href = "mailto:" + addr; a.textContent = addr; }
+  })();
+</script>
 
 </body>
 </html>
