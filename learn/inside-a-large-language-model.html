@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inside a Large Language Model | CR Labs</title>
+<meta name="description" content="A field guide to how modern AI systems are built, trained, shrunk, and run: parameters, pre-training, post-training, parameter-efficient methods, quantization, retrieval, and inference, and how each stage maps to real hardware and real cost.">
+<style>
+  :root{--bg:#0d1b17;--panel:#13261e;--ink:#eaf0ea;--muted:#a7c1b3;--accent:#6fbf9b;--line:#244a3c;}
+  *{margin:0;box-sizing:border-box}
+  body{font-family:-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:18px}
+  .top{border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 24px}
+  .brand{font-weight:700}.brand span{color:var(--accent)}
+  .top a{color:var(--muted);text-decoration:none;font-size:15px}.top a:hover{color:var(--ink)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  article{padding:56px 0 80px}
+  .kicker{color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+  h1{font-size:40px;line-height:1.15;letter-spacing:-.5px;margin:14px 0 10px}
+  .sub{font-size:21px;color:var(--muted);margin-bottom:18px}
+  .byline{color:var(--muted);font-size:15px;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:30px}
+  h2{font-size:26px;color:#fff;margin:42px 0 12px;letter-spacing:-.3px}
+  h3{font-size:20px;color:var(--accent);margin:28px 0 8px}
+  p{margin:0 0 16px}
+  ul,ol{margin:0 0 16px;padding-left:24px}li{margin-bottom:8px}
+  strong{color:#fff}
+  code{font-family:"SF Mono",Menlo,monospace;font-size:.86em;background:#0a1511;border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+  .intuition{border-left:4px solid var(--accent);background:#0f201a;padding:12px 18px;margin:18px 0;color:var(--muted);font-style:italic;border-radius:0 6px 6px 0}
+  .dive{background:#10211b;border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin:20px 0}
+  .dive .tag{display:block;color:var(--accent);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+  .dive p{font-size:16px;color:var(--muted)}.dive code{font-size:.85em}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:#1c3a2f;color:#fff}
+  .glossary{font-size:15.5px;color:var(--muted)}.glossary b{color:var(--ink)}
+  footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:14px}
+  footer a{color:var(--accent);text-decoration:none}
+  .backlink{margin-top:30px}.backlink a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <a class="brand" href="/">Cyber Resiliency <span>Labs</span></a>
+    <a href="/learn/">← Learn</a>
+  </div>
+</div>
+
+<article>
+  <div class="kicker">Field guide</div>
+  <h1>Inside a Large Language Model</h1>
+  <p class="sub">How modern AI systems are built, trained, shrunk, and run.</p>
+  <p class="byline">By Zubair Ashraf, CR Labs. An explainer covering the full lifecycle (parameters,
+  pre-training, post-training, parameter-efficient methods, quantization, retrieval, inference) and how each
+  stage maps onto real hardware and real cost.</p>
+
+  <p>Every large language model you have used, whether a chat assistant, a coding helper, or a search
+  summarizer, is the output of a pipeline with distinct stages. Each stage answers a different question, costs a
+  different amount, and runs on very different hardware. This guide walks the whole pipeline end to end. The main
+  thread is written for a smart non-specialist; the <strong>Deep Dive</strong> boxes carry the math and the
+  precise numbers for readers who want them.</p>
+
+  <h2>1. The big picture: a model's life in five acts</h2>
+  <p>It helps to hold the whole map in your head before zooming in. A model passes through five broad phases,
+  and they are <em>not</em> equally expensive:</p>
+  <ol>
+    <li><strong>Pre-training</strong>: teach a blank network to predict text. Astronomically expensive; done once.</li>
+    <li><strong>Post-training</strong>: turn that raw predictor into a helpful, safe assistant. Moderately expensive; done repeatedly.</li>
+    <li><strong>Quantization</strong>: compress the finished model so it fits on cheaper hardware. Cheap; an engineering step.</li>
+    <li><strong>Retrieval (RAG)</strong>: give the model access to fresh, private, or specific knowledge without retraining. Cheap; an architecture choice around the model.</li>
+    <li><strong>Inference</strong>: actually running the model to answer questions. Cost scales with how many people use it.</li>
+  </ol>
+  <div class="intuition">A useful intuition: pre-training is building the brain (millions of dollars),
+  post-training is the schooling that makes it polite and useful (thousands to hundreds of thousands), and
+  everything after is about delivering that brain cheaply and accurately to users.</div>
+
+  <h2>2. What "parameters" actually mean</h2>
+  <p>When people say a model has "7 billion parameters" or "550 billion parameters," they are counting the
+  model's adjustable numbers, its <strong>weights</strong>. A neural network is, mechanically, a very large pile
+  of multiplications: input numbers flow in, get multiplied by weights, get added together, and flow onward. A
+  parameter is one of those weights. Learning <em>is</em> the process of nudging every one of these numbers until
+  the network's output matches reality.</p>
+  <p>Parameter count matters because it controls three things at once:</p>
+  <ul>
+    <li><strong>Capacity</strong>: roughly, how much the model can know and how subtle its reasoning can be. More parameters, more headroom (up to a point).</li>
+    <li><strong>Memory</strong>: every parameter occupies physical space in a chip's memory. This is the single biggest reason big models need big hardware.</li>
+    <li><strong>Compute</strong>: every parameter participates in arithmetic on every token, so cost grows with size.</li>
+  </ul>
+  <div class="dive"><span class="tag">Deep dive: parameters to gigabytes</span>
+    <p>Memory is just <code>parameters × bytes-per-parameter</code>. How many bytes depends on <em>precision</em>,
+    how many digits you keep per number:</p>
+    <ul>
+      <li><code>FP32</code> (32-bit float): 4 bytes. Full precision; now mostly used for optimizer state in training.</li>
+      <li><code>FP16 / BF16</code> (16-bit): 2 bytes. The standard for training and serving.</li>
+      <li><code>INT8</code> (8-bit): 1 byte. Common for compressed serving.</li>
+      <li><code>INT4</code> (4-bit): 0.5 bytes. Aggressive compression for consumer hardware.</li>
+    </ul>
+    <p>So just to <em>hold</em> the weights at 16-bit: a 7B model needs about 14 GB, a 70B model about 140 GB,
+    and a 550B model about 1.1 TB. Those numbers are the gravity that every other decision orbits.</p>
+  </div>
+
+  <h2>3. Stage zero: data</h2>
+  <p>Before any training happens, there is the corpus: the text (and increasingly code, images, and audio) the
+  model will learn from. Frontier pre-training corpora are measured in <strong>trillions of tokens</strong> (a
+  token is roughly three-quarters of a word). The composition of this data, how much code, how many languages,
+  how much is filtered for quality or for values, silently determines almost everything about the model's
+  character. Data work is unglamorous and decisive: most of the real differentiation between labs lives here,
+  not in the architecture, which is largely shared.</p>
+
+  <h2>4. Stage one: pre-training</h2>
+  <p>Pre-training has one deceptively simple objective: <strong>predict the next token</strong>. Show the model
+  billions of sentences with the last word hidden, ask it to guess, and correct it when it is wrong, trillions of
+  times. From this single game, the model is forced to internalize grammar, facts, reasoning patterns, and world
+  structure, because all of those help it predict better.</p>
+  <p>This is where nearly all the cost lives. The model starts as random noise and must see the entire corpus,
+  often more than once, while adjusting all of its billions of weights. This is the "blank brain" being formed.</p>
+  <div class="dive"><span class="tag">Deep dive: the cost of pre-training</span>
+    <p>A well-known rule of thumb: total training compute is about <code>6 × N × D</code> floating-point
+    operations, where <code>N</code> is parameters and <code>D</code> is training tokens. The <strong>Chinchilla</strong>
+    result (DeepMind, 2022) found the compute-optimal ratio is roughly <strong>20 tokens per parameter</strong>.</p>
+    <p>Worked example, a 70B model trained on ~1.4T tokens: <code>6 × 70e9 × 1.4e12 ≈ 5.9 × 10²³ FLOPs</code>. An
+    NVIDIA H100 sustains very roughly <code>5 × 10¹⁴</code> useful FLOPs/s in practice. That is about 37
+    GPU-years of work, so on a 1,000-GPU cluster, about <strong>two weeks</strong>. At ~$3/GPU-hour that is on the
+    order of <strong>$1M</strong> for this mid-sized example; true frontier runs cost tens to hundreds of
+    millions. Scaling to 550B at the same 20× ratio multiplies the FLOPs by about 60×, which is why a 550B-class
+    model is a national-infrastructure-scale undertaking.</p>
+  </div>
+  <h3>Why pre-training needs a cluster, not a card</h3>
+  <p>Training memory is far larger than the weights alone. To train, each parameter needs not just its current
+  value but also its gradient (which direction to nudge it) and the optimizer's bookkeeping. With the standard
+  Adam optimizer in mixed precision, the rule of thumb is about <strong>16 bytes per parameter</strong>, before
+  counting activations.</p>
+  <div class="dive"><span class="tag">Deep dive: the 16-bytes-per-parameter rule</span>
+    <p>Full fine-tuning or pre-training with Adam holds, per parameter: 2 bytes (FP16 weight) + 2 bytes (FP16
+    gradient) + 4 bytes (FP32 master weight) + 4 bytes (Adam first moment) + 4 bytes (Adam second moment) =
+    <strong>16 bytes</strong>. So a 7B model needs about 112 GB <em>just for state</em>, already more than any
+    single GPU, plus activation memory that grows with batch size and context length. This is why training is
+    distributed across many GPUs using systems like <strong>ZeRO/DeepSpeed</strong> (Microsoft, 2020) and
+    <strong>FSDP</strong> (Meta), which shard these states across the cluster.</p>
+  </div>
+
+  <h2>5. Stage two: post-training (alignment)</h2>
+  <p>A freshly pre-trained model is a brilliant <em>autocomplete</em> and a terrible assistant. Ask it a question
+  and it might continue with more questions, because that is what the raw internet looks like.
+  <strong>Post-training</strong> is the schooling that converts this raw predictor into something that follows
+  instructions, refuses harmful requests, and adopts a consistent voice. It comes in two layers.</p>
+  <h3>5a. Supervised fine-tuning (SFT)</h3>
+  <p>First, show the model thousands of examples of good behavior: a prompt paired with an ideal answer. The
+  model imitates. This alone gets you most of the way to a usable assistant. It is the same "predict the next
+  token" machinery as pre-training, just on a small, curated, instruction-shaped dataset.</p>
+  <h3>5b. Preference optimization (learning from comparisons)</h3>
+  <p>Imitation has a ceiling: for many questions there is no single ideal answer, only "this response is better
+  than that one." So the second layer teaches the model from <em>preferences</em>, pairs where a human or another
+  AI judged one answer better. This is where a family of competing methods lives, and it is worth knowing who
+  invented what, because the field moved fast and the names are everywhere.</p>
+  <table>
+    <tr><th>Method</th><th>Who / when</th><th>One-line idea</th><th>Trade-off</th></tr>
+    <tr><td><strong>RLHF (with PPO)</strong></td><td>Christiano et al. (OpenAI/DeepMind, 2017); InstructGPT (OpenAI, 2022)</td><td>Train a separate "reward model" on human preferences, then use RL to push the model toward high-reward answers.</td><td>Powerful and proven, but complex and unstable; you juggle multiple models at once.</td></tr>
+    <tr><td><strong>Constitutional AI / RLAIF</strong></td><td>Bai et al. (Anthropic, 2022)</td><td>Replace much of the human feedback with an AI giving feedback against a written set of principles.</td><td>Scales feedback cheaply; quality depends on the principles and the judge model.</td></tr>
+    <tr><td><strong>DPO</strong></td><td>Rafailov et al. (Stanford, 2023)</td><td>Skip the separate reward model and RL loop; optimize directly on the preference pairs with one simple loss.</td><td>Far simpler and more stable; the default for most open-source post-training today.</td></tr>
+    <tr><td><strong>ORPO</strong></td><td>Hong et al. (KAIST, 2024)</td><td>Fold preference learning into the SFT step, removing the need for a separate reference model.</td><td>One stage instead of two; memory-light.</td></tr>
+    <tr><td><strong>SimPO</strong></td><td>Meng et al. (UVA/Princeton, 2024)</td><td>A reference-free simplification of DPO using average log-probability as the implicit reward.</td><td>Even leaner than DPO; competitive quality.</td></tr>
+    <tr><td><strong>KTO</strong></td><td>Ethayarajh et al. (2024)</td><td>Learn from single thumbs-up / thumbs-down labels instead of paired comparisons.</td><td>Easier data collection (no pairs needed).</td></tr>
+    <tr><td><strong>GRPO</strong></td><td>Shao et al. (DeepSeek, 2024); powered DeepSeek-R1</td><td>A streamlined RL method that drops the reward-model critic and compares a <em>group</em> of sampled answers.</td><td>Memory-efficient RL; excellent when rewards are verifiable (math, code). The engine behind the recent "reasoning model" wave.</td></tr>
+  </table>
+  <div class="intuition">The historical arc: the field started with heavy, multi-model RLHF (OpenAI's recipe),
+  Anthropic made the feedback itself cheaper with AI judges, Stanford collapsed the whole RL apparatus into the
+  simple DPO loss, and DeepSeek swung back toward RL with a lean, critic-free method (GRPO) aimed at tasks where
+  correctness can be checked automatically.</div>
+  <h3>Distillation: a shortcut worth knowing</h3>
+  <p>Instead of aligning a model from scratch, you can have a large, already-excellent "teacher" model generate
+  training data (or even its internal probabilities) for a smaller "student." The student learns to mimic the
+  teacher at a fraction of the size. Most small, fast open models you can run at home were distilled this way.</p>
+
+  <h2>6. Engineering efficiency for post-training: the PEFT toolkit</h2>
+  <p>Here is the crux of why a small team can post-train a huge model at all. Recall that full fine-tuning costs
+  about 16 bytes per parameter, putting even a 7B model out of reach of a single consumer GPU. The escape hatch is
+  <strong>Parameter-Efficient Fine-Tuning (PEFT)</strong>: instead of updating all the weights, <em>freeze</em>
+  the giant pre-trained model and train only a tiny set of new or selected numbers. The frozen base can even be
+  quantized while you train.</p>
+  <table>
+    <tr><th>Technique</th><th>Who / when</th><th>What it does</th><th>Why it matters</th></tr>
+    <tr><td><strong>Adapters</strong></td><td>Houlsby et al. (Google, 2019)</td><td>Insert small trainable layers between the frozen ones.</td><td>The original PEFT idea; ~1% of parameters trained.</td></tr>
+    <tr><td><strong>Prefix / prompt tuning</strong></td><td>Li &amp; Liang (Stanford, 2021); Lester et al. (Google, 2021)</td><td>Learn a handful of virtual "soft prompt" vectors; the model itself is untouched.</td><td>Extremely light; good for many tasks sharing one base.</td></tr>
+    <tr><td><strong>LoRA</strong></td><td>Hu et al. (Microsoft, 2021)</td><td>Freeze the base; learn small low-rank "update" matrices alongside each big weight matrix.</td><td>The dominant method. Trains &lt;1% of parameters, results rival full fine-tuning, adapters are tiny files you can swap.</td></tr>
+    <tr><td><strong>QLoRA</strong></td><td>Dettmers et al. (Univ. of Washington, 2023)</td><td>LoRA on top of a 4-bit quantized frozen base (NF4 format, paged optimizer).</td><td>The democratizer: fine-tune a 70B model on a single 48 GB GPU, or smaller models on a 24 GB card.</td></tr>
+    <tr><td><strong>DoRA</strong></td><td>Liu et al. (NVIDIA, 2024)</td><td>Splits weights into magnitude and direction, applying LoRA more surgically.</td><td>Closes the small remaining gap to full fine-tuning.</td></tr>
+    <tr><td><strong>(IA)³</strong></td><td>Liu et al. (Raffel group, UNC, 2022)</td><td>Learn tiny per-feature scaling vectors.</td><td>Even fewer parameters than LoRA for few-shot settings.</td></tr>
+  </table>
+  <div class="dive"><span class="tag">Deep dive: why LoRA is nearly free</span>
+    <p>A big weight matrix of shape <code>d×k</code> has <code>d·k</code> parameters. LoRA replaces its
+    <em>update</em> with two skinny matrices of shape <code>d×r</code> and <code>r×k</code> where the rank
+    <code>r</code> is small (8, 16, 64). That is <code>r·(d+k)</code> trainable numbers, often a few
+    hundred-thousandths of the original. The frozen base still has to <em>sit</em> in memory, but it needs no
+    gradients or optimizer states. Combine with QLoRA's 4-bit base and the memory bill collapses: a 70B base is
+    about 35 GB (4-bit) plus a few GB of adapters and optimizer, which fits on one GPU. This is the entire reason
+    individuals and small labs can specialize frontier-scale models.</p>
+  </div>
+  <h3>Who uses what, in practice</h3>
+  <ul>
+    <li><strong>OpenAI</strong>: pioneered the RLHF/PPO recipe (the InstructGPT lineage); details now closed.</li>
+    <li><strong>Anthropic</strong>: Constitutional AI / RLAIF layered on RLHF, to scale and principle-anchor feedback.</li>
+    <li><strong>Meta (Llama)</strong>: open-weights; recent releases lean on SFT plus rejection sampling and DPO rather than heavy PPO.</li>
+    <li><strong>DeepSeek</strong>: GRPO with verifiable rewards for reasoning, plus Mixture-of-Experts and FP8 training for efficiency.</li>
+    <li><strong>Google (Gemma/Gemini)</strong>: RLHF plus heavy use of distillation to produce small models.</li>
+    <li><strong>The open-source community</strong>: overwhelmingly QLoRA + DPO/ORPO, run through tooling such as TRL, Axolotl, and Unsloth, because it is the cheapest path from a base model to a specialized one.</li>
+  </ul>
+
+  <h2>7. Quantization: making a finished model fit</h2>
+  <p>Once a model is trained, its weights are usually 16-bit. <strong>Quantization</strong> rewrites them in
+  fewer bits (8, 4, or even fewer), trading a sliver of accuracy for a large cut in memory and a speed-up. This is
+  what lets a model that needed a server farm to <em>train</em> run on a single card to <em>serve</em>.</p>
+  <table>
+    <tr><th>Model size</th><th>FP16 (2 B/param)</th><th>INT8 (1 B/param)</th><th>INT4 (0.5 B/param)</th></tr>
+    <tr><td>7B</td><td>~14 GB</td><td>~7 GB</td><td>~3.5 GB</td></tr>
+    <tr><td>70B</td><td>~140 GB</td><td>~70 GB</td><td>~35 GB</td></tr>
+    <tr><td>550B</td><td>~1.1 TB</td><td>~550 GB</td><td>~275 GB</td></tr>
+  </table>
+  <p>That 70B row tells the story: at FP16 it needs two 80 GB GPUs for the weights alone (more once you add KV
+  cache and long contexts); quantized to INT4 it slips onto a <em>single</em> card. A 7B model at INT4 (~3.5 GB)
+  runs comfortably on a consumer RTX 3090/4090.</p>
+  <div class="dive"><span class="tag">Deep dive: flavors of quantization</span>
+    <p><strong>PTQ (post-training quantization)</strong>: compress an already-trained model. Fast, no retraining.
+    Methods include GPTQ (Frantar et al., 2022), AWQ (Lin et al., MIT, 2023), <code>bitsandbytes</code>
+    (Dettmers), and the GGUF format used by <code>llama.cpp</code> for CPU/Mac inference.
+    <strong>QAT (quantization-aware training)</strong>: simulate low precision <em>during</em> training so the
+    model adapts. More accurate, more expensive. <strong>FP8 training</strong>: newer hardware (H100 and up) can
+    train directly in 8-bit float, which DeepSeek used to cut pre-training cost.</p>
+  </div>
+
+  <h2>8. Retrieval-Augmented Generation (RAG): knowledge without retraining</h2>
+  <p>A model only "knows" what was in its training data, frozen at a point in time. It cannot know your company's
+  documents or yesterday's news. You <em>could</em> retrain it (slow and expensive) or you can use <strong>RAG</strong>
+  (Lewis et al., FAIR/Meta, 2020): at question time, search a knowledge base for relevant passages and paste them
+  into the prompt, so the model reasons over fresh, authoritative text it can see right in front of it.</p>
+  <p>The mechanics: documents are converted into <strong>embeddings</strong> (vectors capturing meaning) and
+  stored in a <strong>vector database</strong>. A question is embedded the same way, the nearest passages are
+  retrieved, and they ride along in the prompt.</p>
+  <div class="intuition">Rule of thumb: fine-tune to change behavior and style; use RAG to supply facts. RAG is
+  cheaper, updates instantly (just edit the database), and lets the model cite sources. Many production systems
+  use both.</div>
+  <p>Hardware-wise RAG is light: the embedding model is small (hundreds of MB), and a vector database runs on CPU
+  or a modest GPU. The cost is a little extra latency per query and the engineering to keep the knowledge base
+  clean.</p>
+
+  <h2>9. Inference: actually running the model</h2>
+  <p>Inference is the model <em>working</em>: reading your prompt and generating an answer token by token. Unlike
+  training (a one-time cost), inference cost recurs with every single query, so at scale it dominates the total
+  bill. Two things drive it:</p>
+  <ul>
+    <li><strong>The weights must fit in memory</strong>, which is exactly why quantization matters for serving.</li>
+    <li><strong>The KV cache</strong>: as the model generates, it stores intermediate results for every token of context. Long conversations and long documents inflate this, sometimes past the size of the weights themselves.</li>
+  </ul>
+  <div class="dive"><span class="tag">Deep dive: tricks that make inference cheap</span>
+    <p><strong>FlashAttention</strong> (Dao et al., Stanford, 2022): a memory-efficient attention computation,
+    near-universal now. <strong>PagedAttention / vLLM</strong> (Kwon et al., UC Berkeley, 2023): manages the KV
+    cache like virtual memory, enabling high-throughput batched serving. <strong>Continuous batching</strong>:
+    pack many users' requests through the GPU together to keep it busy. <strong>Speculative decoding</strong>
+    (2023): a small draft model proposes tokens that the big model verifies in bulk, multiplying speed.
+    <strong>Mixture-of-Experts (MoE)</strong> (Shazeer et al., 2017; used in Mixtral, DeepSeek): only a fraction
+    of the parameters fire per token, so a model can be huge in capacity but cheap per query.</p>
+  </div>
+
+  <h2>10. How it all maps to hardware</h2>
+  <p>Pulling the whole guide together into one picture: the same model demands wildly different hardware
+  depending on which stage you are in.</p>
+  <table>
+    <tr><th>Stage</th><th>What you're doing</th><th>Memory pressure</th><th>Typical hardware (70B-class)</th></tr>
+    <tr><td>Pre-training</td><td>Building the brain from scratch</td><td>Extreme (~16 B/param + activations, sharded)</td><td>Hundreds to thousands of H100s for weeks</td></tr>
+    <tr><td>Full fine-tuning</td><td>Updating all weights</td><td>Very high (~16 B/param)</td><td>Multi-GPU node (8× A100/H100)</td></tr>
+    <tr><td>LoRA fine-tuning</td><td>Training tiny adapters, frozen base</td><td>Moderate</td><td>1–2 high-memory GPUs</td></tr>
+    <tr><td>QLoRA fine-tuning</td><td>Adapters on a 4-bit base</td><td>Low (~35 GB base + a few GB)</td><td>A single 48 GB GPU (or 24 GB for smaller models)</td></tr>
+    <tr><td>Quantization</td><td>Compressing a trained model</td><td>Low to moderate, brief</td><td>One GPU, minutes to hours</td></tr>
+    <tr><td>RAG</td><td>Embedding + retrieval around the model</td><td>Low</td><td>CPU or modest GPU + a vector DB</td></tr>
+    <tr><td>Inference (FP16)</td><td>Serving uncompressed</td><td>High (~140 GB + KV cache)</td><td>2× 80 GB GPUs (more for long context)</td></tr>
+    <tr><td>Inference (INT4)</td><td>Serving compressed</td><td>Moderate (~35 GB + KV cache)</td><td>One GPU; a 7B model fits a gaming card</td></tr>
+  </table>
+
+  <h2>11. Who's doing what across the frontier</h2>
+  <p>The techniques above are shared vocabulary; what distinguishes the major labs is which ones they lean on and
+  how they combine them. A quick, honest tour, recognizing that exact recipes for closed models are inferred, not
+  published.</p>
+  <table>
+    <tr><th>Lab</th><th>Flagship</th><th>Signature approach</th></tr>
+    <tr><td>OpenAI</td><td>GPT-4-class, o-series</td><td>Pioneered the modern RLHF/PPO pipeline. The o1/o3 "reasoning" models scale test-time compute, trained with large-scale RL to think in long chains before answering.</td></tr>
+    <tr><td>Anthropic</td><td>Claude</td><td>Constitutional AI / RLAIF: an AI critiques and revises answers against a written set of principles, reducing the human-labeling burden.</td></tr>
+    <tr><td>Google DeepMind</td><td>Gemini; Gemma (open)</td><td>Natively multimodal training, RLHF, and heavy distillation to spin out small, fast models. Very long context.</td></tr>
+    <tr><td>Meta AI</td><td>Llama (open)</td><td>Open-weight strategy. Recent Llamas use SFT + rejection sampling + DPO rather than heavy PPO.</td></tr>
+    <tr><td>Mistral AI</td><td>Mistral / Mixtral (open)</td><td>Efficiency-first, European. Popularized open sparse Mixture-of-Experts, big capacity at small per-token cost.</td></tr>
+    <tr><td>Cohere</td><td>Command R+; Embed, Rerank</td><td>Enterprise- and retrieval-focused; models tuned for RAG and tool use. Research arm ships the open multilingual Aya models.</td></tr>
+  </table>
+  <h3>11b. The Chinese open-weight wave</h3>
+  <p>A cluster of Chinese labs has become a major force, largely by releasing strong <em>open-weight</em> models
+  and squeezing more out of constrained hardware.</p>
+  <ul>
+    <li><strong>DeepSeek</strong>: the standout. DeepSeek-V3 is a large Mixture-of-Experts model (~671B total, ~37B active per token), trained in FP8 at a reported cost of a few million dollars for the final run. Its reasoning model, R1, showed that pure reinforcement learning (GRPO) can induce strong reasoning, then distilled that into smaller open models.</li>
+    <li><strong>Qwen (Alibaba)</strong>: a broad, frequently-updated family of open-weight models, strong at multilingual and coding tasks; one of the most-downloaded open bases worldwide.</li>
+    <li><strong>Kimi (Moonshot AI)</strong>: very long context and large agentic MoE models tuned for tool use.</li>
+    <li><strong>GLM (Zhipu AI), Yi (01.AI), MiniMax</strong>: further open or semi-open families, several experimenting with alternative attention designs to cut cost.</li>
+  </ul>
+  <div class="dive"><span class="tag">Deep dive: the efficiency tricks behind the Chinese wave</span>
+    <p>With limited access to top-end chips, these labs leaned hard on architecture: <strong>Mixture-of-Experts</strong>
+    (only a slice of the model fires per token), <strong>FP8 training</strong>, and KV-cache compression such as
+    DeepSeek's <strong>Multi-head Latent Attention (MLA)</strong> and the now-standard <strong>Grouped-Query
+    Attention</strong> (Google, 2023). The lesson the whole field absorbed: smart architecture can substitute for
+    raw compute.</p>
+  </div>
+  <h3>11c. Where the frontier is heading</h3>
+  <ul>
+    <li><strong>Reasoning &amp; test-time compute</strong>: letting a model "think longer" at inference often beats making it bigger. Trained largely with RL from verifiable rewards on math and code.</li>
+    <li><strong>Mixture-of-Experts everywhere</strong>: decoupling total capacity from per-token cost is now standard at the frontier.</li>
+    <li><strong>Long context &amp; KV-cache compression</strong>: pushing toward million-token windows without the memory blowing up.</li>
+    <li><strong>Alternatives to attention</strong>: state-space models like Mamba (Gu &amp; Dao, 2023) and hybrids aim to handle long sequences more cheaply.</li>
+    <li><strong>Extreme quantization</strong>: research like BitNet (Microsoft, 2024) explores ~1.58-bit ternary weights; new hardware adds FP4.</li>
+    <li><strong>Synthetic data, agentic tool-use training, and model merging</strong>: increasingly how capability is added after pre-training.</li>
+  </ul>
+
+  <h2>12. A simple decision guide</h2>
+  <ul>
+    <li><strong>Want the model to know new facts?</strong> RAG first. Cheapest, instant updates, citable.</li>
+    <li><strong>Want to change its behavior, format, or voice?</strong> Post-train, and start with QLoRA + DPO. You rarely need full fine-tuning.</li>
+    <li><strong>Need it to run cheaply or on small hardware?</strong> Quantize (INT8, then INT4 if quality holds), and serve with vLLM.</li>
+    <li><strong>Need a genuinely new base capability or values foundation?</strong> That is pre-training territory, the one stage you cannot shortcut, and the one that demands a real cluster.</li>
+    <li><strong>Want a small, fast model that behaves like a big one?</strong> Distill from a strong teacher, then quantize.</li>
+  </ul>
+
+  <h2>13. Glossary</h2>
+  <p class="glossary">
+    <b>Token</b>: a chunk of text (~¾ of a word) the model reads/writes one at a time.
+    <b>Parameter / weight</b>: one of the model's adjustable numbers.
+    <b>FLOP</b>: one arithmetic operation; the unit of compute.
+    <b>Precision (FP32/FP16/INT8/INT4)</b>: how many bits store each number; fewer bits is less memory, less accuracy.
+    <b>Gradient</b>: the direction to nudge a weight to reduce error.
+    <b>Optimizer (Adam)</b>: the algorithm that applies gradients; keeps extra per-weight bookkeeping.
+    <b>SFT</b>: supervised fine-tuning, learning from ideal example answers.
+    <b>RLHF</b>: reinforcement learning from human feedback.
+    <b>DPO/ORPO/SimPO/KTO/GRPO</b>: methods to learn from preferences or rewards.
+    <b>PEFT</b>: parameter-efficient fine-tuning (LoRA, adapters, etc.).
+    <b>LoRA/QLoRA</b>: train tiny low-rank adapters on a frozen (or 4-bit) base.
+    <b>Quantization</b>: compressing weights to fewer bits.
+    <b>RAG</b>: retrieval-augmented generation; fetch facts into the prompt at query time.
+    <b>Embedding</b>: a vector capturing the meaning of text.
+    <b>KV cache</b>: stored intermediate state that makes generation fast but eats memory.
+    <b>MoE</b>: mixture-of-experts; only part of the model fires per token.
+    <b>Inference</b>: running the trained model to produce answers.
+  </p>
+
+  <div class="backlink"><a href="/learn/">← More from Learn</a></div>
+</article>
+
+<footer>
+  <div class="wrap">© CR Labs · <a href="/">crlab.ca</a> · Attributions reflect the originating papers/labs for each technique; many ideas were refined by the broader community afterward.</div>
+</footer>
+
+</body>
+</html>

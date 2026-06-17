@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn | Cyber Resiliency Labs</title>
+<meta name="description" content="Explainers, field guides, and videos from Cyber Resiliency Labs that make modern AI understandable: how models are trained, post-trained, shrunk, and run.">
+<style>
+  :root{--bg:#0d1b17;--panel:#13261e;--ink:#eaf0ea;--muted:#a7c1b3;--accent:#6fbf9b;--line:#244a3c;}
+  *{margin:0;box-sizing:border-box}
+  body{font-family:-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:17px}
+  a{color:var(--accent);text-decoration:none}
+  .top{border-bottom:1px solid var(--line)}
+  .top .row{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;max-width:920px;margin:0 auto}
+  .brand{font-weight:700;color:var(--ink)}.brand span{color:var(--accent)}
+  .top .row a.nav{color:var(--muted);font-size:15px}.top .row a.nav:hover{color:var(--ink)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+  header.hero{padding:64px 0 8px}
+  .kicker{color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+  h1{font-size:44px;letter-spacing:-.5px;margin:12px 0 10px}
+  .lead{font-size:20px;color:var(--muted);max-width:680px}
+  section{padding:44px 0;border-top:1px solid var(--line);margin-top:36px}
+  h2{font-size:15px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+  .post{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:26px;margin-bottom:18px;transition:.15s}
+  .post:hover{border-color:var(--accent)}
+  .post h3{color:#fff;font-size:23px;margin-bottom:8px}
+  .post p{color:var(--muted);font-size:16px}
+  .post .meta{color:var(--accent);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-top:12px}
+  .video{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-soon{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:48px;text-align:center;color:var(--muted)}
+  footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="row">
+    <a class="brand" href="/">Cyber Resiliency <span>Labs</span></a>
+    <a class="nav" href="/">← Home</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker">Learn</div>
+    <h1>Making AI legible.</h1>
+    <p class="lead">Explainers, field guides, and videos from our team. We turn dense AI research and hard
+    technical topics into something a non-specialist can actually follow.</p>
+  </header>
+
+  <section>
+    <h2>Read</h2>
+    <a class="post" href="/learn/inside-a-large-language-model.html">
+      <h3>Inside a Large Language Model</h3>
+      <p>A field guide to how modern AI systems are built, trained, shrunk, and run: parameters, pre-training,
+      post-training, parameter-efficient methods, quantization, retrieval, and inference, and how each stage maps
+      to real hardware and real cost.</p>
+      <div class="meta">Field guide · ~20 min read</div>
+    </a>
+  </section>
+
+  <section>
+    <h2>Watch</h2>
+    <p style="color:var(--muted);margin-bottom:22px;max-width:680px">Short, narrated walkthroughs of the topics
+    above. They publish to our YouTube playlist below.</p>
+
+    <!-- VIDEO PLAYLIST: when the YouTube playlist is live, replace the .video-soon block below with:
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed/videoseries?list=YOUR_PLAYLIST_ID"
+        title="CR Labs explainer videos" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+    -->
+    <div class="video-soon">Video playlist coming soon.</div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">© Cyber Resiliency Labs and Consulting Inc. · <a href="/">crlab.ca</a></div>
+</footer>
+
+</body>
+</html>
