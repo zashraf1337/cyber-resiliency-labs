@@ -44,6 +44,16 @@
   .video{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
   .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .video-soon{background:var(--soft);border:1px dashed #cdd9d1;border-radius:12px;padding:48px;text-align:center;color:var(--muted)}
+  .series{display:grid;grid-template-columns:1.8fr 1fr;gap:20px;align-items:start}
+  .series-player{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
+  .series-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .series-list{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .ep{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:13px 15px;border:0;border-bottom:1px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;color:var(--ink);transition:.12s}
+  .ep:last-child{border-bottom:0}
+  .ep:hover,.ep.active{background:var(--soft)}
+  .ep .epn{color:var(--accent);font-weight:700;font-size:13px;min-width:16px}
+  .ep .ept{font-size:14.5px;line-height:1.32}
+  @media(max-width:760px){.series{grid-template-columns:1fr}}
   footer{padding:30px 0;color:var(--muted);font-size:14px}
 </style>
 </head>
@@ -79,16 +89,40 @@
 
   <section id="watch" style="border-bottom:none">
     <h2>Watch</h2>
-    <p style="color:var(--muted);margin-bottom:22px;max-width:660px">Short, narrated walkthroughs of the topics
-    above, on our YouTube playlist.</p>
+    <p style="color:var(--muted);margin-bottom:22px;max-width:660px">A seven-part video series that walks
+    through the field guide above, one stage at a time. Pick an episode, or watch the full playlist on YouTube.</p>
 
-    <div class="video">
-      <iframe src="https://www.youtube.com/embed/videoseries?list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9"
-        title="CR Labs explainer videos" loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+    <div class="series">
+      <div class="series-player">
+        <iframe id="series-frame" src="https://www.youtube.com/embed/fzs_TID6rso?rel=0"
+          title="CR Labs: Inside a Large Language Model" loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+      <div class="series-list" id="series-list">
+        <button class="ep active" data-id="fzs_TID6rso" data-title="Inside a Large Language Model"><span class="epn">1</span><span class="ept">Inside a Large Language Model</span></button>
+        <button class="ep" data-id="bUo6LpnnG14" data-title="How Models Learn"><span class="epn">2</span><span class="ept">How Models Learn</span></button>
+        <button class="ep" data-id="o7hmYTdO_x0" data-title="Teaching Models to Behave"><span class="epn">3</span><span class="ept">Teaching Models to Behave</span></button>
+        <button class="ep" data-id="kXepsWtDAug" data-title="Doing It Cheaply"><span class="epn">4</span><span class="ept">Doing It Cheaply</span></button>
+        <button class="ep" data-id="RFBKpLJ2K9c" data-title="Giving Models Knowledge, and Serving Them"><span class="epn">5</span><span class="ept">Giving Models Knowledge, and Serving Them</span></button>
+        <button class="ep" data-id="IWj9ynx6guU" data-title="Measuring and Steering"><span class="epn">6</span><span class="ept">Measuring and Steering</span></button>
+        <button class="ep" data-id="s2tB7a3u-3k" data-title="The Frontier: Who's Doing What"><span class="epn">7</span><span class="ept">The Frontier: Who's Doing What</span></button>
+      </div>
     </div>
     <p style="margin-top:18px"><a href="https://www.youtube.com/playlist?list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9" target="_blank" rel="noopener" style="font-weight:600">Watch the full playlist on YouTube ›</a></p>
+    <script>
+    (function(){
+      var frame=document.getElementById('series-frame'),list=document.getElementById('series-list');
+      if(!frame||!list)return;
+      list.addEventListener('click',function(e){
+        var b=e.target.closest('.ep');if(!b)return;
+        list.querySelectorAll('.ep').forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        frame.src='https://www.youtube.com/embed/'+b.getAttribute('data-id')+'?rel=0&autoplay=1';
+        frame.title='CR Labs: '+b.getAttribute('data-title');
+      });
+    })();
+    </script>
   </section>
 </div>
 
