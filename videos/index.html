@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Video series: Inside a Large Language Model | CR Labs</title>
-<meta name="description" content="A seven-part video series on how modern AI is built, trained, shrunk, and run: pre-training, post-training, efficiency, retrieval, serving, measurement, and the frontier.">
+<title>Video series | Cyber Resiliency Labs</title>
+<meta name="description" content="Plain-language video series from Cyber Resiliency Labs on how modern AI is built, trained, run, and put to work: Inside a Large Language Model, Under the LLM Hood, and The Business of AI.">
 <link rel="canonical" href="https://crlab.ca/videos/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Cyber Resiliency Labs">
 <meta property="og:url" content="https://crlab.ca/videos/">
-<meta property="og:title" content="Inside a Large Language Model: the video series">
-<meta property="og:description" content="Seven short videos on how modern AI is built, trained, shrunk, and run: pre-training, post-training, efficiency, retrieval, serving, and the frontier.">
+<meta property="og:title" content="Video series from CR Labs">
+<meta property="og:description" content="Plain-language video series on how modern AI is built, trained, run, and put to work.">
 <meta property="og:image" content="https://crlab.ca/assets/og-videos.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -19,7 +19,6 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#ffffff">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Inside a Large Language Model: video series","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"VideoObject","name":"Inside a Large Language Model","description":"Overview of the full LLM lifecycle: how modern AI is built, trained, shrunk, and run.","thumbnailUrl":"https://i.ytimg.com/vi/fzs_TID6rso/hqdefault.jpg","uploadDate":"2026-06-18T02:11:02+00:00","contentUrl":"https://www.youtube.com/watch?v=fzs_TID6rso","embedUrl":"https://www.youtube.com/embed/fzs_TID6rso","publisher":{"@type":"Organization","name":"Cyber Resiliency Labs"}}},{"@type":"ListItem","position":2,"item":{"@type":"VideoObject","name":"How Models Learn","description":"Pre-training: how a model learns to predict text, and why it costs millions.","thumbnailUrl":"https://i.ytimg.com/vi/bUo6LpnnG14/hqdefault.jpg","uploadDate":"2026-06-18T02:11:05+00:00","contentUrl":"https://www.youtube.com/watch?v=bUo6LpnnG14","embedUrl":"https://www.youtube.com/embed/bUo6LpnnG14","publisher":{"@type":"Organization","name":"Cyber Resiliency Labs"}}},{"@type":"ListItem","position":3,"item":{"@type":"VideoObject","name":"Teaching Models to Behave","description":"Post-training and alignment: SFT, RLHF, and DPO turn a raw model into a helpful assistant.","thumbnailUrl":"https://i.ytimg.com/vi/o7hmYTdO_x0/hqdefault.jpg","uploadDate":"2026-06-18T02:11:09+00:00","contentUrl":"https://www.youtube.com/watch?v=o7hmYTdO_x0","embedUrl":"https://www.youtube.com/embed/o7hmYTdO_x0","publisher":{"@type":"Organization","name":"Cyber Resiliency Labs"}}},{"@type":"ListItem","position":4,"item":{"@type":"VideoObject","name":"Doing It Cheaply","description":"Efficiency: LoRA, QLoRA, and quantization let small teams fine-tune and run huge models.","thumbnailUrl":"https://i.ytimg.com/vi/kXepsWtDAug/hqdefault.jpg","uploadDate":"2026-06-18T02:07:43+00:00","contentUrl":"https://www.youtube.com/watch?v=kXepsWtDAug","embedUrl":"https://www.youtube.com/embed/kXepsWtDAug","publisher":{"@type":"Organization","name":"Cyber Resiliency Labs"}}},{"@type":"ListItem","position":5,"item":{"@type":"VideoObject","name":"Giving Models Knowledge, and Serving Them","description":"Retrieval (RAG) gives models fresh knowledge; inference serves them affordably.","thumbnailUrl":"https://i.ytimg.com/vi/RFBKpLJ2K9c/hqdefault.jpg","uploadDate":"2026-06-18T02:09:19+00:00","contentUrl":"https://www.youtube.com/watch?v=RFBKpLJ2K9c","embedUrl":"https://www.youtube.com/embed/RFBKpLJ2K9c","publisher":{"@type":"Organization","name":"Cyber Resiliency Labs"}}},{"@type":"ListItem","position":6,"item":{"@type":"VideoObject","name":"Measuring and Steering","description":"Evaluation and steering: measuring how a model behaves and shaping it.","thumbnailUrl":"https://i.ytimg.com/vi/IWj9ynx6guU/hqdefault.jpg","uploadDate":"2026-06-18T02:09:42+00:00","contentUrl":"https://www.youtube.com/watch?v=IWj9ynx6guU","embedUrl":"https://www.youtube.com/embed/IWj9ynx6guU","publisher":{"@type":"Organization","name":"Cyber Resiliency Labs"}}},{"@type":"ListItem","position":7,"item":{"@type":"VideoObject","name":"The Frontier: Who's Doing What","description":"The frontier: how the major AI labs build and differentiate their models.","thumbnailUrl":"https://i.ytimg.com/vi/s2tB7a3u-3k/hqdefault.jpg","uploadDate":"2026-06-18T02:10:15+00:00","contentUrl":"https://www.youtube.com/watch?v=s2tB7a3u-3k","embedUrl":"https://www.youtube.com/embed/s2tB7a3u-3k","publisher":{"@type":"Organization","name":"Cyber Resiliency Labs"}}}]}</script>
 <style>
   :root{--bg:#ffffff;--soft:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--accent:#1f6b4a;--line:#d2d2d7;}
   *{margin:0;box-sizing:border-box}
@@ -35,21 +34,28 @@
   .kicker{color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
   h1{font-size:46px;letter-spacing:-.6px;margin:12px 0 12px;color:#13201a}
   .lead{font-size:20px;color:var(--muted);max-width:680px;line-height:1.45}
-  main{padding:44px 0 20px}
-  .series{display:grid;grid-template-columns:1.8fr 1fr;gap:20px;align-items:start}
-  .series-player{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
-  .series-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-  .series-list{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
-  .ep{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:13px 15px;border:0;border-bottom:1px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;color:var(--ink);transition:.12s}
-  .ep:last-child{border-bottom:0}
-  .ep:hover,.ep.active{background:var(--soft)}
-  .ep .epn{color:var(--accent);font-weight:700;font-size:13px;min-width:16px}
-  .ep .ept{font-size:14.5px;line-height:1.32}
-  .more{margin-top:22px;font-size:16px}
-  .more a{font-weight:600}.more .dot{color:var(--muted);margin:0 8px}
-  footer{border-top:1px solid var(--line);background:var(--soft);padding:30px 0;color:var(--muted);font-size:14px;margin-top:30px}
+  main{padding:46px 0 24px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .scard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:.15s}
+  a.scard:hover{box-shadow:0 8px 26px rgba(0,0,0,.08);transform:translateY(-2px)}
+  .thumb{position:relative;aspect-ratio:16/9;background:#0b1411;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb.soon{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#15332a,#0b1411)}
+  .thumb.soon .ph{color:#bfe3d1;font-weight:700;font-size:19px;letter-spacing:-.3px;text-align:center;padding:0 18px;opacity:.92}
+  .play{position:absolute;left:14px;bottom:12px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center}
+  .play svg{width:18px;height:18px;fill:#13201a;margin-left:2px}
+  .body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+  .body h3{font-size:19px;letter-spacing:-.2px;color:#13201a;margin-bottom:7px}
+  .body p{font-size:15px;color:var(--muted);line-height:1.45;flex:1}
+  .tagrow{margin-top:14px;display:flex;align-items:center;gap:10px}
+  .count{font-size:13px;color:var(--accent);font-weight:700}
+  .badge{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:980px;padding:4px 11px}
+  .scard.dim{opacity:.96}
+  .scard.dim .body h3{color:#3a4742}
+  footer{border-top:1px solid var(--line);background:var(--soft);padding:30px 0;color:var(--muted);font-size:14px;margin-top:34px}
   footer a{color:var(--accent)}
-  @media(max-width:760px){.series{grid-template-columns:1fr}h1{font-size:34px}}
+  @media(max-width:860px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}h1{font-size:34px}}
 </style>
 </head>
 <body>
@@ -64,56 +70,56 @@
 <header class="hero">
   <div class="wrap">
     <div class="kicker">Video series</div>
-    <h1>Inside a Large Language Model</h1>
-    <p class="lead">Seven short videos on how modern AI is built, trained, shrunk, and run. The field guide,
-    one stage at a time. Pick an episode below.</p>
+    <h1>How AI really works, in plain language</h1>
+    <p class="lead">Short video series from our team on how modern AI is built, trained, run, and put to work.
+    Pick a series to start.</p>
   </div>
 </header>
 
 <main>
   <div class="wrap">
-    <div class="series">
-      <div class="series-player">
-        <iframe id="series-frame" src="https://www.youtube.com/embed/fzs_TID6rso?rel=0"
-          title="CR Labs: Inside a Large Language Model" loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+    <div class="grid">
+
+      <a class="scard" href="/videos/inside-a-large-language-model/">
+        <div class="thumb">
+          <img src="https://i.ytimg.com/vi/fzs_TID6rso/hqdefault.jpg" alt="Inside a Large Language Model" loading="lazy">
+          <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+        <div class="body">
+          <h3>Inside a Large Language Model</h3>
+          <p>How modern AI is built, trained, shrunk, and run, one stage at a time: pre-training, post-training,
+          efficiency, retrieval, serving, and the frontier.</p>
+          <div class="tagrow"><span class="count">7 episodes</span></div>
+        </div>
+      </a>
+
+      <div class="scard dim">
+        <div class="thumb soon"><span class="ph">Under the LLM Hood</span></div>
+        <div class="body">
+          <h3>Under the LLM Hood</h3>
+          <p>A closer look at the machinery inside a language model: the parts that turn text into predictions,
+          explained without the math wall.</p>
+          <div class="tagrow"><span class="badge">Coming soon</span></div>
+        </div>
       </div>
-      <div class="series-list" id="series-list">
-        <button class="ep active" data-id="fzs_TID6rso" data-title="Inside a Large Language Model"><span class="epn">1</span><span class="ept">Inside a Large Language Model</span></button>
-        <button class="ep" data-id="bUo6LpnnG14" data-title="How Models Learn"><span class="epn">2</span><span class="ept">How Models Learn</span></button>
-        <button class="ep" data-id="o7hmYTdO_x0" data-title="Teaching Models to Behave"><span class="epn">3</span><span class="ept">Teaching Models to Behave</span></button>
-        <button class="ep" data-id="kXepsWtDAug" data-title="Doing It Cheaply"><span class="epn">4</span><span class="ept">Doing It Cheaply</span></button>
-        <button class="ep" data-id="RFBKpLJ2K9c" data-title="Giving Models Knowledge, and Serving Them"><span class="epn">5</span><span class="ept">Giving Models Knowledge, and Serving Them</span></button>
-        <button class="ep" data-id="IWj9ynx6guU" data-title="Measuring and Steering"><span class="epn">6</span><span class="ept">Measuring and Steering</span></button>
-        <button class="ep" data-id="s2tB7a3u-3k" data-title="The Frontier: Who's Doing What"><span class="epn">7</span><span class="ept">The Frontier: Who's Doing What</span></button>
+
+      <div class="scard dim">
+        <div class="thumb soon"><span class="ph">The Business of AI</span></div>
+        <div class="body">
+          <h3>The Business of AI</h3>
+          <p>What AI means for the people paying for it: cost, value, risk, and where it actually pays off in a
+          real organization.</p>
+          <div class="tagrow"><span class="badge">Coming soon</span></div>
+        </div>
       </div>
+
     </div>
-    <p class="more">
-      <a href="https://www.youtube.com/playlist?list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9" target="_blank" rel="noopener">Watch on YouTube ›</a>
-      <span class="dot">·</span>
-      <a href="/learn/inside-a-large-language-model.html">Read the full field guide ›</a>
-    </p>
   </div>
 </main>
 
 <footer>
   <div class="wrap">© Cyber Resiliency Labs and Consulting Inc. · <a href="/">crlab.ca</a></div>
 </footer>
-
-<script>
-(function(){
-  var frame=document.getElementById('series-frame'),list=document.getElementById('series-list');
-  if(!frame||!list)return;
-  list.addEventListener('click',function(e){
-    var b=e.target.closest('.ep');if(!b)return;
-    list.querySelectorAll('.ep').forEach(function(x){x.classList.remove('active');});
-    b.classList.add('active');
-    frame.src='https://www.youtube.com/embed/'+b.getAttribute('data-id')+'?rel=0&autoplay=1';
-    frame.title='CR Labs: '+b.getAttribute('data-title');
-  });
-})();
-</script>
 
 </body>
 </html>
