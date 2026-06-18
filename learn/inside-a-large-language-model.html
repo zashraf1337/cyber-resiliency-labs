@@ -18,55 +18,85 @@
 <meta name="twitter:site" content="@zashraf1337">
 <meta name="twitter:creator" content="@zashraf1337">
 <style>
-  :root{--bg:#0d1b17;--panel:#13261e;--ink:#eaf0ea;--muted:#a7c1b3;--accent:#6fbf9b;--line:#244a3c;}
+  :root{--bg:#ffffff;--soft:#f3f7f4;--ink:#1b2420;--muted:#5c6b63;--accent:#1f6b4a;--accent-d:#16513a;--line:#e4e9e4;}
   *{margin:0;box-sizing:border-box}
-  body{font-family:-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:18px}
-  .top{border-bottom:1px solid var(--line)}
-  .top .wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 24px}
-  .brand{font-weight:700}.brand span{color:var(--accent)}
-  .top a{color:var(--muted);text-decoration:none;font-size:15px}.top a:hover{color:var(--ink)}
-  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
-  article{padding:56px 0 80px}
-  .kicker{color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase}
-  h1{font-size:40px;line-height:1.15;letter-spacing:-.5px;margin:14px 0 10px}
-  .sub{font-size:21px;color:var(--muted);margin-bottom:18px}
-  .byline{color:var(--muted);font-size:15px;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:30px}
-  h2{font-size:26px;color:#fff;margin:42px 0 12px;letter-spacing:-.3px}
-  h3{font-size:20px;color:var(--accent);margin:28px 0 8px}
-  p{margin:0 0 16px}
-  ul,ol{margin:0 0 16px;padding-left:24px}li{margin-bottom:8px}
-  strong{color:#fff}
-  code{font-family:"SF Mono",Menlo,monospace;font-size:.86em;background:#0a1511;border:1px solid var(--line);padding:1px 5px;border-radius:4px}
-  .intuition{border-left:4px solid var(--accent);background:#0f201a;padding:12px 18px;margin:18px 0;color:var(--muted);font-style:italic;border-radius:0 6px 6px 0}
-  .dive{background:#10211b;border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin:20px 0}
-  .dive .tag{display:block;color:var(--accent);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
-  .dive p{font-size:16px;color:var(--muted)}.dive code{font-size:.85em}
-  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px;display:block;overflow-x:auto}
-  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
-  th{background:#1c3a2f;color:#fff}
-  .glossary{font-size:15.5px;color:var(--muted)}.glossary b{color:var(--ink)}
-  footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:14px}
-  footer a{color:var(--accent);text-decoration:none}
-  .backlink{margin-top:30px}.backlink a{color:var(--accent);text-decoration:none}
+  .sans{font-family:-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+  body{font-family:Georgia,"Charter","Times New Roman",serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:19px;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  .top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+  .top .row{display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;padding:16px 24px}
+  .brand{font-family:-apple-system,"Segoe UI",Inter,sans-serif;font-weight:700;color:var(--ink);text-decoration:none;font-size:18px}
+  .brand span{color:var(--accent)}
+  .top a.nav{font-family:-apple-system,"Segoe UI",Inter,sans-serif;color:var(--muted);text-decoration:none;font-size:15px}
+  .top a.nav:hover{color:var(--ink)}
+  .hero{background:var(--soft);border-bottom:1px solid var(--line)}
+  .hero .wrap{padding:62px 24px 46px}
+  .kicker{font-family:-apple-system,"Segoe UI",Inter,sans-serif;color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+  h1{font-family:-apple-system,"Segoe UI",Inter,sans-serif;font-size:47px;line-height:1.12;letter-spacing:-.7px;margin:16px 0 14px;color:#13201a}
+  .sub{font-size:23px;color:var(--muted);line-height:1.4;font-style:italic;max-width:620px}
+  .meta{font-family:-apple-system,"Segoe UI",Inter,sans-serif;font-size:14.5px;color:var(--muted);margin-top:24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .meta .dot{opacity:.45}
+  .share{display:flex;gap:10px;align-items:center;margin-top:20px;font-family:-apple-system,"Segoe UI",Inter,sans-serif}
+  .share .lbl{font-size:13px;color:var(--muted);margin-right:2px}
+  .share a{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;color:var(--muted);text-decoration:none;background:#fff}
+  .share a:hover{color:var(--accent);border-color:var(--accent)}
+  .share svg{width:18px;height:18px;fill:currentColor}
+  article{padding:46px 0 10px}
+  article p{margin:0 0 20px}
+  h2{font-family:-apple-system,"Segoe UI",Inter,sans-serif;font-size:30px;line-height:1.2;margin:48px 0 14px;color:#13201a;letter-spacing:-.3px}
+  h3{font-family:-apple-system,"Segoe UI",Inter,sans-serif;font-size:21px;margin:32px 0 8px;color:var(--accent-d)}
+  ul,ol{margin:0 0 20px;padding-left:26px}li{margin-bottom:10px}
+  strong{color:#0f1711}
+  code{font-family:"SF Mono",Menlo,monospace;font-size:.8em;background:var(--soft);border:1px solid var(--line);padding:1px 5px;border-radius:4px;color:#15402d}
+  .intuition{border-left:4px solid var(--accent);background:var(--soft);padding:14px 20px;margin:24px 0;color:#3a4a42;font-style:italic;border-radius:0 6px 6px 0}
+  .dive{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:26px 0}
+  .dive .tag{font-family:-apple-system,"Segoe UI",Inter,sans-serif;display:block;color:var(--accent);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+  .dive p{font-size:17px;color:#3a4a42}
+  .dive code{background:#e9efe9}
+  table{width:100%;border-collapse:collapse;margin:24px 0;font-size:15px;font-family:-apple-system,"Segoe UI",Inter,sans-serif;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#e8f0ea;color:#15402d;font-weight:700}
+  tr:nth-child(even) td{background:#fafbfa}
+  .glossary{font-size:16px;color:#3a4a42}.glossary b{color:var(--ink)}
+  .bio{display:flex;gap:18px;align-items:flex-start;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:22px;margin:46px 0 6px;font-family:-apple-system,"Segoe UI",Inter,sans-serif}
+  .avatar{flex:0 0 54px;width:54px;height:54px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:19px}
+  .bio h4{font-size:17px;margin-bottom:5px;color:var(--ink)}
+  .bio p{font-size:15px;color:var(--muted);margin:0 0 8px;line-height:1.5}
+  .bio a{font-size:14px;margin-right:16px}
+  .backlink{font-family:-apple-system,"Segoe UI",Inter,sans-serif;margin:26px 0 0}
+  footer{border-top:1px solid var(--line);background:#fff;padding:32px 0;color:var(--muted);font-size:14px;font-family:-apple-system,"Segoe UI",Inter,sans-serif;margin-top:30px}
+  footer a{color:var(--accent)}
+  @media(max-width:640px){h1{font-size:34px}body{font-size:18px}.hero .wrap{padding:44px 24px 34px}}
 </style>
 </head>
 <body>
 
 <div class="top">
-  <div class="wrap">
+  <div class="row">
     <a class="brand" href="/">Cyber Resiliency <span>Labs</span></a>
-    <a href="/learn/">← Learn</a>
+    <a class="nav" href="/learn/">← Learn</a>
   </div>
 </div>
 
-<article>
-  <div class="kicker">Field guide</div>
-  <h1>Inside a Large Language Model</h1>
-  <p class="sub">How modern AI systems are built, trained, shrunk, and run.</p>
-  <p class="byline">By Zubair Ashraf, CR Labs. An explainer covering the full lifecycle (parameters,
-  pre-training, post-training, parameter-efficient methods, quantization, retrieval, inference) and how each
-  stage maps onto real hardware and real cost.</p>
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Field guide</div>
+    <h1>Inside a Large Language Model</h1>
+    <p class="sub">How modern AI systems are built, trained, shrunk, and run.</p>
+    <div class="meta">
+      <span>By <strong>Zubair Ashraf</strong></span><span class="dot">·</span><span>CR Labs</span><span class="dot">·</span><span>~20 min read</span>
+    </div>
+    <div class="share">
+      <span class="lbl">Share</span>
+      <a href="https://twitter.com/intent/tweet?text=Inside%20a%20Large%20Language%20Model&url=https%3A%2F%2Fcrlab.ca%2Flearn%2Finside-a-large-language-model.html" target="_blank" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcrlab.ca%2Flearn%2Finside-a-large-language-model.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+    </div>
+  </div>
+</header>
 
+<div class="wrap">
+<article>
   <p>Every large language model you have used, whether a chat assistant, a coding helper, or a search
   summarizer, is the output of a pipeline with distinct stages. Each stage answers a different question, costs a
   different amount, and runs on very different hardware. This guide walks the whole pipeline end to end. The main
@@ -302,7 +332,7 @@
     <tr><td>Mistral AI</td><td>Mistral / Mixtral (open)</td><td>Efficiency-first, European. Popularized open sparse Mixture-of-Experts, big capacity at small per-token cost.</td></tr>
     <tr><td>Cohere</td><td>Command R+; Embed, Rerank</td><td>Enterprise- and retrieval-focused; models tuned for RAG and tool use. Research arm ships the open multilingual Aya models.</td></tr>
   </table>
-  <h3>11b. The Chinese open-weight wave</h3>
+  <h3>The Chinese open-weight wave</h3>
   <p>A cluster of Chinese labs has become a major force, largely by releasing strong <em>open-weight</em> models
   and squeezing more out of constrained hardware.</p>
   <ul>
@@ -318,7 +348,7 @@
     Attention</strong> (Google, 2023). The lesson the whole field absorbed: smart architecture can substitute for
     raw compute.</p>
   </div>
-  <h3>11c. Where the frontier is heading</h3>
+  <h3>Where the frontier is heading</h3>
   <ul>
     <li><strong>Reasoning &amp; test-time compute</strong>: letting a model "think longer" at inference often beats making it bigger. Trained largely with RL from verifiable rewards on math and code.</li>
     <li><strong>Mixture-of-Experts everywhere</strong>: decoupling total capacity from per-token cost is now standard at the frontier.</li>
@@ -358,11 +388,21 @@
     <b>Inference</b>: running the trained model to produce answers.
   </p>
 
+  <div class="bio">
+    <div class="avatar">ZA</div>
+    <div>
+      <h4>Zubair Ashraf</h4>
+      <p>Founder of Cyber Resiliency Labs. We post-train AI models for businesses and non-profits, and make AI
+      easier to understand.</p>
+      <a href="https://www.linkedin.com/in/zubairashraf/" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/zashraf1337" target="_blank" rel="noopener">X</a>
+    </div>
+  </div>
   <div class="backlink"><a href="/learn/">← More from Learn</a></div>
 </article>
+</div>
 
 <footer>
-  <div class="wrap">© CR Labs · <a href="/">crlab.ca</a> · Attributions reflect the originating papers/labs for each technique; many ideas were refined by the broader community afterward.</div>
+  <div class="wrap">© CR Labs · <a href="/">crlab.ca</a> · Attributions reflect the originating papers and labs for each technique; many ideas were refined by the broader community afterward.</div>
 </footer>
 
 </body>
