@@ -56,6 +56,10 @@
   .two{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:880px;margin:0 auto}
   .two h3{font-size:26px;font-weight:600;margin-bottom:12px;letter-spacing:-.01em}
   .two p{font-size:18px;color:var(--muted);line-height:1.5}
+  .two a.linkcard{display:block;background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;transition:.15s;color:inherit}
+  .two a.linkcard:hover{border-color:var(--accent);box-shadow:0 8px 24px rgba(31,107,74,.09);transform:translateY(-2px)}
+  .two a.linkcard h3{margin-bottom:10px}
+  .two a.linkcard .more{display:inline-block;margin-top:14px;color:var(--accent);font-weight:500;font-size:16px}
   /* contact */
   .contact{text-align:center}
   .contact p{font-size:20px;color:var(--muted);max-width:560px;margin:0 auto 28px}
@@ -145,17 +149,18 @@
   <div class="wrap">
     <div class="sec-head"><h2>Education &amp; resources</h2></div>
     <div class="two">
-      <div>
+      <a class="linkcard" href="https://zashraf1337.github.io/big-ideas/" target="_blank" rel="noopener">
         <h3>Tech Breakthrough Ideas</h3>
         <p>Part of our research work: a weekly tracker of the most significant breakthroughs across AI and the
-        frontier fields around it. <a href="https://zashraf1337.github.io/big-ideas/" target="_blank" rel="noopener">Read the tracker ›</a></p>
-      </div>
-      <div>
+        frontier fields around it.</p>
+        <span class="more">Read the tracker ›</span>
+      </a>
+      <a class="linkcard" href="/learn/">
         <h3>Explainers and videos</h3>
-        <p>Field guides and narrated walkthroughs that make dense AI easy to follow. Start with
-        <a href="/learn/inside-a-large-language-model.html">Inside a Large Language Model</a>, or browse the
-        <a href="/learn/">Learn</a> library.</p>
-      </div>
+        <p>Field guides and narrated walkthroughs that make dense AI easy to follow, including our field guide
+        Inside a Large Language Model.</p>
+        <span class="more">Browse Learn ›</span>
+      </a>
     </div>
   </div>
 </section>
