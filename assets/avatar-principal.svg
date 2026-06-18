@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Illustrated avatar of the MLOps principal">
+  <defs><clipPath id="cir"><circle cx="120" cy="120" r="120"/></clipPath></defs>
+  <g clip-path="url(#cir)">
+    <rect width="240" height="240" fill="#e9f1ec"/>
+    <!-- shoulders / garment -->
+    <path d="M30 240 C34 182 76 164 120 164 C164 164 206 182 210 240 Z" fill="#13513a"/>
+    <!-- hijab outer (head + drape to shoulders) -->
+    <path d="M60 118 C60 62 86 36 120 36 C154 36 180 62 180 118 C180 154 170 182 156 202 L150 176 C150 150 152 126 120 126 C88 126 90 150 90 176 L84 202 C70 182 60 154 60 118 Z" fill="#1f6b4a"/>
+    <!-- face -->
+    <ellipse cx="120" cy="110" rx="39" ry="43" fill="#c2895c"/>
+    <!-- hijab framing forehead/hairline -->
+    <path d="M80 100 C80 70 98 54 120 54 C142 54 160 70 160 100 C151 86 138 80 120 80 C102 80 89 86 80 100 Z" fill="#1f6b4a"/>
+    <!-- hijab sides over cheeks (slightly darker for depth) -->
+    <path d="M80 100 C77 124 82 150 92 166 C82 160 67 138 67 114 C67 106 73 101 80 100 Z" fill="#1a5b40"/>
+    <path d="M160 100 C163 124 158 150 148 166 C158 160 173 138 173 114 C173 106 167 101 160 100 Z" fill="#1a5b40"/>
+    <!-- eyes -->
+    <circle cx="107" cy="108" r="3.1" fill="#3a2a1d"/>
+    <circle cx="133" cy="108" r="3.1" fill="#3a2a1d"/>
+    <!-- brows -->
+    <path d="M101 100 Q107 97 113 100" stroke="#5b3f29" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M127 100 Q133 97 139 100" stroke="#5b3f29" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- smile -->
+    <path d="M110 126 Q120 133 130 126" stroke="#7a5235" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>
