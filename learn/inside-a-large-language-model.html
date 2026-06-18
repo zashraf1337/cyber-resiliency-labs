@@ -66,6 +66,11 @@
   .backlink{font-family:-apple-system,"Segoe UI",Inter,sans-serif;margin:26px 0 0}
   footer{border-top:1px solid var(--line);background:#fff;padding:32px 0;color:var(--muted);font-size:14px;font-family:-apple-system,"Segoe UI",Inter,sans-serif;margin-top:30px}
   footer a{color:var(--accent)}
+  .flow{display:flex;gap:10px;margin:26px 0 6px;flex-wrap:wrap}
+  .flow .step{flex:1;min-width:122px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 12px;text-align:center}
+  .flow .step .n{font-family:-apple-system,"Segoe UI",Inter,sans-serif;font-size:11px;letter-spacing:1px;color:var(--accent);font-weight:700;text-transform:uppercase}
+  .flow .step .t{font-family:-apple-system,"Segoe UI",Inter,sans-serif;font-weight:600;font-size:15px;margin-top:5px;color:var(--ink)}
+  .flow .step .c{font-family:-apple-system,"Segoe UI",Inter,sans-serif;font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.35}
   @media(max-width:640px){h1{font-size:34px}body{font-size:18px}.hero .wrap{padding:44px 24px 34px}}
 </style>
 </head>
@@ -112,6 +117,13 @@
     <li><strong>Retrieval (RAG)</strong>: give the model access to fresh, private, or specific knowledge without retraining. Cheap; an architecture choice around the model.</li>
     <li><strong>Inference</strong>: actually running the model to answer questions. Cost scales with how many people use it.</li>
   </ol>
+  <div class="flow">
+    <div class="step"><div class="n">1</div><div class="t">Pre-training</div><div class="c">Build the brain · $millions · once</div></div>
+    <div class="step"><div class="n">2</div><div class="t">Post-training</div><div class="c">Make it useful · $K–100s K · repeated</div></div>
+    <div class="step"><div class="n">3</div><div class="t">Quantization</div><div class="c">Shrink it · cheap</div></div>
+    <div class="step"><div class="n">4</div><div class="t">Retrieval</div><div class="c">Add knowledge · cheap</div></div>
+    <div class="step"><div class="n">5</div><div class="t">Inference</div><div class="c">Run it · scales with use</div></div>
+  </div>
   <div class="intuition">A useful intuition: pre-training is building the brain (millions of dollars),
   post-training is the schooling that makes it polite and useful (thousands to hundreds of thousands), and
   everything after is about delivering that brain cheaply and accurately to users.</div>
