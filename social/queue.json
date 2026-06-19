@@ -1,0 +1,58 @@
+[
+  {
+    "id": "llm-01-overview",
+    "title": "Inside a Large Language Model",
+    "video": "https://www.youtube.com/watch?v=fzs_TID6rso&list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9",
+    "desc": "An overview of the full LLM lifecycle: how modern AI is built, trained, shrunk, and run.",
+    "x": "New series: how a large language model actually works, start to finish. Episode 1 is the map of the whole thing, built, trained, shrunk, and run, in plain language. #AI #LLM",
+    "linkedin": "We made a short series on how a large language model actually works, with no math wall.\n\nEpisode 1 is the overview: how modern AI gets built, trained, shrunk, and run, and how each stage maps to real cost. If you've wanted the whole picture in one sitting, start here."
+  },
+  {
+    "id": "llm-02-pretraining",
+    "title": "How Models Learn",
+    "video": "https://www.youtube.com/watch?v=bUo6LpnnG14&list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9",
+    "desc": "Pre-training: how a model learns to predict text, and why it costs millions.",
+    "x": "Episode 2: how models learn. Pre-training is just predicting the next word, billions of times, and it's where the millions of dollars go. Here's what's really happening. #AI #LLM",
+    "linkedin": "Episode 2 of the series: how models learn.\n\nPre-training sounds exotic, but the core idea is simple. Predict the next word, over and over, across a huge amount of text. This video shows why that simple loop is where most of the money and compute go."
+  },
+  {
+    "id": "llm-03-posttraining",
+    "title": "Teaching Models to Behave",
+    "video": "https://www.youtube.com/watch?v=o7hmYTdO_x0&list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9",
+    "desc": "Post-training and alignment: SFT, RLHF, and DPO turn a raw model into a helpful assistant.",
+    "x": "Episode 3: teaching models to behave. A raw model isn't an assistant yet. SFT, RLHF, and DPO are how it learns to be helpful. The alignment step, explained simply. #AI",
+    "linkedin": "Episode 3: teaching models to behave.\n\nStraight out of pre-training, a model is capable but not helpful. This one walks through the steps that turn it into an assistant, SFT, RLHF, and DPO, and what each actually does."
+  },
+  {
+    "id": "llm-04-efficiency",
+    "title": "Doing It Cheaply",
+    "video": "https://www.youtube.com/watch?v=kXepsWtDAug&list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9",
+    "desc": "Efficiency: LoRA, QLoRA, and quantization let small teams fine-tune and run huge models.",
+    "x": "Episode 4: doing it cheaply. You don't need a data center to fine-tune a big model. LoRA, QLoRA, and quantization put it within reach of a small team. Here's how. #AI #LLM",
+    "linkedin": "Episode 4: doing it cheaply.\n\nThe idea that only big labs can fine-tune or run large models isn't true anymore. This video covers LoRA, QLoRA, and quantization, the techniques that let a small team work with big models on modest hardware."
+  },
+  {
+    "id": "llm-05-rag-serving",
+    "title": "Giving Models Knowledge, and Serving Them",
+    "video": "https://www.youtube.com/watch?v=RFBKpLJ2K9c&list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9",
+    "desc": "Retrieval (RAG) gives models fresh knowledge; inference serves them affordably.",
+    "x": "Episode 5: giving models knowledge, and serving them. RAG lets a model use facts it was never trained on. Then you serve it without the bill exploding. Both, explained. #AI #RAG",
+    "linkedin": "Episode 5: giving models knowledge, and serving them.\n\nTwo problems every real deployment hits. RAG (retrieval) lets a model answer from your own up-to-date data. Serving is how you run it at a price that makes sense. This covers both."
+  },
+  {
+    "id": "llm-06-eval-steering",
+    "title": "Measuring and Steering",
+    "video": "https://www.youtube.com/watch?v=IWj9ynx6guU&list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9",
+    "desc": "Evaluation and steering: measuring how a model behaves and shaping it.",
+    "x": "Episode 6: measuring and steering. How do you know a model is good, and how do you change how it behaves? Evaluation and steering, without the hand-waving. #AI #LLM",
+    "linkedin": "Episode 6: measuring and steering.\n\nTwo questions that decide whether an AI system is trustworthy. How do you measure what it does, and how do you shape it? This video gets specific about both."
+  },
+  {
+    "id": "llm-07-frontier",
+    "title": "The Frontier: Who's Doing What",
+    "video": "https://www.youtube.com/watch?v=s2tB7a3u-3k&list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9",
+    "desc": "The frontier: how the major AI labs build and differentiate their models.",
+    "x": "Episode 7: the frontier. OpenAI, Anthropic, Google, Meta, and the open-source world are not building the same thing. Here's how the major labs actually differ. #AI #LLM",
+    "linkedin": "Episode 7, the finale: who's doing what at the frontier.\n\nThe big labs get lumped together, but their bets are different. This closes the series with how the major players build and differentiate their models."
+  }
+]

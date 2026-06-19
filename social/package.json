@@ -1,0 +1,9 @@
+{
+  "name": "crl-social",
+  "private": true,
+  "type": "module",
+  "description": "Daily video teaser poster for CR Labs (X + LinkedIn)",
+  "dependencies": {
+    "twitter-api-v2": "^1.18.2"
+  }
+}
