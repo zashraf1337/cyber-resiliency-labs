@@ -60,6 +60,7 @@
   .ico{color:var(--accent);margin-bottom:18px}
   .ico svg{width:42px;height:42px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:880px;margin:0 auto}
+  .two.wide{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));max-width:1040px;gap:28px}
   .two h3{font-size:26px;font-weight:600;margin-bottom:12px;letter-spacing:-.01em}
   .two p{font-size:18px;color:var(--muted);line-height:1.5}
   .two a.linkcard{display:block;background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;transition:.15s;color:inherit}
@@ -180,12 +181,18 @@
 <section id="resources">
   <div class="wrap">
     <div class="sec-head"><h2>Education &amp; resources</h2></div>
-    <div class="two">
+    <div class="two wide">
       <a class="linkcard" href="https://zashraf1337.github.io/big-ideas/" target="_blank" rel="noopener">
         <h3>Tech Breakthrough Ideas</h3>
         <p>Part of our research work: a weekly tracker of the most significant breakthroughs across AI and the
         frontier fields around it.</p>
         <span class="more">Read the tracker ›</span>
+      </a>
+      <a class="linkcard" href="https://zashraf1337.github.io/big-ideas/next-trillion-tracker/" target="_blank" rel="noopener">
+        <h3>Trillion-Dollar Idea Tracker</h3>
+        <p>A builder's field guide that ranks the tech categories where a small team could build the next huge
+        company, scored on market size, timing, and capital efficiency.</p>
+        <span class="more">See the rankings ›</span>
       </a>
       <a class="linkcard" href="/videos/">
         <h3>Video series</h3>
@@ -206,6 +213,7 @@
       <a href="https://www.linkedin.com/in/zubairashraf/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
       <a href="https://x.com/zashraf1337" target="_blank" rel="noopener" aria-label="X (@zashraf1337)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
     </div>
+    <p style="font-size:15px;color:var(--muted);margin-top:22px">New explainers most weeks. Follow <a href="https://x.com/zashraf1337" target="_blank" rel="noopener">@zashraf1337</a> on X to catch them as they post.</p>
   </div>
 </section>
 
