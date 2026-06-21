@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Infrastructure: The Engineers Who Make AI Models Actually Run | Careers Building AI, Ep. 4 · CR Labs</title>
+<meta name="description" content="ML systems, MLOps, and data engineers: the people who make AI models actually run.">
+<link rel="canonical" href="https://crlab.ca/learn/careers-building-ai/infrastructure/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Cyber Resiliency Labs">
+<meta property="og:url" content="https://crlab.ca/learn/careers-building-ai/infrastructure/">
+<meta property="og:title" content="The Infrastructure: The Engineers Who Make AI Models Actually Run | Careers Building AI, Ep. 4 · CR Labs">
+<meta property="og:description" content="ML systems, MLOps, and data engineers: the people who make AI models actually run.">
+<meta property="og:image" content="https://crlab.ca/assets/og-careers-building-ai.png?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@zashraf1337">
+<meta name="twitter:creator" content="@zashraf1337">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "The Infrastructure: The Engineers Who Make AI Models Actually Run | Careers Building AI, Ep. 4 · CR Labs", "description": "ML systems, MLOps, and data engineers: the people who make AI models actually run.", "author": {"@type": "Person", "name": "Zubair Ashraf"}, "publisher": {"@type": "Organization", "name": "Cyber Resiliency Labs", "logo": {"@type": "ImageObject", "url": "https://crlab.ca/assets/apple-touch-icon.png"}}, "image": "https://crlab.ca/assets/og-careers-building-ai.png", "url": "https://crlab.ca/learn/careers-building-ai/infrastructure/"}</script>
+<style>
+  :root{--bg:#fff;--soft:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--accent:#1f6b4a;--accent-d:#175338;--line:#d2d2d7;}
+  *{margin:0;box-sizing:border-box}
+  body{font-family:-apple-system,"SF Pro Display","SF Pro Text",system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:18px;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+  a{color:var(--accent)}
+  .top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+  .top .row{display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;padding:16px 24px}
+  .brand{font-weight:700;color:var(--ink);text-decoration:none;font-size:18px}.brand span{color:var(--accent)}
+  .top a.nav{color:var(--muted);text-decoration:none;font-size:15px}.top a.nav:hover{color:var(--ink)}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  article{padding:44px 0 10px}
+  article p{margin:0 0 20px}
+  article h1{font-size:46px;line-height:1.12;letter-spacing:-.7px;margin:6px 0 16px;color:#13201a}
+  article h2{font-size:29px;line-height:1.2;margin:46px 0 14px;color:#13201a;letter-spacing:-.3px}
+  article h3{font-size:21px;margin:30px 0 8px;color:var(--accent-d)}
+  article ul,article ol{margin:0 0 20px;padding-left:26px}article li{margin-bottom:10px}
+  article strong{color:#0f1711}
+  table{width:100%;border-collapse:collapse;margin:24px 0;font-size:15px;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#e8f0ea;color:#15402d;font-weight:700}
+  tr:nth-child(even) td{background:#fafbfa}
+  .wai-nav{border-top:1px solid var(--line);margin-top:40px;padding-top:26px}
+  .watch{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:11px 20px;border-radius:980px}
+  .watch:hover{background:var(--accent-d)}
+  .lp-link{display:block;margin:22px 0 0;font-weight:600;font-size:16px}
+  .eps{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:22px 0 8px}
+  .eps .lbl{display:block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+  .eps ol{margin:0;padding-left:20px}.eps li{margin-bottom:7px;font-size:16px}
+  .eps li.cur{color:var(--muted);font-weight:600}
+  footer{border-top:1px solid var(--line);background:var(--soft);padding:30px 0;color:var(--muted);font-size:14px;margin-top:34px}
+  footer a{color:var(--accent)}
+  @media(max-width:640px){article h1{font-size:33px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="row">
+  <a class="brand" href="/">Cyber Resiliency <span>Labs</span></a>
+  <a class="nav" href="/learn/careers-building-ai/">&larr; Careers Building AI</a>
+</div></div>
+<div class="wrap">
+<article>
+<h1>The Infrastructure</h1>
+<p><em>Careers Building AI · Episode 4. The engineers who train and serve models efficiently.</em></p>
+
+<p>Everyone talks about the people who design the models. Almost nobody talks about the people who make those models run. This is about that second group.</p>
+
+<p>A trained model is a big file full of numbers. It does nothing until someone gets it onto thousands of chips, keeps it fed with clean data, and answers a real user in under a second. That work is the highest-leverage, least-glamorous part of the whole field. Nobody puts you on stage at the launch. The launch doesn't happen without you.</p>
+
+<p>Three roles do the running. The ML systems engineer, who sits closest to the hardware. The MLOps engineer, who keeps the model alive in production. And the data engineer for ML, who builds the plumbing that feeds everything else. Each owns a different piece of the pipeline, and the paths into them differ enough that it's worth taking them one at a time.</p>
+
+<p>One number frames all three. As of mid-2026, inference is reportedly around 70 to 80 percent of all AI compute spend. Not training. Serving. The model answering questions, over and over, all day. So shaving the cost of serving has outsized payback: cut it 20 percent at scale and you've freed a budget large enough to fund a team. Keep that in mind as you read. It's why these jobs pay what they pay.</p>
+
+<h2>1. ML Systems / Performance Engineer</h2>
+
+<p>This is the role closest to the metal. You'll also see it called an infrastructure engineer or a performance engineer, and at some shops the titles blur into model-inference or runtime engineer. The job is the same underneath: make the chips earn their keep.</p>
+
+<h3>What they actually do</h3>
+
+<p>They design and optimize how training and inference run across a lot of machines at once. That means GPU and TPU utilization, writing custom kernels when the framework's defaults leave performance on the table, quantizing models down so they fit and run faster, batching incoming requests to keep the hardware busy, and fighting for every millisecond of serving latency.</p>
+
+<p>And then there's the part that doesn't show up in tutorials. A chip dies mid-run. A node drops off the network. With a training job spread over thousands of accelerators, hardware failure isn't an edge case, it's Tuesday. The systems engineer builds the job so it survives that and keeps going. Checkpointing, recovery, fault tolerance. The unglamorous machinery that turns a fragile experiment into something that finishes.</p>
+
+<h3>Who it suits</h3>
+
+<p>People who like the question "why is this slow, and exactly how slow." If you read a profiler trace the way other people read a novel, you'll be at home here. Most who end up in this role came from a systems or infrastructure background first and picked up the machine learning side later. That order matters. The hard-won skill is distributed systems thinking, not model architecture.</p>
+
+<h3>Training and education path</h3>
+
+<p>You don't arrive here from a bootcamp. The technical base is C++, Python, and CUDA, plus real experience running ML frameworks at scale rather than on a single laptop GPU. A master's helps and shows up in a lot of postings, though it isn't a hard gate. Figure four to seven years or more of relevant work before the senior roles open up. The depth is the point.</p>
+
+<h3>How job posts phrase it</h3>
+
+<p>Once you know the shape, the listings are easy to spot. The phrasing clusters around lines like "massive-scale distributed systems · inference latency · kernel optimization." Postings from inference teams in mid-2026 tend to ask for things like (paraphrasing, since exact wording varies by company) experience "optimizing inference performance for both latency and throughput across the stack," and comfort with the low-level networking and collectives layer: CUDA, NCCL, sometimes InfiniBand for the multi-node case. If a description leans hard on profiling, throughput, and GPU memory, you've found one.</p>
+
+<h3>Salary band</h3>
+
+<p>The pay tracks the leverage. As of mid-2026, a distributed ML systems and inference role at a company like Together AI reportedly runs about $160K to $230K in base range. Senior people at the frontier labs sit well above that once equity is in the mix. Treat these as reported figures, not a quote: bands move with location, level, and how badly a given team needs the skill that quarter.</p>
+
+<h3>Supply and demand</h3>
+
+<p>The supply is genuinely thin. Deep distributed-systems experience plus ML plus hands-on kernel work is a narrow intersection, and the labs and inference startups are all hiring from the same small pool. That's the whole reason one good performance engineer can pay for themselves many times over. The 70-to-80-percent inference number isn't abstract to a CFO.</p>
+
+<h3>A learning path</h3>
+
+<table>
+<tr><th>Stage</th><th>What to do</th></tr>
+<tr><td>Applied course</td><td>MIT 6.5840 Distributed Systems. It's the real thing: Raft, fault tolerance, building systems that survive failure. Free online.</td></tr>
+<tr><td>Expert program</td><td>Full Stack Deep Learning (the LLM bootcamp material). Connects the systems side to how models actually get trained and served.</td></tr>
+<tr><td>Portfolio project</td><td>Serve a real model yourself with vLLM or TensorRT-LLM. Then measure your own latency and throughput, and write down what you changed and what it bought you.</td></tr>
+<tr><td>Break-in move</td><td>Publish the measurements. A short writeup showing you cut p99 latency on a real serving setup beats any certificate. That number is your interview.</td></tr>
+</table>
+
+<p>The theory from 6.5840 and Full Stack Deep Learning is necessary. It isn't sufficient. The thing that gets you hired is having served a model and knowing your own numbers cold.</p>
+
+<h2>2. MLOps Engineer</h2>
+
+<p>This title confuses people because it sounds like a buzzword. It isn't. It's specific, and the work is real.</p>
+
+<h3>What they actually do</h3>
+
+<p>MLOps is the job of taking a model from a notebook to a live service that stays reliable. CI/CD for machine learning, deployment, monitoring, and catching drift when the model quietly gets worse because the world changed underneath it.</p>
+
+<p>Drift is the part worth understanding, because it's the failure mode nobody else watches for. The code never crashes. No exception, no red alert. The model just slowly stops matching reality, its accuracy decaying as the data it sees in production drifts away from the data it learned on. A fraud model trained last year on last year's fraud. Nothing breaks. The numbers rot. Someone has to build the alarm that notices, and that someone is the MLOps engineer.</p>
+
+<h3>Who it suits</h3>
+
+<p>People who already think in terms of pipelines, uptime, and "what happens when this fails at 3am." If you've done DevOps or site reliability work, you have most of the instincts already. The transferable half is large. You're mostly learning what's different about shipping a model versus shipping a web service, and the big difference is that a model can fail silently.</p>
+
+<h3>Training and education path</h3>
+
+<p>Most people arrive from a DevOps or SRE background rather than from research. The tool stack is Docker and Kubernetes for the operations layer, then ML-specific tooling on top: MLflow for tracking and registry, Weights and Biases for experiment monitoring. The 2026 postings increasingly name LLM serving at scale, GPU orchestration, and ML observability as the in-demand corners of the field.</p>
+
+<h3>How job posts phrase it</h3>
+
+<p>The listings read like a DevOps role with machine learning bolted on. Expect lines about building "scalable MLOps pipelines for model training, validation, deployment, and monitoring," and explicit mention of watching "for data drift, concept drift, and model performance" with alerting (that phrasing is synthesized from common mid-2026 postings, not a single quote). Docker, Kubernetes, and CI/CD show up almost every time. If drift detection is in the responsibilities, it's a true MLOps role and not a relabeled deployment job.</p>
+
+<h3>Salary band</h3>
+
+<p>As of mid-2026, the reported bands look roughly like this in the US market:</p>
+
+<table>
+<tr><th>Level</th><th>Reported range (mid-2026)</th></tr>
+<tr><td>Entry</td><td>~$90K–$130K</td></tr>
+<tr><td>Mid</td><td>~$130K–$200K</td></tr>
+<tr><td>Senior</td><td>~$200K–$300K</td></tr>
+<tr><td>Top total comp (leading firms)</td><td>reportedly $300K–$550K</td></tr>
+</table>
+
+<p>The top of that range is total comp at the strongest firms, equity included, and it's the exception rather than the median. Read the whole table as reported and directional.</p>
+
+<h3>Supply and demand</h3>
+
+<p>This is the role with the clearest shortage. Demand reportedly outstrips supply by roughly 2.8 to 1, which is to say there are nearly three open roles for every qualified person. One projection puts the MLOps market at around $15.7 billion by 2030. That's a forecast, so treat it as a direction rather than a fact, but the direction has been steady rather than a hype spike. If you're coming from DevOps, this is the shortest jump of the three roles into AI work.</p>
+
+<h3>A learning path</h3>
+
+<table>
+<tr><th>Stage</th><th>What to do</th></tr>
+<tr><td>Applied course</td><td>The MLOps Specialization on Coursera from DeepLearning.AI. Covers the production lifecycle: deployment, monitoring, the drift problem.</td></tr>
+<tr><td>Expert program</td><td>Made With ML. Project-driven, opinionated, and close to how teams actually ship.</td></tr>
+<tr><td>Portfolio project</td><td>Deploy a model behind an API with full CI/CD, then add real monitoring and a drift alert. Make it fail on purpose and show the alarm firing.</td></tr>
+<tr><td>Break-in move</td><td>If you're already in DevOps, retitle your work. Take one production model end to end at your current job, or build the demo above, and you've turned a DevOps resume into an MLOps one.</td></tr>
+</table>
+
+<h2>3. Data Engineer for ML</h2>
+
+<p>The least visible of the three, and arguably the one everything else rests on. A model is only ever as good as what you feed it.</p>
+
+<h3>What they actually do</h3>
+
+<p>They build and maintain the pipelines, the feature stores, and the vector databases that get clean data to the model on time. When the data is late, or wrong, or quietly malformed, every other role on this list is stuck. The systems engineer's beautifully optimized serving stack is serving garbage. The MLOps engineer's drift alarm is firing because the upstream pipeline broke, not because the model decayed. Data engineering is load-bearing in a way that only becomes obvious when it fails.</p>
+
+<h3>Who it suits</h3>
+
+<p>People who get satisfaction from a pipeline that just works, day after day, and who care about data being correct more than about being near the modeling glory. It's patient work. It rewards the kind of person who'd rather prevent a 2am page than be the hero who fixes one.</p>
+
+<h3>Training and education path</h3>
+
+<p>SQL and Python sit at the core. On top of that: Spark for large-scale processing, Airflow for orchestration, dbt for transformations, Snowflake or a similar warehouse for storage. Most people come straight from data engineering or ETL work and add the ML-specific pieces, the feature stores and vector databases, once they're already fluent with the base stack.</p>
+
+<h3>How job posts phrase it</h3>
+
+<p>You'll see "build and maintain data pipelines," "feature engineering at scale," and the tool names spelled out: Spark, Airflow, dbt, Snowflake. The ML-flavored versions add "feature store" and "vector database" to the list. The closer a posting gets to "powering ML and analytics teams" rather than plain reporting, the more it's this role and not a generic analytics job.</p>
+
+<h3>Salary band</h3>
+
+<p>As of mid-2026, entry pay runs roughly $90K to $130K. Senior people with real ML experience go past $200K. The ML experience is what pushes it up; a data engineer who understands what a model actually needs from its data is worth more than one who just moves rows around. As with the others, these are reported ranges and they move with location and level.</p>
+
+<h3>Supply and demand</h3>
+
+<p>Data engineering has been in steady demand for years, well before the current wave, so the talent pool is deeper than for ML systems work. The scarcity is at the intersection: data engineers who also understand ML needs are rarer and command the higher end of the band. That intersection is where the openings are.</p>
+
+<h3>A learning path</h3>
+
+<table>
+<tr><th>Stage</th><th>What to do</th></tr>
+<tr><td>Applied course</td><td>The DataCamp data engineering track. Gets you the fundamentals: SQL, Python, pipelines, the warehouse stack.</td></tr>
+<tr><td>Expert program</td><td>Made With ML for the machine learning side, so you understand what you're feeding and why.</td></tr>
+<tr><td>Portfolio project</td><td>Build a pipeline that actually feeds a model. Ingest raw data, clean it, land it in a feature store, and have a model train or serve off it on a schedule.</td></tr>
+<tr><td>Break-in move</td><td>Show the whole pipeline running end to end, with the model consuming your output. That proves the ML connection that a pure ETL portfolio can't.</td></tr>
+</table>
+
+<h2>The pattern across all three</h2>
+
+<p>None of these people is on stage at the launch. The launch doesn't happen without them, and the demand has been strong and steady rather than a spike, which is the kind of demand you want to build a career on.</p>
+
+<p>Here's the whole learning path in one frame:</p>
+
+<table>
+<tr><th>Role</th><th>Applied course</th><th>Then</th><th>Project</th></tr>
+<tr><td>ML Systems</td><td>MIT 6.5840</td><td>Full Stack Deep Learning</td><td>Serve a model, measure latency</td></tr>
+<tr><td>MLOps</td><td>Coursera MLOps Spec (DeepLearning.AI)</td><td>Made With ML</td><td>Deploy with CI/CD + drift alert</td></tr>
+<tr><td>Data Eng for ML</td><td>DataCamp data engineering track</td><td>Made With ML</td><td>Pipeline that feeds a real model</td></tr>
+</table>
+
+<p>If you like making things fast, reliable, and cheap more than you like the spotlight, this is where the work is, and where the inference-cost math means the work pays. Pick the role closest to where you already are. Ship one real project that proves the connection. You're most of the way in.</p>
+
+<p>That's the infrastructure.</p>
+
+<hr>
+
+<p><strong>Watch the episode:</strong> <a href="https://crlab.ca/learn/careers-building-ai/infrastructure/">crlab.ca/learn/careers-building-ai/infrastructure/</a></p>
+
+<p><em>By Zubair Ashraf · CR Labs · <a href="https://crlab.ca">crlab.ca</a></em></p>
+<div class="wai-nav">
+  <a class="watch" href="/videos/careers-building-ai/">&#9654;&nbsp; Watch the series (video for this part coming soon)</a>
+  <a class="lp-link" href="/learn/careers-building-ai/learning-paths/">&#128196; Learning paths: all 13 roles, one roadmap each &rsaquo;</a>
+  <div class="eps">
+    <span class="lbl">Careers Building AI &mdash; the series</span>
+    <ol>
+      <li value="1"><a href="/learn/careers-building-ai/">The AI Careers Map</a></li>
+      <li value="2"><a href="/learn/careers-building-ai/researchers/">The Researchers</a></li>
+      <li value="3"><a href="/learn/careers-building-ai/builders/">The Builders</a></li>
+      <li class="cur" value="4">The Infrastructure (this one)</li>
+      <li value="5"><a href="/learn/careers-building-ai/defenders/">The Defenders</a></li>
+      <li value="6"><a href="/learn/careers-building-ai/choosing-your-path/">Choosing Your Path</a></li>
+    </ol>
+  </div>
+</div>
+</article>
+</div>
+<footer><div class="wrap">&copy; Cyber Resiliency Labs and Consulting Inc. &middot; <a href="/">crlab.ca</a> &middot; <a href="/learn/careers-building-ai/">Careers Building AI</a></div></footer>
+</body>
+</html>
