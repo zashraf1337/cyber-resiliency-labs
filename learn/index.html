@@ -62,7 +62,7 @@
 <div class="top">
   <div class="row">
     <a class="brand" href="/">Cyber Resiliency <span>Labs</span></a>
-    <div><a class="nav" href="/videos/">Videos</a><a class="nav" href="/">← Home</a></div>
+    <a class="nav" href="/">← Home</a>
   </div>
 </div>
 
@@ -76,7 +76,8 @@
 </header>
 
 <div class="wrap">
-  <section>
+  <p style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 6px"><a href="#read" style="text-decoration:none">Read</a> &middot; <a href="#watch" style="text-decoration:none">Watch</a></p>
+  <section id="read">
     <h2>Read</h2>
     <a class="post" href="/learn/inside-a-large-language-model.html">
       <h3>Inside a Large Language Model</h3>
@@ -95,41 +96,29 @@
 
   <section id="watch" style="border-bottom:none">
     <h2>Watch</h2>
-    <p style="color:var(--muted);margin-bottom:22px;max-width:660px">A seven-part video series that walks
-    through the field guide above, one stage at a time. Pick an episode, or watch the full playlist on YouTube.</p>
-
-    <div class="series">
-      <div class="series-player">
-        <iframe id="series-frame" src="https://www.youtube.com/embed/fzs_TID6rso?rel=0"
-          title="CR Labs: Inside a Large Language Model" loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div>
-      <div class="series-list" id="series-list">
-        <button class="ep active" data-id="fzs_TID6rso" data-title="Inside a Large Language Model"><span class="epn">1</span><span class="ept">Inside a Large Language Model</span></button>
-        <button class="ep" data-id="bUo6LpnnG14" data-title="How Models Learn"><span class="epn">2</span><span class="ept">How Models Learn</span></button>
-        <button class="ep" data-id="o7hmYTdO_x0" data-title="Teaching Models to Behave"><span class="epn">3</span><span class="ept">Teaching Models to Behave</span></button>
-        <button class="ep" data-id="kXepsWtDAug" data-title="Doing It Cheaply"><span class="epn">4</span><span class="ept">Doing It Cheaply</span></button>
-        <button class="ep" data-id="RFBKpLJ2K9c" data-title="Giving Models Knowledge, and Serving Them"><span class="epn">5</span><span class="ept">Giving Models Knowledge, and Serving Them</span></button>
-        <button class="ep" data-id="IWj9ynx6guU" data-title="Measuring and Steering"><span class="epn">6</span><span class="ept">Measuring and Steering</span></button>
-        <button class="ep" data-id="s2tB7a3u-3k" data-title="The Frontier: Who's Doing What"><span class="epn">7</span><span class="ept">The Frontier: Who's Doing What</span></button>
-      </div>
-    </div>
-    <p style="margin-top:18px"><a href="https://www.youtube.com/playlist?list=PLztQuw2PvShZ6QSMt6yfaZKMp6VUb2_T9" target="_blank" rel="noopener" style="font-weight:600">Watch the full playlist on YouTube ›</a></p>
-    <p style="margin-top:6px"><a href="/videos/" style="font-weight:600">Browse all video series ›</a></p>
-    <script>
-    (function(){
-      var frame=document.getElementById('series-frame'),list=document.getElementById('series-list');
-      if(!frame||!list)return;
-      list.addEventListener('click',function(e){
-        var b=e.target.closest('.ep');if(!b)return;
-        list.querySelectorAll('.ep').forEach(function(x){x.classList.remove('active');});
-        b.classList.add('active');
-        frame.src='https://www.youtube.com/embed/'+b.getAttribute('data-id')+'?rel=0&autoplay=1';
-        frame.title='CR Labs: '+b.getAttribute('data-title');
-      });
-    })();
-    </script>
+    <p style="color:var(--muted);margin-bottom:22px;max-width:660px">Short video series that walk through the
+    same material on screen. Pick a series.</p>
+    <a class="post" href="/videos/inside-a-large-language-model/">
+      <h3>Inside a Large Language Model</h3>
+      <p>How modern AI is built, trained, shrunk, and run, one stage at a time.</p>
+      <div class="meta">7 episodes</div>
+    </a>
+    <a class="post" href="/videos/under-the-llm-hood/">
+      <h3>Under the LLM Hood</h3>
+      <p>A closer look at the machinery inside a language model, no math wall.</p>
+      <div class="meta">12 episodes</div>
+    </a>
+    <a class="post" href="/videos/the-business-of-ai/">
+      <h3>The Business of AI</h3>
+      <p>How the labs work, how models differ, and where the value is.</p>
+      <div class="meta">8 episodes</div>
+    </a>
+    <a class="post" href="/videos/careers-building-ai/">
+      <h3>Careers Building AI</h3>
+      <p>The jobs in AI: the roles, what they really do, what they pay, and how to break in.</p>
+      <div class="meta">Video + written</div>
+    </a>
+    <p style="margin-top:18px"><a href="/videos/" style="font-weight:600">Open the full video hub ›</a></p>
   </section>
 </div>
 
