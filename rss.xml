@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>CR Labs — Learn</title>
+  <subtitle>Clear explainers on how modern AI works.</subtitle>
+  <link href="https://crlab.ca/learn/"/>
+  <link rel="self" href="https://crlab.ca/rss.xml"/>
+  <id>https://crlab.ca/learn/</id>
+  <updated>2026-06-22T12:00:00Z</updated>
+  <author><name>Zubair Ashraf</name></author>
+  <entry>
+    <title>AI Infrastructure Careers: MLOps, ML Systems &amp; Data Engineering | CR Labs</title>
+    <link href="https://crlab.ca/learn/careers-building-ai/infrastructure/"/>
+    <id>https://crlab.ca/learn/careers-building-ai/infrastructure/</id>
+    <updated>2026-06-22T12:00:00Z</updated>
+    <published>2026-06-22T12:00:00Z</published>
+    <summary>Inference is 70-80% of AI compute spend. The engineers who make models run cheaply at scale, what they do, and what they earn.</summary>
+  </entry>
+  <entry>
+    <title>AI Security Careers: Red Teaming, Evals &amp; Safety Research | CR Labs</title>
+    <link href="https://crlab.ca/learn/careers-building-ai/defenders/"/>
+    <id>https://crlab.ca/learn/careers-building-ai/defenders/</id>
+    <updated>2026-06-22T12:00:00Z</updated>
+    <published>2026-06-22T12:00:00Z</published>
+    <summary>AI red teaming is the hardest hire in security, about 3 roles per qualified person. The AI safety roles, the demand, the pay, and how to get in.</summary>
+  </entry>
+  <entry>
+    <title>How to Choose Your AI Career Path (2026) | CR Labs</title>
+    <link href="https://crlab.ca/learn/careers-building-ai/choosing-your-path/"/>
+    <id>https://crlab.ca/learn/careers-building-ai/choosing-your-path/</id>
+    <updated>2026-06-22T12:00:00Z</updated>
+    <published>2026-06-22T12:00:00Z</published>
+    <summary>Pick an AI role by starting from the skills you already have. A practical guide to matching yourself to the right AI career track.</summary>
+  </entry>
+  <entry>
+    <title>AI Careers Explained: 13 Roles That Build Modern AI (2026) | CR Labs</title>
+    <link href="https://crlab.ca/learn/careers-building-ai/"/>
+    <id>https://crlab.ca/learn/careers-building-ai/</id>
+    <updated>2026-06-21T12:00:00Z</updated>
+    <published>2026-06-21T12:00:00Z</published>
+    <summary>&quot;I want to work in AI&quot; is really a dozen jobs. A plain-English map of the five tiers and thirteen roles that build modern AI, what they pay, and how to break in.</summary>
+  </entry>
+  <entry>
+    <title>Research Scientist vs Applied Scientist vs Research Engineer | CR Labs</title>
+    <link href="https://crlab.ca/learn/careers-building-ai/researchers/"/>
+    <id>https://crlab.ca/learn/careers-building-ai/researchers/</id>
+    <updated>2026-06-21T12:00:00Z</updated>
+    <published>2026-06-21T12:00:00Z</published>
+    <summary>Three AI research roles people mix up: what each does, what they pay (including the no-PhD path to $500K+), and how to break into each.</summary>
+  </entry>
+  <entry>
+    <title>ML Engineer vs AI Engineer vs Agentic AI Developer | CR Labs</title>
+    <link href="https://crlab.ca/learn/careers-building-ai/builders/"/>
+    <id>https://crlab.ca/learn/careers-building-ai/builders/</id>
+    <updated>2026-06-21T12:00:00Z</updated>
+    <published>2026-06-21T12:00:00Z</published>
+    <summary>The three roles that build most AI products, the real difference between them, pay bands, and which to start with in 2026.</summary>
+  </entry>
+  <entry>
+    <title>AI Learning Paths: 13 Role-by-Role Roadmaps Into AI | CR Labs</title>
+    <link href="https://crlab.ca/learn/careers-building-ai/learning-paths/"/>
+    <id>https://crlab.ca/learn/careers-building-ai/learning-paths/</id>
+    <updated>2026-06-21T12:00:00Z</updated>
+    <published>2026-06-21T12:00:00Z</published>
+    <summary>Thirteen role-specific learning paths into AI. For each: a course to start, a program to go deep, a portfolio project, and a realistic way in.</summary>
+  </entry>
+  <entry>
+    <title>Inside a Large Language Model | CR Labs</title>
+    <link href="https://crlab.ca/learn/inside-a-large-language-model.html"/>
+    <id>https://crlab.ca/learn/inside-a-large-language-model.html</id>
+    <updated>2026-06-18T12:00:00Z</updated>
+    <published>2026-06-18T12:00:00Z</published>
+    <summary>A field guide to how modern AI systems are built, trained, shrunk, and run: parameters, pre-training, post-training, parameter-efficient methods, quantization, retrieval, and inference, and how each stage maps to real hardware and real cost.</summary>
+  </entry>
+</feed>
