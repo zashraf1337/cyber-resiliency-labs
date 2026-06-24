@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>State of the Hack and Cyber Threat Intelligence Gain/Loss | CR Labs</title>
+<meta name="description" content="“ Mikko Hypponen at TrustyCon: Governments as Malware Authors ” was my first post in the series of cyber threat intelligence keynote recaps. There you…">
+<link rel="canonical" href="https://crlab.ca/learn/security-research/state-of-hack-cyber-threat-intelligence-kevin-mandia-mandiant-crowdstrike-fireeye/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CR Labs">
+<meta property="og:url" content="https://crlab.ca/learn/security-research/state-of-hack-cyber-threat-intelligence-kevin-mandia-mandiant-crowdstrike-fireeye/">
+<meta property="og:title" content="State of the Hack and Cyber Threat Intelligence Gain/Loss">
+<meta property="og:description" content="“ Mikko Hypponen at TrustyCon: Governments as Malware Authors ” was my first post in the series of cyber threat intelligence keynote recaps. There you…">
+<meta property="og:image" content="https://crlab.ca/assets/og-default.png?v=3">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@zashraf1337">
+<meta name="twitter:creator" content="@zashraf1337">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "State of the Hack and Cyber Threat Intelligence Gain/Loss", "description": "“ Mikko Hypponen at TrustyCon: Governments as Malware Authors ” was my first post in the series of cyber threat intelligence keynote recaps. There you…", "author": {"@type": "Person", "name": "Zubair Ashraf"}, "publisher": {"@type": "Organization", "name": "Cyber Resiliency Labs", "logo": {"@type": "ImageObject", "url": "https://crlab.ca/assets/apple-touch-icon.png"}}, "url": "https://crlab.ca/learn/security-research/state-of-hack-cyber-threat-intelligence-kevin-mandia-mandiant-crowdstrike-fireeye/", "datePublished": "2014-04-15"}</script>
+<style>
+  :root{--bg:#fff;--soft:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--accent:#1f6b4a;--accent-d:#175338;--line:#d2d2d7;}
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{font-family:-apple-system,"SF Pro Text",system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:18px;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;overflow-x:hidden}
+  a{color:var(--accent);overflow-wrap:break-word}
+  .top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+  .top .row{display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;padding:16px 24px}
+  .brand{font-weight:700;color:var(--ink);text-decoration:none;font-size:18px}.brand span{color:var(--accent)}
+  .top a.nav{color:var(--muted);text-decoration:none;font-size:15px}.top a.nav:hover{color:var(--ink)}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  article{padding:40px 0 10px}
+  article h1{font-size:40px;line-height:1.14;letter-spacing:-.6px;margin:0 0 14px;color:#13201a}
+  .attr{font-size:14.5px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:0 0 28px}
+  .attr strong{color:#13201a}
+  article p{margin:0 0 20px}
+  article h2{font-size:27px;line-height:1.2;margin:42px 0 12px;color:#13201a;letter-spacing:-.3px}
+  article h3{font-size:20px;margin:30px 0 8px;color:var(--accent-d)}
+  article h4{font-size:17px;margin:24px 0 6px;color:#13201a}
+  article ul,article ol{margin:0 0 20px;padding-left:26px}article li{margin-bottom:9px}
+  article strong{color:#0f1711}
+  article img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;margin:16px 0;display:block}
+  article blockquote{border-left:4px solid var(--accent);margin:22px 0;padding:6px 18px;color:#3a4a42;background:var(--soft);border-radius:0 8px 8px 0}
+  pre{background:#0d1b14;color:#d7e7dd;border-radius:10px;padding:16px 18px;overflow-x:auto;margin:20px 0;font-size:13.5px;line-height:1.5}
+  pre code{font-family:"SF Mono",Menlo,Consolas,monospace;white-space:pre}
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.86em;background:var(--soft);border:1px solid var(--line);padding:1px 5px;border-radius:4px;color:#15402d}
+  pre code{background:none;border:0;padding:0;color:inherit}
+  table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#e8f0ea;color:#15402d;font-weight:700}
+  .backlink{margin:36px 0 0;border-top:1px solid var(--line);padding-top:18px;font-weight:600}
+  footer{border-top:1px solid var(--line);background:var(--soft);padding:28px 0;color:var(--muted);font-size:14px;margin-top:34px}
+  footer a{color:var(--accent)}
+  @media(max-width:640px){article h1{font-size:31px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="row">
+  <a class="brand" href="/">Cyber Resiliency <span>Labs</span></a>
+  <a class="nav" href="/learn/security-research/">← Security research</a>
+</div></div>
+<div class="wrap">
+<article>
+<h1>State of the Hack and Cyber Threat Intelligence Gain/Loss</h1>
+<p class="attr">By <strong>Zubair Ashraf</strong> · Originally published on <a href="https://web.archive.org/web/20140511011052/https://securityintelligence.com/state-of-hack-cyber-threat-intelligence-kevin-mandia-mandiant-crowdstrike-fireeye/" target="_blank" rel="noopener">IBM SecurityIntelligence</a>, 2014 · archived copy, republished here.</p>
+
+
+ <p>“<a href="/learn/security-research/governments-malware-authors-mikko-hypponen-trustycon/" target="_blank" rel="noopener">Mikko Hypponen at TrustyCon: Governments as Malware Authors</a>” was my first post in the series of cyber threat intelligence keynote recaps. There you will find an introduction to the series and the motivation behind it.</p>
+<p><img src="/assets/security-research/state-of-hack-cyber-threat-intelligence-kevin-mandia-mandiant-crowdstrike-fireeye/img2.jpg" alt="Kevin Mandia (Mandiant/FireEye) and Dmitri Alperovitch (Crowdstrike)" loading="lazy">This month, I would like to recap Kevin Mandia’s keynote at RSA 2014, “<a href="http://www.rsaconference.com/videos/128/state-of-the-hack-one-year-after-the-apt1-report" target="_blank" rel="noopener">State of the Hack: One Year after the APT1 Report</a>“; and while we’re at it, we will also take a look at a related talk, “<a href="http://www.rsaconference.com/events/us13/agenda/sessions/198/hacking-exposed-pla-edition" target="_blank" rel="noopener">Hacking Exposed: PLA Edition</a>,” by Dmitri Alperovitch (<a href="https://twitter.com/DmitriCyber" target="_blank" rel="noopener">@DmitriCyber</a>) and George Kurtz (<a href="https://twitter.com/George_Kurtz" target="_blank" rel="noopener">@George_Kurtz</a>). Let’s first take a look at the reasons companies should or should not disclose cyber threat intelligence.</p>
+
+<h2>Intelligence Gain/Loss (IGL): Why Disclose Intelligence?</h2>
+<p>Clearly, when you disclose the intelligence that you have gathered about an adversary, it alerts them and forces them to abandon their command and control (C&C) infrastructure. You may also lose sight of the adversary for some time until they come back with new attack tools and C&C infrastructure. This is not to mention that you may cause collateral damage to others who are compromised as part of the new C&C infrastructure; but perhaps they were already compromised — or would have been compromised — regardless of the circumstances. Thus, one may wonder why companies such as Mandiant and Crowdstrike release their intelligence to the public.</p>
+<p>Let’s start with the reasons that Mandia mentioned in his keynote:</p>
+<ul>
+<li>In January 2013, <a href="http://www.nytimes.com/2013/01/31/technology/chinese-hackers-infiltrate-new-york-times-computers.html?pagewanted=all&amp;_r=1&amp;" target="_blank" rel="noopener">The New York Times</a> disclosed that they had been breached, and Mandiant, the cyber security firm hired by The Times to investigate the breaches, claimed that these attackers were hackers associated with the Chinese military. The NYT article reports China’s Ministry of National Defense as having said, “To accuse the Chinese military of launching cyber attacks without solid proof is unprofessional and baseless.” Thus, the APT1 report provides solid proof.</li>
+<li>Mandiant kept seeing this adversary in the breaches to which they responded (this included nongovernmental and nonmilitary targets as well), and looking back, they could not find any set of technology and practices that would have been a silver bullet to prevent the breaches. There was some C-level frustration as well, and they decided to release details and thousands of actionable indicators of compromise (IOC) so that companies could scan their networks and logs to determine whether APT1 had been around.</li>
+<li>Another major factor that Mandia mentioned as part of why companies would disclose IGL is to see whether we can stop these attacks by nontechnical diplomatic means. This is also one of the takeaways from our recap of Hypponen’s keynote: The need to get better at attribution and use policies for better security and privacy. Mandiant was confident that releasing attribution proof for APT1 would help the U.S. government stop this at the diplomatic level. Did it work? Well, according to the <a href="http://bigstory.ap.org/article/cybersecurity-tops-obamas-agenda-china-talks" target="_blank" rel="noopener">Associated Press</a>, cyber security was on top of the agenda for talks between the U.S. and China in the summer of 2013, but then Snowden leaked and stalled cyber security talks, as reported in the <a href="http://www.huffingtonpost.com/2013/07/09/snowden-cyber-security-us-china_n_3564192.html" target="_blank" rel="noopener">Huffington Post</a>; if the U.S. pointed a finger at China, they would see three fingers pointing back.</li>
+</ul>
+<h2>Crowdstrike’s Perspective on IGL</h2>
+<p>Here are a few points explaining why Crowdstrike went ahead with disclosing their cyber threat intelligence about adversaries, based on the <a href="http://youtu.be/lTa9dJmL6mw" target="_blank" rel="noopener">talk that Alperovitch and Kurtz gave at RSA 2013</a> and a <a href="http://www.crowdstrike.com/blog/whois-anchor-panda/index.html" target="_blank" rel="noopener">blog post by Adam Meyers</a> (<a href="https://twitter.com/Adam_Cyber" target="_blank" rel="noopener">@Adam_Cyber</a>):</p>
+<ul>
+<li>To raise operational costs for adversaries by disclosing their infrastructure and TTP.</li>
+<li>To use standardized nomenclature to name adversaries based on motives and national origins to avoid confusing and inconsistent names across the security industry.</li>
+<li>To better know your adversary and what they are after and to focus defense accordingly.</li>
+<li>To release IOCs to help others detect common adversaries.</li>
+<li>If I may add another reason of my own: Mandiant released and made big news about APT1, so…</li>
+</ul>
+<h2>Other Points from Mandia’s Talk</h2>
+<p>Alright, now back to the keynote we are recapping and some other points that Mandia mentions:</p>
+<ul>
+<li>Disclosing APT1 did not stop the adversary, and as expected, they came back with a different C&C infrastructure.</li>
+<li>Obviously, we don’t have just one nation state to worry about; everyone who can breach networks is likely doing it. There is not much tangible/physical risk to the adversary for attacking us across the borders.</li>
+<li>Releasing IGL makes it easier for the adversary not because they are necessarily smarter but because it is just the nature of the game: it is much easier to shatter crystal than to form it.</li>
+<li>After a breach, organizations are on high alert; but as time passes and nothing happens, the defenders get bored and relaxed. That’s when the adversary strikes again.</li>
+<li>Whether you deserve an “A” in cyber security and have done a super job setting up your security posture or you deserve an “F,” a determined adversary will come after you. And if — or, rather, when — an adversary gets in, the only difference is that an “A” in cyber security means you will detect the breach sooner and go from alert to fix in 10 minutes.</li>
+<li>Reduce your target area, and monitor the heck out of it.</li>
+</ul>
+<h2>Conclusion, Takeaways and Action Items</h2>
+<p>I thank Mandiant (then, and now FireEye) for doing a great job taking the lead in disclosing an adversary’s TTP, releasing thousands of actionable IOCs and providing sufficient background details. It was great to see Crowdstrike and others follow suit and share similar information. Moving forward, organizations should:</p>
+<ul>
+<li>Continue sharing more and more cyber threat intelligence and IOCs publicly and in closed trusted groups.</li>
+<li>Get an “A” for their cyber security postures.</li>
+<li>Use the shared IOCs and intelligence about adversaries to scan company networks and determine whether they have seen similar visitors.</li>
+<li>Come to some agreement on using common nomenclature for identifying adversaries.</li>
+</ul>
+<p>Finally, on the diplomatic/policy side, we need to get back on the table, set up policies and then respect and abide by policies and law; and on this score, I leave you with an article titled “<a href="http://jeffreycarr.blogspot.ca/2014/04/chinas-cyber-security-strategy-with-eu.html" target="_blank" rel="noopener">China’s Cyber Security Strategy with the EU is an opportunity for the U.S.</a>” by <a href="https://twitter.com/jeffreycarr" target="_blank" rel="noopener">Jeffrey Carr</a>.</p>
+<p class="backlink"><a href="/learn/security-research/">← More security research</a></p>
+</article>
+</div>
+<footer><div class="wrap">© Cyber Resiliency Labs and Consulting Inc. · <a href="/">crlab.ca</a></div></footer>
+</body>
+</html>

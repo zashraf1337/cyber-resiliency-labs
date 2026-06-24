@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proactive Threat Hunting and Memory Forensics Against Rombertik | CR Labs</title>
+<meta name="description" content="Rombertik was in the news during the beginning of the month, with many headlines specifically mentioning its ability to bypass sandboxes. This malware was…">
+<link rel="canonical" href="https://crlab.ca/learn/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CR Labs">
+<meta property="og:url" content="https://crlab.ca/learn/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/">
+<meta property="og:title" content="Proactive Threat Hunting and Memory Forensics Against Rombertik">
+<meta property="og:description" content="Rombertik was in the news during the beginning of the month, with many headlines specifically mentioning its ability to bypass sandboxes. This malware was…">
+<meta property="og:image" content="https://crlab.ca/assets/og-default.png?v=3">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@zashraf1337">
+<meta name="twitter:creator" content="@zashraf1337">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Proactive Threat Hunting and Memory Forensics Against Rombertik", "description": "Rombertik was in the news during the beginning of the month, with many headlines specifically mentioning its ability to bypass sandboxes. This malware was…", "author": {"@type": "Person", "name": "Zubair Ashraf"}, "publisher": {"@type": "Organization", "name": "Cyber Resiliency Labs", "logo": {"@type": "ImageObject", "url": "https://crlab.ca/assets/apple-touch-icon.png"}}, "url": "https://crlab.ca/learn/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/"}</script>
+<style>
+  :root{--bg:#fff;--soft:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--accent:#1f6b4a;--accent-d:#175338;--line:#d2d2d7;}
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{font-family:-apple-system,"SF Pro Text",system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:18px;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;overflow-x:hidden}
+  a{color:var(--accent);overflow-wrap:break-word}
+  .top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+  .top .row{display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;padding:16px 24px}
+  .brand{font-weight:700;color:var(--ink);text-decoration:none;font-size:18px}.brand span{color:var(--accent)}
+  .top a.nav{color:var(--muted);text-decoration:none;font-size:15px}.top a.nav:hover{color:var(--ink)}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  article{padding:40px 0 10px}
+  article h1{font-size:40px;line-height:1.14;letter-spacing:-.6px;margin:0 0 14px;color:#13201a}
+  .attr{font-size:14.5px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:0 0 28px}
+  .attr strong{color:#13201a}
+  article p{margin:0 0 20px}
+  article h2{font-size:27px;line-height:1.2;margin:42px 0 12px;color:#13201a;letter-spacing:-.3px}
+  article h3{font-size:20px;margin:30px 0 8px;color:var(--accent-d)}
+  article h4{font-size:17px;margin:24px 0 6px;color:#13201a}
+  article ul,article ol{margin:0 0 20px;padding-left:26px}article li{margin-bottom:9px}
+  article strong{color:#0f1711}
+  article img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;margin:16px 0;display:block}
+  article blockquote{border-left:4px solid var(--accent);margin:22px 0;padding:6px 18px;color:#3a4a42;background:var(--soft);border-radius:0 8px 8px 0}
+  pre{background:#0d1b14;color:#d7e7dd;border-radius:10px;padding:16px 18px;overflow-x:auto;margin:20px 0;font-size:13.5px;line-height:1.5}
+  pre code{font-family:"SF Mono",Menlo,Consolas,monospace;white-space:pre}
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.86em;background:var(--soft);border:1px solid var(--line);padding:1px 5px;border-radius:4px;color:#15402d}
+  pre code{background:none;border:0;padding:0;color:inherit}
+  table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#e8f0ea;color:#15402d;font-weight:700}
+  .backlink{margin:36px 0 0;border-top:1px solid var(--line);padding-top:18px;font-weight:600}
+  footer{border-top:1px solid var(--line);background:var(--soft);padding:28px 0;color:var(--muted);font-size:14px;margin-top:34px}
+  footer a{color:var(--accent)}
+  @media(max-width:640px){article h1{font-size:31px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="row">
+  <a class="brand" href="/">Cyber Resiliency <span>Labs</span></a>
+  <a class="nav" href="/learn/security-research/">← Security research</a>
+</div></div>
+<div class="wrap">
+<article>
+<h1>Proactive Threat Hunting and Memory Forensics Against Rombertik</h1>
+<p class="attr">By <strong>Zubair Ashraf</strong> · Originally published on <a href="https://web.archive.org/web/20150530235843/https://securityintelligence.com/proactive-threat-hunting-and-memory-forensics-against-rombertik/" target="_blank" rel="noopener">IBM SecurityIntelligence</a>, 2015 · archived copy, republished here.</p>
+<p>Rombertik was in the news during the beginning of the month, with many headlines specifically mentioning its ability to bypass sandboxes. This malware was initially identified by <a href="http://blogs.cisco.com/security/talos/rombertik" target="_blank" rel="noopener">Cisco</a>, which then got others talking about it, too — mostly along the lines of how it is easily analyzed by various sandboxes. In the meantime, I have been planning to start a series of how advanced threats can be identified by using the practice of proactive threat hunting that Andrew Case described at <a href="http://www.slideshare.net/AndrewDFIR/my-keynote-from-bsidestampa-2015-video-in-description" target="_blank" rel="noopener">BSides Tampa 2015</a>. Let’s kick off the series on proactive threat hunting with looking at how performing endpoint analysis can help us detect and analyze Rombertik.</p>
+<h3>Proactive Threat Hunting to Detect Malware</h3>
+<p>I took a shot at <a href="http://www.crowdstrike.com/crowdinspect/" target="_blank" rel="noopener">CrowdStrike’s CrowdInspect</a>, but it did not flag anything, as shown below:</p>
+<p><img src="/assets/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/img2.jpg" alt="CrowdInspect view" loading="lazy"></p>
+<p><em>Figure 1: CrowdInspect did not flag anything as suspicious.</em></p>
+<p>One of the things I realized is that CrowdStrike is only submitting hashes on running processes to VirusTotal. I think a nice feature would be to gather what has been made persistent and submit those hashes, too; Sysinternals’ latest version of <a href="https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx" target="_blank" rel="noopener">Autoruns</a> is pretty useful for this. We can easily detect the newly persistent executable as malicious or suspicious by either looking at the results returned from VirusTotal or comparing it with what are known to be good or pristine images, as shown in the screenshots below:</p>
+<p><img src="/assets/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/img3.jpg" alt="Comparing results of Autoruns with that of a known good image" loading="lazy"></p>
+<p><em>Figure 2: Diffing the results of Autoruns with those from a known good image. Notice the VirusTotal feedback is not enabled.</em></p>
+<p><img src="/assets/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/img4.jpg" alt="A visual basic script is seen in the startup folder and VirusTotal does not know about it" loading="lazy"></p>
+<p><em>Figure 3: A VBScript is seen in the startup folder, but VirusTotal does not know about it.</em></p>
+<p><img src="/assets/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/img5.jpg" alt="Contents of the suspicious visual basic script will lead to the malicious file" loading="lazy"></p>
+<p><em>Figure 4: Tracking the executable from the suspicious VBScript from Autoruns.</em></p>
+<p>The yfoye.bat file will lead us to yfoye.exe with the <a href="https://www.virustotal.com/en/file/77bacb44132eba894ff4cb9c8aa50c3e9c6a26a08f93168f65c48571fdf48e2a/analysis/" target="_blank" rel="noopener">VirusTotal results</a>. Even if VirusTotal didn’t detect it, you would still investigate further during proactive threat hunting and may check with other sandboxes. If the file hashes of malware are not already known to VirusTotal or other public sandboxes, you should excercise caution and not just submit it to public domain without understanding the full scope of compromise. Otherwise, this may prematurely warn the attackers to change their tactics, causing you to do a partial remediation that could potentially leave holes for the attackers.</p>
+<p>In terms of free sandbox analysis services, I found the free <a href="https://www.hybrid-analysis.com/sample/77bacb44132eba894ff4cb9c8aa50c3e9c6a26a08f93168f65c48571fdf48e2a?environmentId=2" target="_blank" rel="noopener">Hybrid Analysis</a> service results to be good. <a href="https://malwr.com/analysis/ZDA0ZTkzNTI5NGVhNDZmZDhmMWU1MjNlMjNjYzZkMTg/" target="_blank" rel="noopener">Malwr</a> does a decent job, too, although their <a href="https://malwr.com/analysis/NzkwZmRlNTJhNWU2NGVmYjk1NGRlM2QwYzY0YjlhNzU/" target="_blank" rel="noopener">initial report</a> was not as impressive. If you were to do a forensic examination of your endpoint, you can use techniques like file creation and modification time to find the original binary that resulted in dropping yfoye.exe in the startup folder. It would be interesting to experiment with a local <a href="http://cuckoosandbox.org/" target="_blank" rel="noopener">Cuckoo</a> deployment and see what changes are needed to analyze this sample.</p>
+<h3>Rombertik and Memory Forensics</h3>
+<p>Next, I would like to share how <a href="/learn/security-research/zeus-analysis-memory-forensics-via-volatility/" target="_blank" rel="noopener">memory forensics</a> can help us detect and analyze this malware. I infected a Windows 7-by-86 image with a <a href="https://www.virustotal.com/en/file/77bacb44132eba894ff4cb9c8aa50c3e9c6a26a08f93168f65c48571fdf48e2a/analysis/" target="_blank" rel="noopener">Trojan</a> and used the <a href="http://rekall-forensic.blogspot.ca/2015/04/the-pmem-memory-acquisition-suite.html" target="_blank" rel="noopener">pmem memory acquisition tool</a> to get before and after memory images. In the future, I would love to see someone use Rekall’s VM introspection feature for this.</p>
+<p>Here is how various volatility plug-ins help us to detect the presence of malware and further analyze it.</p>
+<p>I find that one of the good ones to get started with is <a href="http://takahiroharuyama.github.io/blog/2014/08/15/fast-malware-triage-using-openioc-scan-volatility-plugin/" target="_blank" rel="noopener">openioc_scan</a>. It can be used on the infected image and — better yet — if the results can be compared those on a clean image, it can also help highlight the suspicious processes to be further examined with other volatility plug-ins. Running openioc_scan as:</p>
+<blockquote><p>c:\Python27>python.exe Scripts\vol.py -f d:\downloads\win7x32_after_rombertik.raw –profile=Win7SP1x86 openioc_scan -i C:\Python27\Lib\site-packages\volatility\plugins\malware\IOCs\generic –output-file=openioc_scan_general_rombert.txt</p></blockquote>
+<p>will show you signs of code injection, process hallowing, etc. Below are some examples:</p>
+<blockquote><p>IOC matched (by logic)! short_desc=”Process/module hollowing” id=b28d0314-ca44-45da-97e6-be540a92d929<br></br> logic (matched item is magenta-colored):<br></br> >>> ProcessItem/DllPath is<br></br> Note: ProcessItem was evaluated only in yfoye.exe (Pid=2672)</p>
+<p>—</p>
+<p>***************************************************************<br></br> IOC matched (by logic)! short_desc=”Inline API hook uknown module” id=c02075e0-c6a4-4f4b-9ad1-0a8ca9232db3<br></br> logic (matched item is magenta-colored):<br></br> [1m[35m>>> ProcessItem/Hooked/API/HookingModuleName is [39m[0m<br></br> Note: ProcessItem was evaluated only in chrome.exe (Pid=1912)<br></br> ***************************************************************</p>
+<p>—</p>
+<p>***************************************************************<br></br> IOC matched (by logic)! short_desc=”process code injection (based on API)” id=4219a887-d10f-499f-a028-5c459b9c83d5<br></br> logic (matched item is magenta-colored):<br></br> (<br></br> (<br></br> >>> ProcessItem/SectionList/MemorySection/Injected is true (score=25;)<br></br> or<br></br> >>> ProcessItem/EnabledPrivilege/Name contains SeDebugPrivilege (score=10;)<br></br> )<br></br> and<br></br> (<br></br> >>> ProcessItem/SectionList/MemorySection/PEInfo/ImportedModules/Module/ImportedFunctions/string contains VirtualAllocEx (score=25;)<br></br> >>> ProcessItem/SectionList/MemorySection/PEInfo/ImportedModules/Module/ImportedFunctions/string contains LoadLibrary<br></br> )<br></br> and<br></br> (<br></br> >>> ProcessItem/SectionList/MemorySection/PEInfo/ImportedModules/Module/ImportedFunctions/string contains CreateToolhelp32Snapshot (score=10;)<br></br> )<br></br> and<br></br> (<br></br> >>> ProcessItem/SectionList/MemorySection/PEInfo/ImportedModules/Module/ImportedFunctions/string contains WriteProcessMemory (score=25;)<br></br> )<br></br> and<br></br> (<br></br> >>> ProcessItem/SectionList/MemorySection/PEInfo/ImportedModules/Module/ImportedFunctions/string contains CreateRemoteThread (score=25;)<br></br> )<br></br> )<br></br> Note: ProcessItem was evaluated only in yfoye.exe (Pid=2672)<br></br> ***************************************************************</p>
+</blockquote>
+<p>This would help us see that the endpoint is infected, raising alerts for browser hooks and yfoye.exe. As for Autoruns, from memory image, the <a href="http://tomchop.me/volatility-autoruns-plugin/" target="_blank" rel="noopener">Autoruns</a> plugins didn’t detect the visual script, likely because it is using the startup folder and not registry entries. Next, we try the <a href="https://code.google.com/p/volatility/wiki/CommandReferenceMal22#apihooks" target="_blank" rel="noopener">apihooks</a> plugin, and it points out interesting things such as:</p>
+<blockquote><p>************************************************************************<br></br> Hook mode: Usermode<br></br> Hook type: Inline/Trampoline<br></br> Process: 2416 (iexplore.exe)<br></br> Victim module: WININET.dll (0x778e0000 – 0x779fb000)<br></br> Function: WININET.dll!HttpSendRequestW at 0x7791632d<br></br> Hook address: 0xb9e1f40<br></br> Hooking module:</p>
+<p> Disassembly(0):<br></br> 0x7791632d e90ebc0c94 JMP 0xb9e1f40<br></br> 0x77916332 83ec44 SUB ESP, 0x44<br></br> 0x77916335 56 PUSH ESI<br></br> 0x77916336 57 PUSH EDI<br></br> 0x77916337 f60514ce9b7702 TEST BYTE [0x779bce14], 0x2<br></br> 0x7791633e 8b7d10 MOV EDI, [EBP+0x10] 0x77916341 be DB 0xbe<br></br> 0x77916342 a0 DB 0xa0<br></br> 0x77916343 00 DB 0x0<br></br> 0x77916344 8f DB 0x8f</p>
+<p> Disassembly(1):<br></br> 0xb9e1f40 55 PUSH EBP<br></br> 0xb9e1f41 8bec MOV EBP, ESP<br></br> 0xb9e1f43 53 PUSH EBX<br></br> 0xb9e1f44 8b5d0c MOV EBX, [EBP+0xc] 0xb9e1f47 85db TEST EBX, EBX<br></br> 0xb9e1f49 0f84cb000000 JZ 0xb9e201a<br></br> 0xb9e1f4f 837d1400 CMP DWORD [EBP+0x14], 0x0<br></br> 0xb9e1f53 0f DB 0xf<br></br> 0xb9e1f54 84c1 TEST CL, AL<br></br> 0xb9e1f56 0000 ADD [EAX], AL</p>
+<p> ************************************************************************</p>
+<p>************************************************************************<br></br> Hook mode: Usermode<br></br> Hook type: Inline/Trampoline<br></br> Process: 2672 (yfoye.exe)<br></br> Victim module: kernel32.dll (0x77a00000 – 0x77ad4000)<br></br> Function: kernel32.dll!CreateToolhelp32Snapshot at 0x77a42c21<br></br> Hook address: 0x401730<br></br> Hooking module: yfoye.exe</p>
+<p> Disassembly(0):<br></br> 0x77a42c21 e90aeb9b88 JMP 0x401730<br></br> 0x77a42c26 a4 MOVSB<br></br> 0x77a42c27 77e8 JA 0x77a42c11<br></br> 0x77a42c29 67c500 LDS EAX, [BX+SI] 0x77a42c2c 00834dd0ff83 ADD [EBX-0x7c002fb3], AL<br></br> 0x77a42c32 4d DEC EBP<br></br> 0x77a42c33 cc INT 3<br></br> 0x77a42c34 ff33 PUSH DWORD [EBX] 0x77a42c36 f6 DB 0xf6<br></br> 0x77a42c37 89 DB 0x89<br></br> 0x77a42c38 75 DB 0x75</p>
+<p> Disassembly(1):<br></br> 0x401730 55 PUSH EBP<br></br> 0x401731 8bec MOV EBP, ESP<br></br> 0x401733 83e4f8 AND ESP, -0x8<br></br> 0x401736 81ec0c010000 SUB ESP, 0x10c<br></br> 0x40173c 53 PUSH EBX<br></br> 0x40173d 56 PUSH ESI<br></br> 0x40173e 8b354c6a4000 MOV ESI, [0x406a4c] 0x401744 8b463c MOV EAX, [ESI+0x3c] 0x401747 81 DB 0x81</p>
+<p> ************************************************************************</p>
+</blockquote>
+<p>These hook codes can be extracted using several plugins and analyzed further.</p>
+<p>I hope this drives home the importance of proactive threat hunting, and also how memory forensics can be an amazing means of malware analysis. Should you need help with either of these efforts, consider integrating your own <a href="http://www.ibm.com/security/threat-protection/" target="_blank" rel="noopener">threat protection</a> system into the process and gleaning forensic data from its information.</p>
+
+ 
+<p class="backlink"><a href="/learn/security-research/">← More security research</a></p>
+</article>
+</div>
+<footer><div class="wrap">© Cyber Resiliency Labs and Consulting Inc. · <a href="/">crlab.ca</a></div></footer>
+</body>
+</html>

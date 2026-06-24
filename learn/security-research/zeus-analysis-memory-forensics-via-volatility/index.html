@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zeus Analysis – Memory Forensics Via Volatility | CR Labs</title>
+<meta name="description" content="I am planning to do a blog series on Malware Analysis using the Zeus sample that I recently received in an email. The idea is not only to share what it…">
+<link rel="canonical" href="https://crlab.ca/learn/security-research/zeus-analysis-memory-forensics-via-volatility/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CR Labs">
+<meta property="og:url" content="https://crlab.ca/learn/security-research/zeus-analysis-memory-forensics-via-volatility/">
+<meta property="og:title" content="Zeus Analysis – Memory Forensics Via Volatility">
+<meta property="og:description" content="I am planning to do a blog series on Malware Analysis using the Zeus sample that I recently received in an email. The idea is not only to share what it…">
+<meta property="og:image" content="https://crlab.ca/assets/og-default.png?v=3">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@zashraf1337">
+<meta name="twitter:creator" content="@zashraf1337">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Zeus Analysis – Memory Forensics Via Volatility", "description": "I am planning to do a blog series on Malware Analysis using the Zeus sample that I recently received in an email. The idea is not only to share what it…", "author": {"@type": "Person", "name": "Zubair Ashraf"}, "publisher": {"@type": "Organization", "name": "Cyber Resiliency Labs", "logo": {"@type": "ImageObject", "url": "https://crlab.ca/assets/apple-touch-icon.png"}}, "url": "https://crlab.ca/learn/security-research/zeus-analysis-memory-forensics-via-volatility/", "datePublished": "2013-06-11"}</script>
+<style>
+  :root{--bg:#fff;--soft:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--accent:#1f6b4a;--accent-d:#175338;--line:#d2d2d7;}
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{font-family:-apple-system,"SF Pro Text",system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:18px;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;overflow-x:hidden}
+  a{color:var(--accent);overflow-wrap:break-word}
+  .top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+  .top .row{display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;padding:16px 24px}
+  .brand{font-weight:700;color:var(--ink);text-decoration:none;font-size:18px}.brand span{color:var(--accent)}
+  .top a.nav{color:var(--muted);text-decoration:none;font-size:15px}.top a.nav:hover{color:var(--ink)}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  article{padding:40px 0 10px}
+  article h1{font-size:40px;line-height:1.14;letter-spacing:-.6px;margin:0 0 14px;color:#13201a}
+  .attr{font-size:14.5px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:0 0 28px}
+  .attr strong{color:#13201a}
+  article p{margin:0 0 20px}
+  article h2{font-size:27px;line-height:1.2;margin:42px 0 12px;color:#13201a;letter-spacing:-.3px}
+  article h3{font-size:20px;margin:30px 0 8px;color:var(--accent-d)}
+  article h4{font-size:17px;margin:24px 0 6px;color:#13201a}
+  article ul,article ol{margin:0 0 20px;padding-left:26px}article li{margin-bottom:9px}
+  article strong{color:#0f1711}
+  article img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;margin:16px 0;display:block}
+  article blockquote{border-left:4px solid var(--accent);margin:22px 0;padding:6px 18px;color:#3a4a42;background:var(--soft);border-radius:0 8px 8px 0}
+  pre{background:#0d1b14;color:#d7e7dd;border-radius:10px;padding:16px 18px;overflow-x:auto;margin:20px 0;font-size:13.5px;line-height:1.5}
+  pre code{font-family:"SF Mono",Menlo,Consolas,monospace;white-space:pre}
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.86em;background:var(--soft);border:1px solid var(--line);padding:1px 5px;border-radius:4px;color:#15402d}
+  pre code{background:none;border:0;padding:0;color:inherit}
+  table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#e8f0ea;color:#15402d;font-weight:700}
+  .backlink{margin:36px 0 0;border-top:1px solid var(--line);padding-top:18px;font-weight:600}
+  footer{border-top:1px solid var(--line);background:var(--soft);padding:28px 0;color:var(--muted);font-size:14px;margin-top:34px}
+  footer a{color:var(--accent)}
+  @media(max-width:640px){article h1{font-size:31px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="row">
+  <a class="brand" href="/">Cyber Resiliency <span>Labs</span></a>
+  <a class="nav" href="/learn/security-research/">← Security research</a>
+</div></div>
+<div class="wrap">
+<article>
+<h1>Zeus Analysis – Memory Forensics Via Volatility</h1>
+<p class="attr">By <strong>Zubair Ashraf</strong> · Originally published on <a href="https://web.archive.org/web/20131128014023/https://securityintelligence.com/zeus-analysis-memory-forensics-via-volatility/" target="_blank" rel="noopener">IBM SecurityIntelligence</a>, 2013 · archived copy, republished here.</p>
+<a href="http://twitter.com/share" target="_blank" rel="noopener"></a>
+
+	
+
+	
+
+<p>I am planning to do a blog series on Malware Analysis using the Zeus sample that I recently received in an email. The idea is not only to share what it does, but to focus mostly on sufficient details (without boring the average reader to death) of how it does what it does, and techniques and tools an analyst can use during the analysis. We will be looking at it through various angles and tools.</p>
+<p>It is quite common for malware to have several layers of encoding obfuscations and go through various steps of downloaders. Therefore, often a quick first stab at it is to let it run through a locally deployed automated dynamic analysis sandboxing solution such as <a href="http://www.cuckoosandbox.org/" target="_blank" rel="noopener">Cuckoo</a> or use various freely available services such as <a href="https://malwr.com/" target="_blank" rel="noopener">malwr</a>. (Caveat: hastily submitting a targetted attack sample to an online service is not a very good idea, as this can alert the attackers that they have been discovered, but this is not we are talking about today). Furthermore, there is a cat and mouse chase going with Malware defeating or making it hard to do automatic analysis and reverse engineering, so in many cases it makes sense to just take a look at an infected system via memory forensics and see how Malware has established itself on our system, this way we can discover the various different aspects of Malware and can work backwards and forewords on pieces that we are interested in further learning about.</p>
+<p>In this post we will take a look at what can we learn from an infected system, using Volatility and how can we extract the final piece of decrypted/decoded/unpacked malicious code for further analysis.</p>
+<p>So it begins with someone who spells her last name with a lower case letter sending me an email so I can review the export License and invoice:</p>
+<blockquote><p><em>Kindly open to see export License and payment invoice attached, meanwhile we sent the balance payment yesterday. Please confirm if it has settled in your account or you can call if there is any problem.</em></p>
+<p><em>Thanks</em></p>
+<p><em>Karen parker</em></p></blockquote>
+<p>But there is a problem I (and most likely you too) don’t get paid to review licenses and invoices. So let’s not worry about the information in the attachment for humans but review what it has for our machines.</p>
+<p>We will use <a href="https://code.google.com/p/volatility/" target="_blank" rel="noopener">Volatality</a> a free available and very powerful tool for memory forensics.</p>
+<p>The first step is to acquire memory image, we will use the freely available VirtualBox to run a Windows XP VM, and using the technique described <a href="http://wiki.yobi.be/wiki/RAM_analysis" target="_blank" rel="noopener">here</a>, get a memory dump of the machine after running the attachment that contained an <a href="https://malwr.com/analysis/M2JkNDFjYzcxZTc1NDA0Y2I4MWEzNWJkNGIwMmNhZmY/" target="_blank" rel="noopener">exe (invoice copy) file</a>. More specifically I used the technique mentioned in section <a href="http://wiki.yobi.be/wiki/RAM_analysis#RAM_dump_with_VirtualBox:_via_pgmphystofile" target="_blank" rel="noopener">RAM_dump_with_VirtualBox:_via_pgmphystofile</a></p>
+<p>The first thing I would do is use psxview which enumerates processes using various techniques and is likely to detect processes hidden by rootkits as well.</p>
+
+<p>D:\downloads&gt;volatility-2.2.standalone.exe –profile=WinXPSP3x86 -f Temp\XP_SP3_debug_VM_raw_mem_after_zeus.raw psxview</p>
+<p>Volatile Systems Volatility Framework 2.2</p>
+<p>Offset(P)  Name                    PID pslist psscan thrdproc pspcdid csrss</p>
+<p>———- ——————– —— —— —— ——– ——- —–</p>
+<p>0x06541da0 svchost.exe            1140 True   True   False    True    True</p>
+<p>0x06531b10 wuauclt.exe            1040 True   True   False    True    True</p>
+<p>0x065e44d8 svchost.exe             952 True   True   False    True    True</p>
+<p>0x0667f818 VBoxService.exe         820 True   True   False    True    True</p>
+<p>0x0655eca8 svchost.exe             864 True   True   False    True    True</p>
+<p>0x0662fda0 smss.exe                368 True   True   False    True    False</p>
+<p>0×06649228 csrss.exe               584 True   True   False    True    False</p>
+<p>0x06384da0 alg.exe                1284 True   True   False    True    True</p>
+<p>0x066cebb8 winlogon.exe            608 True   True   False    True    True</p>
+<p>0x0658eda0 svchost.exe            2004 True   True   False    True    True</p>
+<p>0x0657a9a0 lsass.exe               664 True   True   False    True    True</p>
+<p>0x062fb020 wmiprvse.exe           2424 True   True   False    True    True</p>
+<p>0x067c69c8 System                    4 True   True   False    True    False</p>
+<p>0x0658e6f8 VBoxTray.exe           1788 True   True   False    True    True</p>
+<p>0x065d4da0 svchost.exe            1100 True   True   False    True    True</p>
+<p>0x06581da0 ctfmon.exe             1796 True   True   False    True    True</p>
+<p>0x0658a4d8 services.exe            652 True   True   False    True    True</p>
+<p>0x066f7da0 jookov.exe             3504 True   True   False    True    False     <– Were you invited to the party?</p>
+<p>0x066c9b10 explorer.exe           1532 True   True   False    True    True</p>
+<p>0x065de7f0 svchost.exe            1056 True   True   False    True    True</p>
+<p>0x0662e728 spoolsv.exe            1652 True   True   False    True    True</p>
+<p>0x063c6778 wscntfy.exe            1548 True   True   False    True    True</p>
+
+<p>As we will see below that the process has already exited and is not resident in memory, as an example of using knowledge from memory forensics to identify interesting pieces and investigate further, if we wanted to get more information about this suspicious process we can go back to VM, reverting it to a clean snapshot, infecting again and looking at procmon logs or via logs from automated dynamic analysis solution. Let’s take a look at log from procmon.exe:</p>
+
+<p>4:28:23.2233611 PM invoice copy.exe    3472 WriteFile         C:\Documents and Settings\AR\Application Data\Ynigke\jookov.exe   SUCCESS Offset: 0, Length: 332,800</p>
+<p>4:28:23.2739396 PM invoice copy.exe    3472 Process Create    C:\Documents and Settings\AR\Application Data\Ynigke\jookov.exe   SUCCESS PID: 3504,</p>
+<p>4:28:24.8114842 PM Explorer.EXE        1532 RegSetValue       HKCU\Software\Microsoft\Windows\CurrentVersion\Run\Jookov         SUCCESS Type: REG_SZ, Length: 132, Data: C:\Documents and Settings\AR\Application Data\Ynigke\jookov.exe</p>
+
+<p>The process was not resident in memory when the dump was taken:</p>
+
+<p>D:\>volatility-2.2.standalone.exe –profile=WinXPSP3x86 -f Temp\ZEUS_invoice\XP_SP3_debug_VM_raw_mem_after_zeus.raw procexedump -v -D . -p 3504 Volatile Systems Volatility Framework 2.2</p>
+<p>Process(V) ImageBase  Name                 Result</p>
+<p>———- ———- ——————– ——</p>
+<p>0x864f7da0 ———- jookov.exe           Error: PEB at 0x7ffdf000 is paged</p>
+
+<p>What we have seen so far is that using the Run registry key the malware sets up a process to be started when Windows start, but the process then exits soon, one possible way that malware is still executing is by injecting code in the trusted processes. Volatility has several plugins that let us discover this and extract the injected code, note that this extracted code is very likely to be neither obfuscated nor encrypted/encoded, as this is what will be running in the context of the trusted processe(s) and is usually injected there after unpacking/decrypting etc.</p>
+<p>Volatility’s has a bunch of useful commands for Windows Malware Hunting, you can check them out <a href="https://code.google.com/p/volatility/wiki/CommandReferenceMal22" target="_blank" rel="noopener">here</a>. We will look at some of them mostly the ones that gave us interesting information in this case.</p>
+<h3>ApiHooks</h3>
+<p>Running the <a href="https://code.google.com/p/volatility/wiki/CommandReferenceMal22#apihooks" target="_blank" rel="noopener">apihooks</a> command, we can have an idea of what routines does the Malware hook, and will also give an highlevel idea what the malware is upto.</p>
+<p>Taking a look at all the unique functions hooked we see a very interesting list:</p>
+<table>
+<tbody>
+<tr>
+<td>Function: activeds.dll!<unknown> at 0x76e1ef81Function: CRYPT32.dll!PFXImportCertStore at 0x77af012fFunction: ntdll.dll!LdrLoadDll at 0x7c91632dFunction: ntdll.dll!NtCreateThread at 0x7c90d1aeFunction: ntdll.dll!ZwCreateThread at 0x7c90d1aeFunction: Secur32.dll!DecryptMessage at 0x77fea6dcFunction: Secur32.dll!DeleteSecurityContext at 0x77fe2d26</p>
+<p>Function: Secur32.dll!EncryptMessage at 0x77fea68d</p>
+<p>Function: Secur32.dll!SealMessage at 0x77fea68d</p>
+<p>Function: Secur32.dll!UnsealMessage at 0x77fea6dc</p>
+<p>Function: USER32.dll!GetClipboardData at 0x7e430dba</p>
+<p>Function: USER32.dll!TranslateMessage at 0x7e418bf6</p>
+<p>Function: WININET.dll!HttpQueryInfoA at 0x3d94879d</p>
+<p>Function: WININET.dll!HttpQueryInfoW at 0x3d94bda8</p>
+<p>Function: WININET.dll!HttpSendRequestA at 0x3d95eea1</p>
+<p>Function: WININET.dll!HttpSendRequestExA at 0x3d9ba6da</p>
+<p>Function: WININET.dll!HttpSendRequestExW at 0x3d9ba733</p>
+<p>Function: WININET.dll!HttpSendRequestW at 0x3d94face</p>
+<p>Function: WININET.dll!InternetCloseHandle at 0x3d949098</p>
+<p>Function: WININET.dll!InternetQueryDataAvailable at 0x3d94bf93</p>
+<p>Function: WININET.dll!InternetReadFile at 0x3d94655b</p>
+<p>Function: WININET.dll!InternetReadFileExA at 0x3d963271</p>
+<p>Function: WININET.dll!InternetReadFileExW at 0x3d963239</p>
+<p>Function: WININET.dll!InternetWriteFile at 0x3d9a6116</p>
+<p>Function: WS2_32.dll!closesocket at 0x71ab3e2b</p>
+<p>Function: WS2_32.dll!freeaddrinfo at 0x71ab2b0b</p>
+<p>Function: WS2_32.dll!FreeAddrInfoW at 0x71ab2b0b</p>
+<p>Function: WS2_32.dll!getaddrinfo at 0x71ab2a6f</p>
+<p>Function: WS2_32.dll!GetAddrInfoW at 0x71ab2899</p>
+<p>Function: WS2_32.dll!gethostbyname at 0x71ab5355</p>
+<p>Function: WS2_32.dll!recv at 0x71ab676f</p>
+<p>Function: WS2_32.dll!send at 0x71ab4c27</p>
+<p>Function: WS2_32.dll!WSAGetOverlappedResult at 0x71ac0d1b</p>
+<p>Function: WS2_32.dll!WSARecv at 0x71ab4cb5</p>
+<p>Function: WS2_32.dll!WSASend at 0x71ab68fa</td>
+</tr>
+</tbody>
+</table>
+<p>So we see that malware is hooking low level socket communication functions, higher level WININET internet communication routines, crypto routines, along with thread creation and dll load routines.</p>
+<p>The processes that were hooked were:</p>
+<p>Process: 1040 (wuauclt.exe)   </p>
+<p>Process: 1056 (svchost.exe)   </p>
+<p>Process: 1532 (explorer.exe)  </p>
+<p>Process: 1548 (wscntfy.exe)   </p>
+<p>Process: 1788 (VBoxTray.exe)  </p>
+<p>Process: 1796 (ctfmon.exe)    </p>
+<p>I am assuming it would be hooking other interesting processes like browsers, had they been running at the time dump was taken.</p>
+<h3>Getting the injected code</h3>
+<p>Each entry from the output of apihook looks like this</p>
+<table>
+<tbody>
+<tr>
+<td>************************************************************************Hook mode: UsermodeHook type: Inline/TrampolineProcess: 1532 (explorer.exe)Victim module: ntdll.dll (0x7c900000 – 0x7c9b2000)Function: ntdll.dll!NtCreateThread at 0x7c90d1aeHook address: 0x303995c</p>
+<p>Hooking module: <unknown>Disassembly(0):</p>
+<p>0x7c90d1ae e9a9c77286       JMP 0x303995c</p>
+<p>0x7c90d1b3 ba0003fe7f       MOV EDX, 0x7ffe0300</p>
+<p>0x7c90d1b8 ff12             CALL DWORD [EDX]</p>
+<p>0x7c90d1ba c22000           RET 0×20</p>
+<p>0x7c90d1bd 90               NOP</p>
+<p>0x7c90d1be b836000000       MOV EAX, 0×36</p>
+<p>0x7c90d1c3 ba               DB 0xba</p>
+<p>0x7c90d1c4 0003             ADD [EBX], AL</p>
+<p>Disassembly(1):</p>
+<p>0x303995c 55               PUSH EBP</p>
+<p>0x303995d 8bec             MOV EBP, ESP</p>
+<p>0x303995f 83e4f8           AND ESP, -0×8</p>
+<p>0×3039962 83ec24           SUB ESP, 0×24</p>
+<p>0×3039965 a1f8170503       MOV EAX, [0x30517f8]</p>
+<p>0x303996a 53               PUSH EBX</p>
+<p>0x303996b 56               PUSH ESI</p>
+<p>0x303996c 57               PUSH EDI</p>
+<p>0x303996d 89442410         MOV [ESP+0x10], EAX</p>
+<p>0×3039971 e8               DB 0xe8</p>
+<p>0×3039972 21               DB 0×21</p>
+<p>0×3039973 25               DB 0×25</p>
+<p>************************************************************************</td>
+</tr>
+</tbody>
+</table>
+<p>So back to how do we extract the binary comprising of the injected code, fortunately, volatility has another plugin malfind that scans processes for memory pages containing injected code and dumps it as a binary.</p>
+<p>Running <a href="https://code.google.com/p/volatility/wiki/CommandReferenceMal22#malfind" target="_blank" rel="noopener">malfind</a> on the image we get various entries showing various different binaries injected in a process, let’s take a look at what we see in regards to the ntdll.dll!NtCreateThread being hooked in explorer.exe</p>
+<p>We see that malfind detects injected binaries in three different regions in explorer.exe, and it dumps three binaries (if malfind was run with -D option) corresponding to these regions.</p>
+<p>Process: explorer.exe Pid: 1532 Address: 0x2b10000   </p>
+<p>Process: explorer.exe Pid: 1532 Address: 0×3010000    </p>
+<p>Process: explorer.exe Pid: 1532 Address: 0x3d920000  </p>
+<p>Based on the apihook output, the hook for CreateThread is at 0x303995c, let’s take a look at the malfind output for 0×3010000</p>
+<table>
+<tbody>
+<tr>
+<td>Process: explorer.exe Pid: 1532 Address: 0×3010000Vad Tag: VadS Protection: PAGE_EXECUTE_READWRITEFlags: CommitCharge: 72, MemCommit: 1, PrivateMemory: 1, Protection: 60×03010000  4d 5a 00 00 00 00 00 00 00 00 00 00 00 00 00 00   MZ…………..0×03010010  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   …………….0×03010020  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   …………….0×03010030  00 00 00 00 00 00 00 00 00 00 00 00 20 01 00 00   …………….0×3010000 4d               DEC EBP</p>
+<p>0×3010001 5a               POP EDX</p>
+<p>0×3010002 0000             ADD [EAX], AL</p>
+<p>0×3010004 0000             ADD [EAX], AL</p>
+<p>0×3010006 0000             ADD [EAX], AL</p>
+<p>0×3010008 0000             ADD [EAX], AL</td>
+</tr>
+</tbody>
+</table>
+<p>So we see that it successfully finds the MZ header as well, that may not be true every time, but we can still work with that, as most of the time the header is corrupted anyways.</p>
+<p>At this point we use <a href="https://code.google.com/p/volatility/wiki/CommandReferenceMal22#impscan" target="_blank" rel="noopener">impscan</a> that scans and shows us which functions are imported, so we can give it a process id, and a base address where we think the injected code starts and it will tell us the about the imported functions:</p>
+<p>For what we are looking at the moment if we run it as</p>
+<p>impscan -v -b 0×03010000 -p 1532</p>
+<p>This gives us output like</p>
+<table>
+<tbody>
+<tr>
+<td>IAT        Call       Module               Function———- ———- ——————– ——–0×03011000 0x77df78ab ADVAPI32.dll         IsWellKnownSid0x03011004 0x77ddf10f ADVAPI32.dll         ConvertSidToStringSidW0x03011008 0x77e34ce5 ADVAPI32.dll         InitiateSystemShutdownExW0x0301100c 0x77ddd767 ADVAPI32.dll         RegSetValueExW0×03011010 0x77dd7bd9 ADVAPI32.dll         RegEnumKeyExW</p>
+<p>…</td>
+</tr>
+</tbody>
+</table>
+<p>This also, to some extent, gives us an idea of what the malicious code is upto.</p>
+<p>impscan also used to generate an IDC script to be run in IDA while analyzing the corresponding binary, it does not do that any more, but we can run a script on impscan’s output and get entries like</p>
+<blockquote>
+
+ <pre><code><span style="font-family: courier new, courier, monospace;">MakeName(0x03011000, "ADVAPI32.dll.IsWellKnownSid");</span></code></pre>
+
+ <pre><code>MakeName(0x03011004, "ADVAPI32.dll.ConvertSidToStringSidW");</code></pre>
+
+ <pre><code>MakeName(0x03011008, "ADVAPI32.dll.InitiateSystemShutdownExW");</code></pre>
+
+ <pre><code>Edit: Michael Hale Ligh (<a style="text-transform: none; background-color: #ffffff; text-indent: 0px; letter-spacing: normal; font: 12px arial, sans-serif; direction: ltr; white-space: normal; color: #999999; word-spacing: 0px; text-decoration: none; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="https://twitter.com/i/redirect?url=https%3A%2F%2Ftwitter.com%2FiMHLv2&amp;sig=28d6c74275ce53d790da4a231edcb44603452a3f&amp;uid=393783795&amp;iid=d216ae3d-7bda-406a-b55a-1b853a4aab99&amp;nid=6+281&amp;t=1" target="_blank">@iMHLv2</a>) pointed out that idc script is still outputted with <span style="text-transform: none; background-color: #ffffff; text-indent: 0px; letter-spacing: normal; display: inline !important; font: 13px arial, sans-serif; white-space: normal; float: none; color: #222222; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">--output=idc [--output-file=test.idc]</span></code></pre>
+
+</blockquote>
+<p>We can then open the binary dumped by malfind in IDA (make sure you select open as a Binary File, and not the default “Portable Executable ..”, as the header is usually corrupted or not available and IDA may get confused. Don’t forget to rebase the binary to correspond to the the address it is loaded in memory. After that you can do</p>
+<p>File -> Script Command and run the above mentioned MakeName entries, and start reverse engineering with dynamic analysis of the injected code.</p>
+<p><img src="/assets/security-research/zeus-analysis-memory-forensics-via-volatility/img1.jpg" alt="IDA Create Thread Hook" loading="lazy"></p>
+<p>This is it for now. I look forward to continue this series on Zeus analysis and would like to your comments.</p>
+<p>My VM image soon fetched some AV that was very concerned and was telling me how my machine was infected, but needed some $$$ to fix it.</p>
+<p><img src="/assets/security-research/zeus-analysis-memory-forensics-via-volatility/img2.jpg" alt="Infected with Rogue Anti Virus" loading="lazy"></p>
+<p>I look forward to continuing this series, and welcome your comments and feedback.</p>
+
+	
+
+	
+
+<a href="http://twitter.com/share" target="_blank" rel="noopener"></a>
+<p class="backlink"><a href="/learn/security-research/">← More security research</a></p>
+</article>
+</div>
+<footer><div class="wrap">© Cyber Resiliency Labs and Consulting Inc. · <a href="/">crlab.ca</a></div></footer>
+</body>
+</html>

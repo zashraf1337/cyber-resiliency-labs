@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Cheat Your MDM: Compliance without a Password | CR Labs</title>
+<meta name="description" content="DID YOU KNOW? By 2016, 20% of enterprise BYOD programs will fail due to deployment of mobile device management (MDM) measures that are too restrictive.…">
+<link rel="canonical" href="https://crlab.ca/learn/security-research/how-to-cheat-your-mdm-compliance-without-a-password/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CR Labs">
+<meta property="og:url" content="https://crlab.ca/learn/security-research/how-to-cheat-your-mdm-compliance-without-a-password/">
+<meta property="og:title" content="How to Cheat Your MDM: Compliance without a Password">
+<meta property="og:description" content="DID YOU KNOW? By 2016, 20% of enterprise BYOD programs will fail due to deployment of mobile device management (MDM) measures that are too restrictive.…">
+<meta property="og:image" content="https://crlab.ca/assets/og-default.png?v=3">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@zashraf1337">
+<meta name="twitter:creator" content="@zashraf1337">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to Cheat Your MDM: Compliance without a Password", "description": "DID YOU KNOW? By 2016, 20% of enterprise BYOD programs will fail due to deployment of mobile device management (MDM) measures that are too restrictive.…", "author": {"@type": "Person", "name": "Zubair Ashraf"}, "publisher": {"@type": "Organization", "name": "Cyber Resiliency Labs", "logo": {"@type": "ImageObject", "url": "https://crlab.ca/assets/apple-touch-icon.png"}}, "url": "https://crlab.ca/learn/security-research/how-to-cheat-your-mdm-compliance-without-a-password/", "datePublished": "2014-04-03"}</script>
+<style>
+  :root{--bg:#fff;--soft:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--accent:#1f6b4a;--accent-d:#175338;--line:#d2d2d7;}
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{font-family:-apple-system,"SF Pro Text",system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:18px;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;overflow-x:hidden}
+  a{color:var(--accent);overflow-wrap:break-word}
+  .top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+  .top .row{display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;padding:16px 24px}
+  .brand{font-weight:700;color:var(--ink);text-decoration:none;font-size:18px}.brand span{color:var(--accent)}
+  .top a.nav{color:var(--muted);text-decoration:none;font-size:15px}.top a.nav:hover{color:var(--ink)}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  article{padding:40px 0 10px}
+  article h1{font-size:40px;line-height:1.14;letter-spacing:-.6px;margin:0 0 14px;color:#13201a}
+  .attr{font-size:14.5px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:0 0 28px}
+  .attr strong{color:#13201a}
+  article p{margin:0 0 20px}
+  article h2{font-size:27px;line-height:1.2;margin:42px 0 12px;color:#13201a;letter-spacing:-.3px}
+  article h3{font-size:20px;margin:30px 0 8px;color:var(--accent-d)}
+  article h4{font-size:17px;margin:24px 0 6px;color:#13201a}
+  article ul,article ol{margin:0 0 20px;padding-left:26px}article li{margin-bottom:9px}
+  article strong{color:#0f1711}
+  article img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;margin:16px 0;display:block}
+  article blockquote{border-left:4px solid var(--accent);margin:22px 0;padding:6px 18px;color:#3a4a42;background:var(--soft);border-radius:0 8px 8px 0}
+  pre{background:#0d1b14;color:#d7e7dd;border-radius:10px;padding:16px 18px;overflow-x:auto;margin:20px 0;font-size:13.5px;line-height:1.5}
+  pre code{font-family:"SF Mono",Menlo,Consolas,monospace;white-space:pre}
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.86em;background:var(--soft);border:1px solid var(--line);padding:1px 5px;border-radius:4px;color:#15402d}
+  pre code{background:none;border:0;padding:0;color:inherit}
+  table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#e8f0ea;color:#15402d;font-weight:700}
+  .backlink{margin:36px 0 0;border-top:1px solid var(--line);padding-top:18px;font-weight:600}
+  footer{border-top:1px solid var(--line);background:var(--soft);padding:28px 0;color:var(--muted);font-size:14px;margin-top:34px}
+  footer a{color:var(--accent)}
+  @media(max-width:640px){article h1{font-size:31px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="row">
+  <a class="brand" href="/">Cyber Resiliency <span>Labs</span></a>
+  <a class="nav" href="/learn/security-research/">← Security research</a>
+</div></div>
+<div class="wrap">
+<article>
+<h1>How to Cheat Your MDM: Compliance without a Password</h1>
+<p class="attr">By <strong>Zubair Ashraf</strong> · Originally published on <a href="https://web.archive.org/web/20140408042128/https://securityintelligence.com/how-to-cheat-your-mdm-compliance-without-a-password/" target="_blank" rel="noopener">IBM SecurityIntelligence</a>, 2014 · archived copy, republished here.</p>
+<a href="http://twitter.com/share" target="_blank" rel="noopener"></a>
+
+	
+
+	
+
+DID YOU KNOW? By 2016, 20% of enterprise BYOD programs will fail due to deployment of <strong>mobile device management (MDM)</strong> measures that are too restrictive.
+Gartner
+<p>Recently, I came across a bug in Android’s Device Administrator code and questioning whether it can be classified as a security vulnerability and if/how it can be exploited. This resulted in the <strong>CVE-2014-0900</strong>. Below (as promised in my <a href="/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-1/" target="_blank" rel="noopener">OBAD analysis blog entry</a>), I will share the vulnerability in Android OS code and describe how it can be exploited to give a false sense of control and authority to an affected <strong>MDM Android app</strong>.</p>
+<p>What this means is that the MDM app on your Android device would have a false sense that it can wipe data, lock the device, enforce password quality policies and so on and will therefore let you access corporate email, data or intranet resources while in reality it would have no such control and you can continue to use your device without any of the corporate restrictions. We know you did not like to type those long passwords and would rather have no password and no lock screen. After all, don’t you want to share your personal data with everyone?</p>
+<p>I have verified that two commercially used MDM solutions are affected by this. It is very likely that most MDM apps (if not all) are affected, too. Below, I will share the vulnerability and exploitation details. If you are not interested in technical details, you can jump to the end to read about the mitigation possibilities and lessons learned from this that will help you in your BYOD strategy as a solutions provider and as a buyer. If you are responsible for developing an MDM app, we recommend that you take a look under the section titled Mitigation to determine whether your product is affected by this and how to mitigate the risk.</p>
+<strong>Disclaimer:</strong> For your personal safety and job security, we strongly discourage trying this on your BYOD-approved device.
+
+<h2>Now the Details</h2>
+<p>The vulnerability exists in private void handlePackagesChanged(int userHandle) methods of <a href="https://android.googlesource.com/platform/frameworks/base/+/android-4.3_r2/services/java/com/android/server/DevicePolicyManagerService.java" target="_blank" rel="noopener">com.android.server.DevicePolicyManagerService</a> for versions below android-4.4.1_r1.</p>
+<p>DevicePolicyManagerService class maintains two data structures to track the active device admins on a device:</p>
+
+ <pre><code> final HashMap mAdminMap = new HashMap(); final ArrayList mAdminList = new ArrayList();</code></pre>
+
+<p>However, in handlePackagesChanged mAdminList is updated, but mAdminMap is not updated to remove the admin from the hash map.</p>
+
+ <pre><code> private void handlePackagesChanged(int userHandle) { ... for (int i = policy.mAdminList.size() - 1; i &gt;= 0; i--) { ActiveAdmin aa = policy.mAdminList.get(i); try { if (pm.getPackageInfo(aa.info.getPackageName(), 0, userHandle) == null || pm.getReceiverInfo(aa.info.getComponent(), 0, userHandle) == null) { removed = true; policy.mAdminList.remove(i); }</code></pre>
+
+<p>Interesting. Let’s see where in code mAdminMap is consulted but mAdminList is not. We find that getActiveAdminUncheckedLocked and getActiveAdminForCallerLocked(ComponentName who, int reqPolicy) with “who” parameter being non null relies on mAdminMap only, and getActiveAdminUncheckedLocked is used by <a href="http://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#isAdminActive%28android.content.ComponentName%29" target="_blank" rel="noopener">isAdminActive of android.app.admin.DevicePolicyManager</a>. So an MDM app that uses this isAdminActive method to check whether its <a href="http://developer.android.com/guide/topics/admin/device-admin.html" target="_blank" rel="noopener">DeviceAdministrator</a> is active can potentially be deceived. Here is how:</p>
+<p>To demonstrate this, we will use Lookout’s free anti-virus as an example. Note that this is just for demonstration purposes since this is what I had on my phone. This is a benign bypass for demonstration/verification only, and this app is different from the commercial MDM solution from Lookout. The idea is that AV apps typically have features for extra protection (such as remote wiping of a device) if you allow them to enable their Device Administrator component. The AV app would check whether its device administrator is enabled and would show status on their dashboard. We will demonstrate how you can trick it into getting this wrong.</p>
+<h3>Step 1</h3>
+<p>The first step is to get hold of the apk package for Lookout anti-virus (hint: install on your phone, and get the apk using adb pull) and to extract the AndroidManifest.xml file. If you are not familiar with how to do this, you can find some hints in my earlier post, <a href="/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-1/" target="_blank" rel="noopener">DIY: Android Malware Analysis – Taking Apart OBAD</a> . Look at the <a href="http://developer.android.com/guide/topics/manifest/manifest-intro.html" target="_blank" rel="noopener">AndroidManifest.xml</a> file, and take note of two things: The package name for the app and the name of the <a href="http://developer.android.com/guide/topics/admin/device-admin.html" target="_blank" rel="noopener">DeviceAdministrator</a> component. You can read up on the previously linked reference about DeviceAdministrator to learn how to create your own DeviceAdministrator.</p>
+<p>Go ahead and create an Android project with the same package name and same name for the DeviceAdministrator component as the one you are trying to deceive. The special thing you need to do with your DeviceAdministrator is to execute the following code once it is enabled as a device administrator on the device:</p>
+
+ <pre><code>pm.setComponentEnabledSetting(this.getWho(context), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);</code></pre>
+
+<p>I added this in the <a href="http://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html#onEnabled%28android.content.Context,%20android.content.Intent%29" target="_blank" rel="noopener">onEnabled</a> method of my DeviceAdministrator. What this will do is <a href="http://developer.android.com/training/monitoring-device-state/manifest-receivers.html" target="_blank" rel="noopener">disable</a> my DeviceAdministrator component after it has been given the rights of a DeviceAdministrator, resulting in the vulnerable code in handlePackagesChanged (mentioned above) being executed. Note that, after this, my device administrator component will still be in the mAdminMap even if I uninstall my app.</p>
+<p>Once you have done this, go ahead and uninstall your app.</p>
+<h3>Step 2</h3>
+<p>Now install the anti-virus software that you are benignly trying to deceive. If you have done everything right, then you should be able to get something like the screen shots below, in which Lookout’s AV thinks that it has the feature requiring device administration privilege enabled. Note that, if you run into any unexpected results, you can try to debug by building your own Android image with debug log statements inserted in the code related to vulnerable code. You can find some hints for that as well in my earlier post on OBAD analysis.</p>
+<p><strong>Note: If you did not take my advice and, instead of trying it with an AV, you tried it on your corporate MDM app, it may not have worked because of what I will explain below.</strong></p>
+<p><em>Lookout AV thinking that it has the feature requiring device administrator access enabled.</em></p>
+
+<img src="/assets/security-research/how-to-cheat-your-mdm-compliance-without-a-password/img1.jpg" alt="Lookout AV thinking that it has the feature requiring device administrator access enabled." loading="lazy">
+<em>The real list of device administrators as seen from Settings -> Security -> Device Administrators – showing none is enabled.</em>
+
+<img src="/assets/security-research/how-to-cheat-your-mdm-compliance-without-a-password/img2.jpg" alt="Security Device Admins List Showing Lookout Is Not an Admin" loading="lazy">
+
+<h3>One More Obstacle</h3>
+<p>If you tried the above steps on an MDM app, it likely did not work. The reason is that MDM apps typically also use other methods to check whether the device is compliant with the security policies. One common way is to check for password strength compliance using <a href="http://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#isActivePasswordSufficient%28%29" target="_blank" rel="noopener">isActivePasswordSufficient of DevicePolicyManager</a>. Taking a look at its <a href="https://android.googlesource.com/platform/frameworks/base/+/android-4.3_r2/services/java/com/android/server/DevicePolicyManagerService.java#isActivePasswordSufficient" target="_blank" rel="noopener">code</a>, you will see:</p>
+
+ <pre><code> public boolean isActivePasswordSufficient(int userHandle) { enforceCrossUserPermission(userHandle); synchronized (this) { DevicePolicyData policy = getUserData(userHandle); // This API can only be called by an active device admin, // so try to retrieve it to check that the caller is one. getActiveAdminForCallerLocked(null, DeviceAdminInfo.USES_POLICY_LIMIT_PASSWORD);</code></pre>
+
+<p>As you can see in the highlighted code and comment above, it uses getActiveAdminForCallerLocked to ensure that the caller is an active device administrator who has permissions to use the password limiting policy. If the MDM uses this method and you have done what I have mentioned above, the reason it will not work is that, in getActiveAdminForCallerLocked when called with first parameter being null, we execute:</p>
+
+ <pre><code>ActiveAdmin getActiveAdminForCallerLocked(ComponentName who, int reqPolicy) throws SecurityException { final int callingUid = Binder.getCallingUid(); final int userHandle = UserHandle.getUserId(callingUid); final DevicePolicyData policy = getUserData(userHandle); if (who != null) { ... } else { final int N = policy.mAdminList.size(); for (int i=0; i</code></pre>
+
+<p>This enumerates the admins in mAdminList, which is correctly updated when we disable or remove a Device Administrator. In the way we tried to exploit it above, this check will throw a security exception because the MDM’s Device Administrator would not be in mAdminList.</p>
+<p>Note that the exception will not be thrown so long as there exists one enabled device administrator with the same policies as the MDM app that you are trying to bypass. It should have the same user ID (because of admin.getUid() == callingUid check) as that of the MDM to be bypassed. Now this is possible if you can use the <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html" target="_blank" rel="noopener">android:sharedUserId attribute in Android manifest file</a>. This is how you can exploit an MDM:</p>
+<p>Perform Step 1 as mentioned above. Unpack the apk of the MDM you are trying to bypass, edit the AndroidManifest.xml file and add <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html" target="_blank" rel="noopener">android:sharedUserId</a>=, repackage it and generate a new apk signed with your own key .</p>
+<p>Create a different app with a DeviceAdministrator component using same policies as the Device Administrator you are trying to bypass, this would be a simple and dumb app and would not enforce anything, use the same setting for <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html" target="_blank" rel="noopener">android:sharedUserId</a>= in its manifest file, sign it with same key, install it on your device and enable its device administrator. Install the repackaged apk for the MDM you are trying to bypass, and it should think that it has its Device Administrator enabled and that the password is compliant because the security exception will not be thrown by getActiveAdminForCallerLocked since there would be an active device administrator with the same UID as the one you are trying to bypass.</p>
+<p>After all this, you can get your MDM to think that you are fully compliant with the corporate policies while your device does not even have a device administrator enabled except perhaps a self-signed, very user-laziness-friendly one that even allows the absence of a password when the unlock setting is enabled.</p>
+<p><img src="/assets/security-research/how-to-cheat-your-mdm-compliance-without-a-password/img3.png" alt="User (Laziness) Friendly" loading="lazy"><br></br>
+<em>A typical screenshot showing a device compliance message.</em></p>
+
+<img src="/assets/security-research/how-to-cheat-your-mdm-compliance-without-a-password/img4.jpg" alt="A typical screenshot showing a device compliance message." loading="lazy">
+
+<h2>Mitigation and Responsible Disclosure</h2>
+<p>MDM apps should also check whether their DeviceAdministrator component is enabled by using getActiveAdmins() of DevicePolicyManager along with its isAdminActive method. Furthermore, to be safer, they should also look into using code protection techniques and verify the app signing certificate at run time.</p>
+<p>The Android security team has been notified of this vulnerability, and it has already been fixed in the latest version of Android. However, earlier versions remain vulnerable, and the easiest thing here may be for the MDM apps to update themselves if they are affected; even if earlier versions of Android are patched, who knows when it will reach all the devices that an MDM supports. We have also informed some of the top MDM vendors who may be affected by this and have coordinated the release of this blog entry with them.</p>
+<h3>Conclusions</h3>
+<p>We hope this will emphasize the need for the following:</p>
+<ul>
+<li>Well-balanced BYOD solutions that meet security needs while being user-friendly and not causing unnecessary trouble to users.</li>
+<li>Emphasis on the importance of code protection for your apps and on verification of app signature at run time.</li>
+</ul>
+
+	
+
+	
+
+<a href="http://twitter.com/share" target="_blank" rel="noopener"></a>
+<p class="backlink"><a href="/learn/security-research/">← More security research</a></p>
+</article>
+</div>
+<footer><div class="wrap">© Cyber Resiliency Labs and Consulting Inc. · <a href="/">crlab.ca</a></div></footer>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security research (archive) | CR Labs</title>
+<meta name="description" content="Security research by Zubair Ashraf, originally published on IBM SecurityIntelligence (2013–2015): Android malware teardowns, memory forensics, vulnerability analysis, and threat hunting. Archived and republished.">
+<link rel="canonical" href="https://crlab.ca/learn/security-research/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CR Labs">
+<meta property="og:url" content="https://crlab.ca/learn/security-research/">
+<meta property="og:title" content="Security research (archive) · CR Labs">
+<meta property="og:description" content="Android malware teardowns, memory forensics, vulnerability analysis and threat hunting — originally published on IBM SecurityIntelligence, archived here.">
+<meta property="og:image" content="https://crlab.ca/assets/og-default.png?v=3">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@zashraf1337">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Security research (archive)", "itemListElement": [{"@type": "ListItem", "position": 1, "url": "https://crlab.ca/learn/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/", "name": "Proactive Threat Hunting and Memory Forensics Against Rombertik"}, {"@type": "ListItem", "position": 2, "url": "https://crlab.ca/learn/security-research/struts-vulnerabilities-analysis-parameters-cookie-interceptors-impact-exploitation/", "name": "Analysis of Struts Vulnerabilities in Parameters & Cookie Interceptors"}, {"@type": "ListItem", "position": 3, "url": "https://crlab.ca/learn/security-research/embracing-the-uncertainty-of-advanced-attacks-using-big-data-analytics/", "name": "Embracing the Uncertainty of Advanced Attacks Using Big Data Analytics"}, {"@type": "ListItem", "position": 4, "url": "https://crlab.ca/learn/security-research/how-to-cheat-your-mdm-compliance-without-a-password/", "name": "How to Cheat Your MDM: Compliance without a Password"}, {"@type": "ListItem", "position": 5, "url": "https://crlab.ca/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-2/", "name": "DIY: Android Malware Analysis – Taking Apart OBAD (Part 2)"}, {"@type": "ListItem", "position": 6, "url": "https://crlab.ca/learn/security-research/state-of-hack-cyber-threat-intelligence-kevin-mandia-mandiant-crowdstrike-fireeye/", "name": "State of the Hack and Cyber Threat Intelligence Gain/Loss"}, {"@type": "ListItem", "position": 7, "url": "https://crlab.ca/learn/security-research/a-look-back-at-the-state-of-incident-response-by-bruce-schneier/", "name": "A Look Back at 'The State of Incident Response' by Bruce Schneier"}, {"@type": "ListItem", "position": 8, "url": "https://crlab.ca/learn/security-research/governments-malware-authors-mikko-hypponen-trustycon/", "name": "Government as malware authors - Mikko's talk at RSA / TrustyCon"}, {"@type": "ListItem", "position": 9, "url": "https://crlab.ca/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-1/", "name": "DIY: Android Malware Analysis - Taking apart OBAD (part 1)"}, {"@type": "ListItem", "position": 10, "url": "https://crlab.ca/learn/security-research/understanding-the-android-master-key-vulnerability/", "name": "Understanding the Android “master key” vulnerability"}, {"@type": "ListItem", "position": 11, "url": "https://crlab.ca/learn/security-research/zeus-analysis-memory-forensics-via-volatility/", "name": "Zeus Analysis – Memory Forensics Via Volatility"}]}</script>
+<style>
+  :root{--bg:#ffffff;--soft:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--accent:#1f6b4a;--line:#d2d2d7;}
+  *{margin:0;box-sizing:border-box}
+  body{font-family:-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  .top{border-bottom:1px solid var(--line);background:#fff}
+  .top .row{display:flex;justify-content:space-between;align-items:center;max-width:1000px;margin:0 auto;padding:16px 24px}
+  .brand{font-weight:700;color:var(--ink)}.brand span{color:var(--accent)}
+  .top a.nav{color:var(--muted);font-size:15px}.top a.nav:hover{color:var(--ink)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+  .hero{background:var(--soft);border-bottom:1px solid var(--line)}
+  .hero .wrap{padding:60px 24px 48px}
+  .kicker{color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+  h1{font-size:44px;letter-spacing:-.6px;margin:12px 0 14px;color:#13201a}
+  .lead{font-size:19px;color:var(--muted);max-width:680px;line-height:1.55}
+  section{padding:46px 0}
+  .post{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 28px;margin-bottom:16px;transition:.15s;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .post:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(31,107,74,.08)}
+  .post h3{color:#13201a;font-size:22px;margin-bottom:8px;line-height:1.25}
+  .post p{color:var(--muted);font-size:16px}
+  .post .meta{color:var(--accent);font-size:12.5px;letter-spacing:1px;text-transform:uppercase;margin-top:13px;font-weight:600}
+  .note{font-size:14.5px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:0 0 30px;max-width:760px}
+  footer{padding:30px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="row">
+    <a class="brand" href="/">CR <span>Labs</span></a>
+    <a class="nav" href="/learn/">← Learn</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Security research · Archive</div>
+    <h1>Security research</h1>
+    <p class="lead">Malware teardowns, memory forensics, mobile-security and vulnerability analysis
+    written by <strong>Zubair Ashraf</strong> during his years on IBM’s X-Force research team.
+    Originally published on IBM SecurityIntelligence (2013–2015) and preserved here.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <section>
+    <p class="note">These articles were originally published on IBM <strong>SecurityIntelligence</strong>.
+    IBM has since retired that site; each piece below is reproduced from its archived copy, with a link
+    back to the original snapshot on the Internet Archive.</p>
+    <a class="post" href="/learn/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/">
+      <h3>Proactive Threat Hunting and Memory Forensics Against Rombertik</h3>
+      <p>Hunting the Rombertik malware in memory with Volatility, CrowdInspect and AutoRuns — detecting code hooks and injected threads on a live host.</p>
+      <div class="meta">Threat hunting · 2015</div>
+    </a>
+    <a class="post" href="/learn/security-research/struts-vulnerabilities-analysis-parameters-cookie-interceptors-impact-exploitation/">
+      <h3>Analysis of Struts Vulnerabilities in Parameters &amp; Cookie Interceptors</h3>
+      <p>A deep look at the Apache Struts Parameters and Cookie interceptor flaws — how they work, their impact, and how they were exploited.</p>
+      <div class="meta">Vulnerability analysis · 2014</div>
+    </a>
+    <a class="post" href="/learn/security-research/embracing-the-uncertainty-of-advanced-attacks-using-big-data-analytics/">
+      <h3>Embracing the Uncertainty of Advanced Attacks Using Big Data Analytics</h3>
+      <p>Why advanced attacks can&#x27;t be stopped by signatures alone, and how big-data security analytics shifts defenders toward probabilistic detection.</p>
+      <div class="meta">Defense strategy · 2014</div>
+    </a>
+    <a class="post" href="/learn/security-research/how-to-cheat-your-mdm-compliance-without-a-password/">
+      <h3>How to Cheat Your MDM: Compliance without a Password</h3>
+      <p>Demonstrating how an Android device could report itself MDM-compliant — passcode and all — without actually having a password set.</p>
+      <div class="meta">Mobile security · 2014</div>
+    </a>
+    <a class="post" href="/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-2/">
+      <h3>DIY: Android Malware Analysis – Taking Apart OBAD (Part 2)</h3>
+      <p>Part 2 of the OBAD teardown: how the trojan abuses Device Administrator privileges to hide itself and resist uninstallation.</p>
+      <div class="meta">Malware analysis · 2014</div>
+    </a>
+    <a class="post" href="/learn/security-research/state-of-hack-cyber-threat-intelligence-kevin-mandia-mandiant-crowdstrike-fireeye/">
+      <h3>State of the Hack and Cyber Threat Intelligence Gain/Loss</h3>
+      <p>Notes from a State-of-the-Hack panel with Kevin Mandia — what the Mandiant / CrowdStrike / FireEye view said about the attacker–defender gap.</p>
+      <div class="meta">Conference recap · 2014</div>
+    </a>
+    <a class="post" href="/learn/security-research/a-look-back-at-the-state-of-incident-response-by-bruce-schneier/">
+      <h3>A Look Back at &#x27;The State of Incident Response&#x27; by Bruce Schneier</h3>
+      <p>A look back at Bruce Schneier&#x27;s talk on incident response — why detection and response, not just prevention, define modern security.</p>
+      <div class="meta">Conference recap · 2014</div>
+    </a>
+    <a class="post" href="/learn/security-research/governments-malware-authors-mikko-hypponen-trustycon/">
+      <h3>Government as malware authors - Mikko&#x27;s talk at RSA / TrustyCon</h3>
+      <p>Mikko Hyppönen at TrustyCon on governments as malware authors, and what state-sponsored offense means for everyone else&#x27;s trust model.</p>
+      <div class="meta">Conference recap · 2014</div>
+    </a>
+    <a class="post" href="/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-1/">
+      <h3>DIY: Android Malware Analysis - Taking apart OBAD (part 1)</h3>
+      <p>Part 1 of a hands-on Android malware teardown: setting up the tools and beginning to reverse the heavily-obfuscated OBAD trojan.</p>
+      <div class="meta">Malware analysis · 2013</div>
+    </a>
+    <a class="post" href="/learn/security-research/understanding-the-android-master-key-vulnerability/">
+      <h3>Understanding the Android “master key” vulnerability</h3>
+      <p>A plain explanation of the Android “master key” signature-verification bug that let attackers modify a signed APK without breaking its signature.</p>
+      <div class="meta">Vulnerability analysis · 2013</div>
+    </a>
+    <a class="post" href="/learn/security-research/zeus-analysis-memory-forensics-via-volatility/">
+      <h3>Zeus Analysis – Memory Forensics Via Volatility</h3>
+      <p>Memory forensics of the Zeus banking trojan with the Volatility framework — finding the malware&#x27;s footprint in a RAM image.</p>
+      <div class="meta">Malware analysis · 2013</div>
+    </a>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">© Cyber Resiliency Labs and Consulting Inc. · <a href="/">crlab.ca</a></div>
+</footer>
+
+</body>
+</html>
