@@ -54,7 +54,19 @@
   .ep:hover,.ep.active{background:var(--soft)}
   .ep .epn{color:var(--accent);font-weight:700;font-size:13px;min-width:16px}
   .ep .ept{font-size:14.5px;line-height:1.32}
-  @media(max-width:760px){.series{grid-template-columns:1fr}}
+  /* Read / Watch tabs */
+  .tabs{display:inline-flex;gap:4px;background:var(--soft);border:1px solid var(--line);border-radius:980px;padding:5px;margin:2px 0 30px}
+  .tab{appearance:none;-webkit-appearance:none;border:0;background:transparent;font-family:inherit;font-size:15px;font-weight:600;color:var(--muted);padding:9px 30px;border-radius:980px;cursor:pointer;transition:.15s}
+  .tab:hover{color:var(--ink)}
+  .tab.active{background:#fff;color:var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.10)}
+  section.tabpanel{padding:0 0 54px;border-bottom:none}
+  .js-tabs section.tabpanel{display:none}
+  .js-tabs section.tabpanel.active{display:block}
+  .panel-intro{color:var(--muted);margin-bottom:22px;max-width:680px}
+  .posts{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:stretch}
+  .posts .post{margin-bottom:0;display:flex;flex-direction:column}
+  .posts .post .meta{margin-top:auto;padding-top:14px}
+  @media(max-width:760px){.series{grid-template-columns:1fr}.posts{grid-template-columns:1fr}}
   footer{padding:30px 0;color:var(--muted);font-size:14px}
 </style>
 </head>
@@ -77,9 +89,13 @@
 </header>
 
 <div class="wrap">
-  <p style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 6px"><a href="#read" style="text-decoration:none">Read</a> &middot; <a href="#watch" style="text-decoration:none">Watch</a></p>
-  <section id="read">
-    <h2>Read</h2>
+  <div class="tabs" role="tablist" aria-label="Browse Learn">
+    <button class="tab active" data-tab="read" role="tab" aria-selected="true">Read</button>
+    <button class="tab" data-tab="watch" role="tab" aria-selected="false">Watch</button>
+  </div>
+  <section id="read" class="tabpanel active" role="tabpanel">
+    <p class="panel-intro">Field guides, series, and research you can read at your own pace.</p>
+    <div class="posts">
     <a class="post" href="/learn/inside-a-large-language-model.html">
       <h3>Inside a Large Language Model</h3>
       <p>A field guide to how modern AI systems are built, trained, shrunk, and run: parameters, pre-training,
@@ -100,12 +116,12 @@
       SecurityIntelligence (2013–2015), archived and republished here.</p>
       <div class="meta">Archive · 11 articles</div>
     </a>
+    </div>
   </section>
 
-  <section id="watch" style="border-bottom:none">
-    <h2>Watch</h2>
-    <p style="color:var(--muted);margin-bottom:22px;max-width:660px">Short video series that walk through the
-    same material on screen. Pick a series.</p>
+  <section id="watch" class="tabpanel" role="tabpanel" style="border-bottom:none">
+    <p class="panel-intro">Short video series that walk through the same material on screen. Pick a series.</p>
+    <div class="posts">
     <a class="post" href="/videos/inside-a-large-language-model/">
       <h3>Inside a Large Language Model</h3>
       <p>How modern AI is built, trained, shrunk, and run, one stage at a time.</p>
@@ -126,9 +142,25 @@
       <p>The jobs in AI: the roles, what they really do, what they pay, and how to break in.</p>
       <div class="meta">Video + written</div>
     </a>
-    <p style="margin-top:18px"><a href="/videos/" style="font-weight:600">Open the full video hub ›</a></p>
+    </div>
+    <p style="margin-top:20px"><a href="/videos/" style="font-weight:600">Open the full video hub ›</a></p>
   </section>
 </div>
+
+<script>
+(function(){
+  document.body.classList.add('js-tabs');
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var panels=[].slice.call(document.querySelectorAll('.tabpanel'));
+  function show(name){
+    tabs.forEach(function(t){var on=t.dataset.tab===name;t.classList.toggle('active',on);t.setAttribute('aria-selected',on);});
+    panels.forEach(function(p){p.classList.toggle('active',p.id===name);});
+    if(history.replaceState) history.replaceState(null,'','#'+name);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.tab);});});
+  show((location.hash||'').replace('#','')==='watch'?'watch':'read');
+})();
+</script>
 
 <footer>
   <div class="wrap">© Cyber Resiliency Labs and Consulting Inc. · <a href="/">crlab.ca</a></div>
