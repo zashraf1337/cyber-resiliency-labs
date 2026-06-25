@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>CR Labs — Learn</title>
-  <subtitle>Clear explainers on how modern AI works.</subtitle>
+  <subtitle>Clear explainers on how modern AI works, plus security research.</subtitle>
   <link href="https://crlab.ca/learn/"/>
   <link rel="self" href="https://crlab.ca/rss.xml"/>
   <id>https://crlab.ca/learn/</id>
-  <updated>2026-06-22T12:00:00Z</updated>
+  <updated>2026-06-23T12:00:00Z</updated>
   <author><name>Zubair Ashraf</name></author>
   <entry>
     <title>AI Infrastructure Careers: MLOps, ML Systems &amp; Data Engineering | CR Labs</title>
@@ -70,5 +70,93 @@
     <updated>2026-06-18T12:00:00Z</updated>
     <published>2026-06-18T12:00:00Z</published>
     <summary>A field guide to how modern AI systems are built, trained, shrunk, and run: parameters, pre-training, post-training, parameter-efficient methods, quantization, retrieval, and inference, and how each stage maps to real hardware and real cost.</summary>
+  </entry>
+  <entry>
+    <title>Proactive Threat Hunting and Memory Forensics Against Rombertik | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/"/>
+    <id>https://crlab.ca/learn/security-research/proactive-threat-hunting-and-memory-forensics-against-rombertik/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>Rombertik was in the news during the beginning of the month, with many headlines specifically mentioning its ability to bypass sandboxes. This malware was…</summary>
+  </entry>
+  <entry>
+    <title>Analysis of Struts Vulnerabilities in Parameters &amp; Cookie Interceptors | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/struts-vulnerabilities-analysis-parameters-cookie-interceptors-impact-exploitation/"/>
+    <id>https://crlab.ca/learn/security-research/struts-vulnerabilities-analysis-parameters-cookie-interceptors-impact-exploitation/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>Whitelisting and blacklisting are not easy to get right. We have seen this recently with the Apache Struts vulnerabilities and multiple back-to-back…</summary>
+  </entry>
+  <entry>
+    <title>Embracing the Uncertainty of Advanced Attacks Using Big Data Analytics | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/embracing-the-uncertainty-of-advanced-attacks-using-big-data-analytics/"/>
+    <id>https://crlab.ca/learn/security-research/embracing-the-uncertainty-of-advanced-attacks-using-big-data-analytics/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>In my continuing series of keynote recaps, I’d like to discuss two talks that center on using big data analytics to offset the uncertainty of advanced…</summary>
+  </entry>
+  <entry>
+    <title>How to Cheat Your MDM: Compliance without a Password | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/how-to-cheat-your-mdm-compliance-without-a-password/"/>
+    <id>https://crlab.ca/learn/security-research/how-to-cheat-your-mdm-compliance-without-a-password/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>DID YOU KNOW? By 2016, 20% of enterprise BYOD programs will fail due to deployment of mobile device management (MDM) measures that are too restrictive.…</summary>
+  </entry>
+  <entry>
+    <title>DIY: Android Malware Analysis – Taking Apart OBAD (Part 2) | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-2/"/>
+    <id>https://crlab.ca/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-2/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>DIY: Android Malware Analysis – Taking Apart OBAD (Part 1) It has been much longer that what I intended for a follow-up post on OBAD analysis , but better…</summary>
+  </entry>
+  <entry>
+    <title>State of the Hack and Cyber Threat Intelligence Gain/Loss | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/state-of-hack-cyber-threat-intelligence-kevin-mandia-mandiant-crowdstrike-fireeye/"/>
+    <id>https://crlab.ca/learn/security-research/state-of-hack-cyber-threat-intelligence-kevin-mandia-mandiant-crowdstrike-fireeye/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>“ Mikko Hypponen at TrustyCon: Governments as Malware Authors ” was my first post in the series of cyber threat intelligence keynote recaps. There you…</summary>
+  </entry>
+  <entry>
+    <title>A Look Back at 'The State of Incident Response' by Bruce Schneier | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/a-look-back-at-the-state-of-incident-response-by-bruce-schneier/"/>
+    <id>https://crlab.ca/learn/security-research/a-look-back-at-the-state-of-incident-response-by-bruce-schneier/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>The State of Incident Response: Black Hat USA 2014 Keynote Recap from Bruce Schneier In my continuing series of keynote recaps, I will be covering Bruce…</summary>
+  </entry>
+  <entry>
+    <title>Government as malware authors - Mikko's talk at RSA / TrustyCon | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/governments-malware-authors-mikko-hypponen-trustycon/"/>
+    <id>https://crlab.ca/learn/security-research/governments-malware-authors-mikko-hypponen-trustycon/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>Reviving keynotes If we are to win this battle of Cyber Security we have to keep thinking strategically, learning from past and present and getting ready…</summary>
+  </entry>
+  <entry>
+    <title>DIY: Android Malware Analysis - Taking apart OBAD (part 1) | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-1/"/>
+    <id>https://crlab.ca/learn/security-research/diy-android-malware-analysis-taking-apart-obad-part-1/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>If you know the enemy and know yourself, you need not fear the result of a hundred battles. If you know yourself but not the enemy, for every victory…</summary>
+  </entry>
+  <entry>
+    <title>Understanding the Android “master key” vulnerability | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/understanding-the-android-master-key-vulnerability/"/>
+    <id>https://crlab.ca/learn/security-research/understanding-the-android-master-key-vulnerability/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>What does Android “master key” vulnerability and your morning coffee Drive Thru routine have in common? Bluebox Labs last week announced a vulnerability…</summary>
+  </entry>
+  <entry>
+    <title>Zeus Analysis – Memory Forensics Via Volatility | CR Labs</title>
+    <link href="https://crlab.ca/learn/security-research/zeus-analysis-memory-forensics-via-volatility/"/>
+    <id>https://crlab.ca/learn/security-research/zeus-analysis-memory-forensics-via-volatility/</id>
+    <updated>2026-06-23T12:00:00Z</updated>
+    <published>2026-06-23T12:00:00Z</published>
+    <summary>I am planning to do a blog series on Malware Analysis using the Zeus sample that I recently received in an email. The idea is not only to share what it…</summary>
   </entry>
 </feed>
