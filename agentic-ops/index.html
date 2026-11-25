@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic DevOps &amp; SRE | CR Labs</title>
+<meta name="description" content="CR Labs helps engineering teams adopt AI SRE and DevOps agents safely: readiness assessments, vendor-neutral pilots, guardrails and governance, measured against your own incidents. Based in Canada.">
+<link rel="canonical" href="https://crlab.ca/agentic-ops/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CR Labs">
+<meta property="og:url" content="https://crlab.ca/agentic-ops/">
+<meta property="og:title" content="Agentic DevOps &amp; SRE: put AI agents on call, safely">
+<meta property="og:description" content="Vendor-neutral help adopting AI SRE and DevOps agents, with the guardrails regulated teams need. Measured on your own incidents.">
+<meta property="og:image" content="https://crlab.ca/assets/og-agentic-ops.png?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@zashraf1337">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","name":"Agentic DevOps & SRE","serviceType":"AI SRE and DevOps agent adoption","url":"https://crlab.ca/agentic-ops/","areaServed":"CA","provider":{"@type":"Organization","name":"Cyber Resiliency Labs and Consulting Inc.","alternateName":"CR Labs","url":"https://crlab.ca/","email":"zubair@crlab.ca"}}
+</script>
+<style>
+  :root{--bg:#fff;--gray:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--accent:#1f6b4a;--accent-h:#175338;--line:#d2d2d7;}
+  *{margin:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,"SF Pro Display","SF Pro Text",system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+  nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+  nav .row{display:flex;justify-content:space-between;align-items:center;max-width:1000px;margin:0 auto;padding:14px 28px}
+  .brand{font-weight:600;color:var(--ink);font-size:18px}.brand span{color:var(--accent)}
+  nav a.lnk{color:var(--muted);font-size:15px;margin-left:26px}nav a.lnk:hover{color:var(--ink)}
+  .hero{text-align:center;padding:104px 0 88px;background:radial-gradient(1100px 420px at 50% -8%, rgba(31,107,74,.10), rgba(255,255,255,0) 72%)}
+  .eyebrow{color:var(--accent);font-size:17px;font-weight:600;margin-bottom:16px}
+  h1{font-size:62px;line-height:1.07;font-weight:700;letter-spacing:-.025em;max-width:840px;margin:0 auto;color:#111}
+  .hero .lead{font-size:22px;color:var(--muted);max-width:700px;margin:24px auto 0;line-height:1.4}
+  .ctas{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;background:var(--accent);color:#fff;font-size:17px;font-weight:500;padding:13px 26px;border-radius:980px;border:1px solid var(--accent)}
+  .btn:hover{background:var(--accent-h)}
+  .btn.outline{background:#fff;color:var(--accent)}
+  .btn.outline:hover{background:var(--gray)}
+  section{padding:90px 0}
+  section.alt{background:var(--gray)}
+  .sec-head{text-align:center;max-width:680px;margin:0 auto 54px}
+  h2{font-size:42px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:#111}
+  .sec-head p{font-size:20px;color:var(--muted);margin-top:16px;line-height:1.45}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .grid.offers{grid-template-columns:repeat(2,1fr);max-width:880px;margin:0 auto}
+  .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 30px}
+  .card .ico{color:var(--accent);margin-bottom:16px}
+  .card .ico svg{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{font-size:22px;font-weight:600;margin-bottom:10px;letter-spacing:-.01em}
+  .card .dur{color:var(--accent);font-size:14px;font-weight:600;margin:-4px 0 10px}
+  .card p{color:var(--muted);font-size:16.5px;line-height:1.5}
+  .card.span{grid-column:1/-1}
+  .ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:960px;margin:0 auto;counter-reset:step}
+  .rung{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 22px 24px}
+  .rung:before{counter-increment:step;content:counter(step);display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:16px;margin-bottom:14px}
+  .rung:nth-child(1):before{background:rgba(31,107,74,.45)}
+  .rung:nth-child(2):before{background:rgba(31,107,74,.65)}
+  .rung:nth-child(3):before{background:rgba(31,107,74,.82)}
+  .rung h3{font-size:19px;font-weight:600;margin-bottom:6px}
+  .rung p{color:var(--muted);font-size:15.5px;line-height:1.45}
+  .rung:not(:last-child):after{content:"›";position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--accent);font-size:28px;font-weight:600;z-index:1}
+  .note{text-align:center;color:var(--muted);font-size:17px;max-width:640px;margin:30px auto 0}
+  .metrics{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:860px;margin:0 auto}
+  .metrics span{background:#fff;border:1px solid var(--line);border-radius:980px;padding:10px 20px;font-size:16.5px;font-weight:500}
+  section.alt .metrics span{background:#fff}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:880px;margin:0 auto}
+  .two h3{font-size:24px;font-weight:600;margin-bottom:12px;letter-spacing:-.01em}
+  .two p{font-size:18px;color:var(--muted);line-height:1.5}
+  .offer-box{max-width:720px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:20px;padding:36px 34px;text-align:center}
+  .offer-box .tag{display:inline-block;background:rgba(31,107,74,.1);color:var(--accent);font-weight:600;font-size:14px;padding:5px 14px;border-radius:980px;margin-bottom:16px}
+  .offer-box p{font-size:18.5px;color:var(--muted);line-height:1.5;margin-bottom:12px}
+  .offer-box p strong{color:var(--ink);font-weight:600}
+  .team{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:0 auto}
+  .person{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;display:flex;gap:20px;align-items:flex-start}
+  .person .pic{flex:0 0 76px;width:76px;height:76px;border-radius:50%;object-fit:cover}
+  .person .ini{flex:0 0 76px;width:76px;height:76px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:26px}
+  .person h3{font-size:21px;font-weight:600}
+  .person .role{color:var(--accent);font-weight:600;font-size:15px;margin:2px 0 10px}
+  .person p{color:var(--muted);font-size:16px;line-height:1.5;margin-bottom:10px}
+  .person a{font-weight:500;font-size:15.5px}
+  .cmp-wrap{max-width:900px;margin:0 auto;overflow-x:auto}
+  .cmp{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;font-size:16px}
+  .cmp th,.cmp td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  .cmp tr:last-child td{border-bottom:0}
+  .cmp th{font-size:15px;color:var(--muted);font-weight:600}
+  .cmp td:first-child{font-weight:600;color:var(--ink)}
+  .cmp td{color:var(--muted)}
+  .cmp .us{background:rgba(31,107,74,.07);color:var(--accent);font-weight:600}
+  .person{background:var(--bg)}
+  .faq{max-width:760px;margin:0 auto}
+  .faq details{border-bottom:1px solid var(--line);padding:20px 4px}
+  .faq details:first-child{border-top:1px solid var(--line)}
+  .faq summary{font-size:19px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:after{content:"+";color:var(--accent);font-weight:500;font-size:24px;line-height:1}
+  .faq details[open] summary:after{content:"–"}
+  .faq details p{color:var(--muted);font-size:17px;line-height:1.5;margin-top:10px}
+  .contact{text-align:center}
+  .contact p{font-size:20px;color:var(--muted);max-width:580px;margin:0 auto 28px}
+  .contact .mail{font-size:22px;font-weight:600;display:inline-block;margin-bottom:26px}
+  footer{background:var(--gray);border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:13.5px;text-align:center}
+  footer a{color:var(--muted);text-decoration:none}
+  footer a:hover{color:var(--ink)}
+  .fnav{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+  .fnav a{font-weight:500}
+  .social-mini{display:inline-flex;gap:9px;align-items:center}.social-mini a{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:50%;color:var(--muted);border:1px solid var(--line);background:#fff;transition:.15s}.social-mini a:hover{color:var(--accent);border-color:var(--accent)}.social-mini svg{width:15px;height:15px;fill:currentColor}.nav-social{margin-left:24px;vertical-align:middle}.social-foot{justify-content:center;margin:0 auto 18px}
+  @media(max-width:900px){.ladder{grid-template-columns:1fr 1fr;gap:20px}.rung:nth-child(2):after{display:none}}
+  @media(max-width:820px){.nav-social{display:none}nav a.lnk{margin-left:16px}.grid,.grid.offers,.two,.team{grid-template-columns:1fr;gap:20px}h1{font-size:42px}h2{font-size:32px}.hero{padding:72px 0 56px}section{padding:64px 0}}
+  @media(max-width:560px){.ladder{grid-template-columns:1fr}.rung:after{display:none!important}.person{flex-direction:column}nav a.lnk.hide-sm{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="row">
+    <a class="brand" href="/">CR <span>Labs</span></a>
+    <div>
+      <a class="lnk hide-sm" href="/#what">What we do</a>
+      <a class="lnk" href="#offers">Services</a>
+      <a class="lnk hide-sm" href="#team">Team</a>
+      <a class="lnk" href="#contact">Contact</a>
+      <span class="social-mini nav-social"><a href="https://www.youtube.com/channel/UCQ1PDMYSh8m6vvw_57r52Tw" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a><a href="https://x.com/zashraf1337" target="_blank" rel="noopener" aria-label="X (@zashraf1337)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="https://www.linkedin.com/in/zubairashraf/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Agentic DevOps &amp; SRE</div>
+    <h1>Put AI agents on call, safely.</h1>
+    <p class="lead">We help engineering teams adopt AI SRE and DevOps agents that cut incident time and toil,
+    with the guardrails regulated teams need. Vendor-neutral. Results-based pricing available.</p>
+    <div class="ctas">
+      <a class="btn" href="mailto:zubair@crlab.ca?subject=30-min%20intro%20call%3A%20Agentic%20DevOps%20and%20SRE">Book a 30-min intro</a>
+      <a class="btn outline" href="mailto:zubair@crlab.ca">Email us</a>
+    </div>
+  </div>
+</header>
+
+<section id="problem" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><h2>Why most teams haven't switched agents on</h2>
+      <p>The agents are ready to buy. Most teams aren't ready to trust them in production yet, and there are good reasons.</p></div>
+    <div class="grid">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Trust</h3>
+        <p>Agents promise root-cause analysis. Few teams can measure whether the answer was right.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="6" rx="1.5"/><rect x="3" y="15" width="18" height="6" rx="1.5"/><line x1="7" y1="6" x2="7.01" y2="6"/><line x1="7" y1="18" x2="7.01" y2="18"/></svg></div>
+        <h3>Foundations</h3>
+        <p>Without clean telemetry, current runbooks and clear service ownership, an agent is guessing.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Control</h3>
+        <p>Who approves an agent's action? What data leaves your cloud? Who is accountable when it's wrong?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="offers">
+  <div class="wrap">
+    <div class="sec-head"><h2>What we do</h2>
+      <p>Start with an assessment, or bring us in for one piece. Every engagement is scoped to a fixed outcome.</p></div>
+    <div class="grid offers">
+      <div class="card">
+        <h3>Readiness Assessment</h3>
+        <div class="dur">2 weeks</div>
+        <p>We review your telemetry, runbooks, on-call load and access model, then tell you where an agent will help
+        first and what has to be fixed before it can.</p>
+      </div>
+      <div class="card">
+        <h3>Vendor-Neutral Agent Pilot</h3>
+        <div class="dur">4 to 6 weeks</div>
+        <p>AWS DevOps Agent, Azure SRE Agent, Datadog Bits AI, HolmesGPT and others, replayed in read-only mode
+        against 20 to 30 of your past incidents. You get a scorecard: how often each agent found the real cause,
+        how fast, and what it would cost to run.</p>
+      </div>
+      <div class="card">
+        <h3>Guardrails &amp; Governance</h3>
+        <p>Least-privilege access, approval gates, dry-run modes, rate limits and audit trails. Then we red-team the
+        agent itself: prompt injection through logs and tickets, over-broad permissions, data leaving your cloud.</p>
+      </div>
+      <div class="card">
+        <h3>Agentic DevOps Builds</h3>
+        <p>Agents for Terraform plan review, CI failure triage, drift detection and cloud cost.</p>
+      </div>
+      <div class="card span">
+        <h3>Agent Ops retainer</h3>
+        <p>Once agents are live, we keep them tuned: track their accuracy, update guardrails as your stack changes,
+        and decide with you when each one earns more responsibility.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><h2>Where we fit</h2>
+      <p>Agent vendors sell their own agent. Cloud partners sell their cloud's. We don't sell an agent.</p></div>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th></th><th>Agent vendor</th><th>Cloud partner</th><th class="us">CR Labs</th></tr></thead>
+        <tbody>
+          <tr><td>Compares agents head to head</td><td>No, only their own</td><td>Usually one cloud's</td><td class="us">Yes, on your incidents</td></tr>
+          <tr><td>Fixes telemetry and runbooks first</td><td>Partly</td><td>Partly</td><td class="us">Yes, it's step one</td></tr>
+          <tr><td>Red-teams the agent</td><td>No</td><td>Rarely</td><td class="us">Yes, it's our background</td></tr>
+          <tr><td>Data stays in Canada</td><td>Depends on vendor</td><td>Depends on region</td><td class="us">Self-hosted option</td></tr>
+          <tr><td>Paid on results</td><td>Subscription</td><td>Time and materials</td><td class="us">Available for pilots</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head"><h2>How we work: the trust ladder</h2>
+      <p>Agents earn autonomy one step at a time.</p></div>
+    <div class="ladder">
+      <div class="rung"><h3>Observe</h3><p>Read-only. The agent investigates alongside your on-call engineers.</p></div>
+      <div class="rung"><h3>Recommend</h3><p>It proposes a diagnosis and a fix. People decide.</p></div>
+      <div class="rung"><h3>Act with approval</h3><p>It runs approved actions after a named person signs off.</p></div>
+      <div class="rung"><h3>Limited autonomy</h3><p>It handles a defined set of safe actions on its own, with full audit.</p></div>
+    </div>
+    <p class="note">A step unlocks only after the one before it has proven itself on measured results.</p>
+  </div>
+</section>
+
+<section id="results" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><h2>Results we measure</h2>
+      <p>Every engagement starts with a baseline, so improvement is a number you can check.</p></div>
+    <div class="metrics">
+      <span>MTTR</span>
+      <span>Time to first useful diagnosis</span>
+      <span>% of alerts auto-triaged</span>
+      <span>On-call pages per week</span>
+      <span>Engineer hours of toil</span>
+    </div>
+  </div>
+</section>
+
+<section id="regulated">
+  <div class="wrap">
+    <div class="sec-head"><h2>Built for regulated industries</h2></div>
+    <div class="two">
+      <div>
+        <h3>Banking and insurance experience</h3>
+        <p>Our DevOps lead has spent 15+ years running delivery and reliability for large banks and insurers. We know
+        what change control and audit expect.</p>
+      </div>
+      <div>
+        <h3>Governance that maps to OSFI E-23</h3>
+        <p>OSFI Guideline E-23 on model risk, which covers AI, takes effect May 1, 2027. We can map your agent
+        governance to it. Open-model and self-hosted options keep your data in Canada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><h2>Pricing</h2></div>
+    <div class="offer-box">
+      <div class="tag">Founding client offer</div>
+      <p><strong>Introductory rates for our first 5 clients.</strong></p>
+      <p>The assessment is a fixed fee. Pilots can be priced on results: we're paid in full only when agreed targets
+      are met.</p>
+      <p>We're flexible. Tell us what works for you.</p>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head"><h2>Team</h2></div>
+    <div class="team">
+      <div class="person">
+        <img class="pic" src="/assets/avatar-principal.jpg" alt="Illustrated portrait of Zakira Farheen" width="76" height="76">
+        <div>
+          <h3>Zakira Farheen</h3>
+          <div class="role">DevOps &amp; SRE Lead</div>
+          <p>15+ years in DevOps, SRE and DevSecOps for large banks and insurers. AWS, Azure, Kubernetes, Terraform,
+          Dynatrace. HashiCorp Terraform Associate and Microsoft AZ-400 certified.</p>
+          <a href="https://www.linkedin.com/in/zakirafarheen" target="_blank" rel="noopener">LinkedIn ›</a>
+        </div>
+      </div>
+      <div class="person">
+        <div class="ini" aria-hidden="true">ZA</div>
+        <div>
+          <h3>Zubair Ashraf</h3>
+          <div class="role">AI Engineering &amp; Security Lead · Founder</div>
+          <p>Nearly 20 years in security research. Red-teams LLM applications and has published CVEs. Leads the
+          agent guardrails and AI security work.</p>
+          <a href="https://www.linkedin.com/in/zubairashraf/" target="_blank" rel="noopener">LinkedIn ›</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><h2>FAQ</h2></div>
+    <div class="faq">
+      <details><summary>Which tools do you work with?</summary><p>We're vendor-neutral. We test the options on your incidents and recommend what fits your stack.</p></details>
+      <details><summary>Will an agent touch production?</summary><p>Only with your approval, one step at a time. Pilots run read-only.</p></details>
+      <details><summary>Does our data leave Canada?</summary><p>That's your choice. Self-hosted and open-model options keep it in Canada.</p></details>
+      <details><summary>How fast can we start?</summary><p>An assessment can begin within 2 weeks.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact">
+    <div class="sec-head" style="margin-bottom:22px"><h2>Talk to us</h2></div>
+    <p>Tell us where on-call hurts and which agents you're looking at. We'll tell you what we'd test first.</p>
+    <a class="mail" href="mailto:zubair@crlab.ca">zubair@crlab.ca</a>
+    <div class="ctas" style="margin-top:0">
+      <a class="btn" href="mailto:zubair@crlab.ca?subject=30-min%20intro%20call%3A%20Agentic%20DevOps%20and%20SRE">Book a 30-min intro</a>
+      <a class="btn outline" href="https://www.linkedin.com/in/zakirafarheen" target="_blank" rel="noopener">Zakira on LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="social-mini social-foot"><a href="https://www.youtube.com/channel/UCQ1PDMYSh8m6vvw_57r52Tw" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a><a href="https://x.com/zashraf1337" target="_blank" rel="noopener" aria-label="X (@zashraf1337)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="https://www.linkedin.com/in/zubairashraf/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></div>
+    <div class="fnav">
+      <a href="/">Home</a>
+      <a href="/#what">What we do</a>
+      <a href="/learn/">Learn</a>
+      <a href="mailto:zubair@crlab.ca">zubair@crlab.ca</a>
+    </div>
+    <div>© 2026 Cyber Resiliency Labs and Consulting Inc. · Ontario, Canada</div>
+  </div>
+</footer>
+
+</body>
+</html>
